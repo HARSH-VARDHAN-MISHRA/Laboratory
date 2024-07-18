@@ -163,7 +163,8 @@ const AllLaboratory = () => {
                                 <td>{lab.pinCode}</td>
                                 <td>
                                     <button
-                                        className="btn btn-primary"
+                                        className="bt"
+                                        style={{backgroundColor:"var(--color-blue-light)"}}
                                         onClick={() => handleAddTestClick(lab._id)}
                                         data-bs-toggle="modal"
                                         data-bs-target="#exampleModal"
@@ -172,14 +173,14 @@ const AllLaboratory = () => {
                                     </button>
                                 </td>
                                 <td>
-                                    <Link to={`/edit-lab/${lab._id}`} className="btn btn-info">
+                                    <Link to={`/edit-lab/${lab._id}`} className="bt edit">
                                         Edit
                                     </Link>
                                 </td>
                                 <td>
                                     <button
                                         onClick={() => handleDelete(lab._id)}
-                                        className="btn btn-danger"
+                                        className="bt delete"
                                     >
                                         Delete
                                     </button>
