@@ -1,23 +1,23 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import Loading from '../../components/Loading/Loading';
 import './SearchTestByNearLab.css';
 
 const SearchTestByNearLab = () => {
     const { testName } = useParams();
     const [labDetails, setLabDetails] = useState([]);
-    const [branchDetails, setBranchDetails] = useState([]);
     const [loading, setLoading] = useState(true);
     const [showPopup, setShowPopup] = useState(false);
     const [selectedTest, setSelectedTest] = useState(null);
     const [cart, setCart] = useState(JSON.parse(localStorage.getItem('lab-cart')) || []);
+    const navigate = useNavigate()
 
     const fetchTestNearestLab = async () => {
         try {
-            const res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/Search-by-test/${testName}`);
-            setLabDetails(res.data.data[0].labDetails);
-            setBranchDetails(res.data.data[0].branchDetails);
+            const res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/lab/get-all-Tests/${testName}`);
+            setLabDetails(res.data.data);
+
         } catch (error) {
             console.error("Error While Fetching the Test Nearest Labs : ", error);
         } finally {
@@ -42,6 +42,7 @@ const SearchTestByNearLab = () => {
 
     const handleClosePopup = () => {
         setShowPopup(false);
+        navigate('/lab-tests')
     }
 
     const isInCart = (test) => {
@@ -77,53 +78,6 @@ const SearchTestByNearLab = () => {
                         <Loading />
                     ) : (
                         <>
-                            <div className="row">
-                                {branchDetails.map((branch, index) => (
-                                    <div className="col-md-4" key={index}>
-                                        <div className="card mb-4">
-                                            <div className="card-body">
-                                                <h5 className="card-title">{branch.branchName}</h5>
-                                                <p className="card-text">Location: {branch.branchLocation}</p>
-                                                <p className="card-text test-name">{testName}</p>
-                                                <p className="price">
-                                                    <span className='fs-4 pe-1' style={{ color: "var(--bg-dark-blue)", fontWeight: "500" }}>₹{branch.discountedPrice}</span>
-                                                    <span className='text-decoration-line-through'>₹{branch.testPrice}</span>
-                                                </p>
-                                                <p className="card-dicount">{branch.HowManyDiscountAppliedForThisLab}% Off</p>
-                                                {isInCart({ ...branch, id: `${branch.branchName}-${testName}` }) ? (
-                                                    <button
-                                                        className="btn btn-danger"
-                                                        onClick={() => removeFromCart({
-                                                            ...branch,
-                                                            testName,
-                                                            id: `${branch.branchName}-${testName}`,
-                                                            actualPrice: branch.testPrice,
-                                                            discountPrice: branch.discountedPrice,
-                                                            discountPercentage: branch.HowManyDiscountAppliedForThisLab
-                                                        })}
-                                                    >
-                                                        Remove
-                                                    </button>
-                                                ) : (
-                                                    <button
-                                                        className="btn btn-primary"
-                                                        onClick={() => addToCart({
-                                                            ...branch,
-                                                            testName,
-                                                            id: `${branch.branchName}-${testName}`,
-                                                            actualPrice: branch.testPrice,
-                                                            discountPrice: branch.discountedPrice,
-                                                            discountPercentage: branch.HowManyDiscountAppliedForThisLab
-                                                        })}
-                                                    >
-                                                        Book Test
-                                                    </button>
-                                                )}
-                                            </div>
-                                        </div>
-                                    </div>
-                                ))}
-                            </div>
 
                             <div className="row">
                                 {labDetails.map((lab, index) => (
@@ -131,13 +85,29 @@ const SearchTestByNearLab = () => {
                                         <div className="card mb-4">
                                             <div className="card-body">
                                                 <h5 className="card-title">{lab.labName}</h5>
-                                                <p className="card-text">Location: {lab.labLocation}</p>
+                                                <p className="card-text"><strong>Location:</strong> {lab.labLocation}</p>
                                                 <p className="card-text test-name">{testName}</p>
-                                                <p className="price">
-                                                    <span className='fs-4 pe-1' style={{ color: "var(--bg-dark-blue)", fontWeight: "500" }}>₹{lab.discountedPrice}</span>
-                                                    <span className='text-decoration-line-through'>₹{lab.testPrice}</span>
-                                                </p>
-                                                <p className="card-dicount">{lab.discountPercentage}% Off</p>
+                                                {lab.discountPercentage && lab.discountPercentage > 0 ? (
+                                                    <>
+                                                        <p className="price">
+                                                            <span className='fs-4 pe-1' style={{ color: "var(--bg-dark-blue)", fontWeight: "500" }}>₹{lab.discountPrice}</span>
+                                                            <span className='text-decoration-line-through'>₹{lab.price}</span>
+                                                        </p>
+                                                    </>
+                                                ) : (
+                                                    <>
+                                                     <p className="price">
+                                                            <span className='fs-4 pe-1' style={{ color: "var(--bg-dark-blue)", fontWeight: "500" }}>₹{lab.price}</span>
+                                                            
+                                                        </p>
+                                                        
+                                                    </>
+                                                )}
+
+                                                {lab.discountPercentage && lab.discountPercentage > 0 ? (
+                                                    <p className="card-dicount">{lab.discountPercentage}% Off</p>
+                                                ) : null}
+
                                                 {isInCart({ ...lab, id: `${lab.labName}-${testName}` }) ? (
                                                     <button
                                                         className="btn btn-danger"
@@ -145,8 +115,8 @@ const SearchTestByNearLab = () => {
                                                             ...lab,
                                                             testName,
                                                             id: `${lab.labName}-${testName}`,
-                                                            actualPrice: lab.testPrice,
-                                                            discountPrice: lab.discountedPrice,
+                                                            actualPrice: lab.price,
+                                                            discountPrice: lab.discountPrice,
                                                             discountPercentage: lab.discountPercentage,
                                                             Branch: lab.Branch
                                                         })}
@@ -160,8 +130,8 @@ const SearchTestByNearLab = () => {
                                                             ...lab,
                                                             testName,
                                                             id: `${lab.labName}-${testName}`,
-                                                            actualPrice: lab.testPrice,
-                                                            discountPrice: lab.discountedPrice,
+                                                            actualPrice: lab.price,
+                                                            discountPrice: lab.discountPrice,
                                                             discountPercentage: lab.discountPercentage,
                                                             Branch: lab.Branch
                                                         })}

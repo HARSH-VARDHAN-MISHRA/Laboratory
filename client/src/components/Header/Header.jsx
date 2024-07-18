@@ -108,9 +108,9 @@ const Header = () => {
                     )}
                 </div>
                 <div className="book-btn">
-                    {/* <Link to="/book-test" >
+                    <Link to="/lab-tests" >
                         Book a Test
-                    </Link> */}
+                    </Link>
                 </div>
             </div>
 

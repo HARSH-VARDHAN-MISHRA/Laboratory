@@ -232,7 +232,7 @@ const HomePage = () => {
                   </g>
                 </svg>
               </div>
-              <Link to="/book-your-test" className="content">
+              <Link to="/lab-tests" className="content">
                 <div className="text">
                   <h4>Book Your Lab Test</h4>
                   <p>Home Sample Collection</p>

@@ -16,7 +16,7 @@ const AllTest = () => {
 
     const fetchTests = async (page) => {
         try {
-            const res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/get-all-test?page=${page}&limit=${itemsPerPage}`);
+            const res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/lab/get-all-tests?page=${page}&limit=${itemsPerPage}`);
             setTests(res.data.data);
             setTotalItems(res.data.data.length || 0);
         } catch (error) {
@@ -160,9 +160,9 @@ const AllTest = () => {
     return (
         <>
         <MetaTag
-            title="Lab Mantra Diagnostic Tests - Comprehensive Medical Imaging Services"
-            description="Explore the comprehensive range of diagnostic tests offered by Lab Mantra, including CT Scan, MRI Scan, Ultrasound, X-ray, ECG, PET/CT, and Thyroid Scan. Our services are designed to provide high-quality, accessible, and affordable healthcare to all Indian citizens."
-            keyword="Lab Mantra, diagnostic tests, CT Scan, MRI Scan, Ultrasound, X-ray, ECG, PET/CT, Thyroid Scan, medical imaging, healthcare services"
+            title="YUGI Health Provider LLP Diagnostic Tests - Comprehensive Medical Imaging Services"
+            description="Explore the comprehensive range of diagnostic tests offered by YUGI Health Provider LLP, including CT Scan, MRI Scan, Ultrasound, X-ray, ECG, PET/CT, and Thyroid Scan. Our services are designed to provide high-quality, accessible, and affordable healthcare to all Indian citizens."
+            keyword="YUGI Health Provider LLP, diagnostic tests, CT Scan, MRI Scan, Ultrasound, X-ray, ECG, PET/CT, Thyroid Scan, medical imaging, healthcare services"
         />
 
             <section className="bread">
@@ -207,11 +207,11 @@ const AllTest = () => {
                                                 {item.discountPrice ? (
                                                     <>
                                                         <span className="discount_price">₹{item.discountPrice}</span>
-                                                        <span className="actual_price">₹{item.actualPrice}</span>
+                                                        <span className="actual_price">₹{item.price}</span>
                                                     </>
                                                 ) : (
                                                     <>
-                                                        <span className="discount_price">₹{item.actualPrice}</span>
+                                                        <span className="discount_price">₹{item.price}</span>
                                                     </>
                                                 )}
                                             </div>
