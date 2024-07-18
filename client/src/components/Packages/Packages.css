@@ -1,0 +1,143 @@
+.single-package{
+    padding: 0.6rem;
+    border: 1px solid var(--bg-light-greenblue);
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    transition: var(--transition-3);
+}
+.single-package:hover{
+    background: var(--bg-light-green);
+    background: var(--bg-head);
+}
+.single-package .main-head{
+    text-align: center;
+    padding-bottom: 0.5rem;
+}
+.single-package h4{
+    font-size: 1.3rem;
+    padding-bottom: 0.6rem;
+    color: var(--bg-dark-blue);
+    max-width: 95%;
+    margin: auto;
+    text-transform: capitalize;
+}
+.single-package .flex{
+    margin: 0.2rem 0rem;
+    font-size: 1.1rem;
+}
+.single-package .main-head small{
+    color: red;
+}
+.single-package .price{
+    display: flex;
+    align-items:baseline;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.single-package .price .current_price{
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: var(--bg-greenblue);
+}
+.single-package .price .actual_price{
+    text-decoration: line-through;
+    color: var(--color-grey);
+}
+
+.single-package .test-cate{
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    gap: 0.2rem;
+}
+.single-package .test-cate .single:nth-child(even){
+    text-align: end;
+}
+
+
+
+.single-package .test-cate .single{
+    position: relative;
+}
+.single-package .test-cate .single .test-names{
+    position: absolute;
+    background: var(--bg-light-green);
+    z-index: 50;
+    font-size: 0.7rem;
+    color: white;
+    padding: 0.2rem;
+    border-radius: 2px;
+    bottom: 100%;
+}
+.single-package .test-cate .single .test-names>div{
+    text-wrap: nowrap;
+}
+
+.single-package .test-cate .single:nth-child(even) .test-names{
+    right: 0;
+}
+
+/* Example CSS for Tooltip */
+
+
+
+
+
+.single-package .content{
+    padding-top: 1rem;
+    text-align: center;
+}
+.single-package .content p{
+    color: var(--bg-dark-blue);
+    color: red;
+    margin-bottom: 0.3rem;
+}
+.single-package .content .book-btn button ,
+.single-package .content .book-btn a{
+    color: white;
+    background: var(--bg-greenblue);
+    border-radius: 5px;
+    width: 60%;
+    padding: 0.5rem;
+    display: block;
+    margin: auto;
+    text-decoration: none;
+    transition: var(--transition-3);
+    border: none;
+    outline: none;
+}
+.single-package .content .book-btn button i,
+.single-package .content .book-btn a i{
+    transition: var(--transition-3);
+}
+.single-package .content .book-btn button:hover i ,
+.single-package .content .book-btn a:hover i{
+    padding-left: 1rem;
+}
+
+@media only screen and (max-width: 420px){
+    .single-package .content .book-btn button ,
+    .single-package .content .book-btn a {
+        width: 80%;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

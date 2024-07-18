@@ -1,0 +1,37 @@
+.success-card {
+    background-color: var(--bg-light-greenblue); /* Replace with your custom color scheme */
+    border: none;
+  }
+  
+  .success-card .card-body {
+    padding: 2rem;
+  }
+  
+  .success-card .card-img-bottom {
+    max-width: 100%;
+  }
+  
+  .success-card .btn-primary {
+    background-color: var(--bg-greenblue); /* Replace with your custom color scheme */
+    color: white;
+    border: none;
+  }
+  .failure-card {
+    background-color: var(--bg-light-red); /* Replace with your custom color scheme for failure */
+    border: none;
+  }
+  
+  .failure-card .card-body {
+    padding: 2rem;
+  }
+  
+  .failure-card .card-img-bottom {
+    max-width: 100%;
+  }
+  
+  .failure-card .btn-primary {
+    background-color: var(--bg-blue); /* Replace with your custom color scheme for buttons */
+    color: white;
+    border: none;
+  }
+  

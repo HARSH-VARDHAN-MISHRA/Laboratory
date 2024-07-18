@@ -1,0 +1,39 @@
+footer{
+    background: var(--bg-greenblue);
+    padding: 1rem 0rem;
+    color: white;
+}
+
+footer .logo img{
+    height: 90px;
+    width: auto;
+    object-fit: contain;
+}
+footer ul{
+    padding-left: 0rem;
+    list-style: none;
+}
+footer ul li a{
+    color: white;
+    text-decoration: none;
+    display: inline-block;
+    margin-bottom: 0.5rem;
+}
+
+footer .copy{
+    border-top: 2px solid white;
+    padding-top: 1rem;
+}
+footer .copy a{
+    color: white;
+}
+
+
+
+
+
+
+
+
+
+

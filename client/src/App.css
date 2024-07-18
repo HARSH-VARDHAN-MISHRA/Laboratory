@@ -1,0 +1,55 @@
+#root{
+    overflow-x: hidden;
+    width: 100%;
+}
+
+/* --- Pagination ---  */
+.pagination-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.pagination-controls button {
+    margin: 0 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+    border: 1px solid #ccc;
+    background-color: white;
+    transition: background-color 0.3s;
+}
+.pagination-controls button.next-prev{
+    background: var(--bg-greenblue);
+    color: white;
+    border-radius: 5px;
+}
+.pagination-controls .active {
+    font-weight: bold;
+    background-color: var(--bg-greenblue);
+    color: white;
+    border: none;
+    border-radius: 3px;
+}
+
+.pagination-controls button:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+/* === Policies ===  */
+.highlight-link {
+    color: blue;
+    text-decoration: underline;
+  }
+  
+  .highlight-email {
+    color: green;
+    font-weight: bold;
+  }
+  
+  .highlight-phone {
+    color: red;
+    font-style: italic;
+  }
+  

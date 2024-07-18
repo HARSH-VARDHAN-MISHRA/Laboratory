@@ -1,0 +1,28 @@
+.heading{
+    padding: 2rem 0rem;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+.heading h2{
+    text-transform: capitalize;
+    color: var(--bg-dark-blue);
+    font-weight: 600;
+    font-size: 2.5rem;
+}
+
+@media only screen and (max-width: 500px){
+    .heading{
+        padding: 1rem 0rem;
+        text-align: center;
+    }
+    .heading h2{
+        font-size: 2.2rem;
+        margin-bottom: 0rem;
+    }
+}
+
+
+
+
+

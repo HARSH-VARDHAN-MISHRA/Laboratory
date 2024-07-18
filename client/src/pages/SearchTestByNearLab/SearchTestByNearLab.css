@@ -1,0 +1,92 @@
+.cart-popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.popup-content {
+    background: white;
+    padding: 20px;
+    margin: 1rem;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+.popup-content h4{
+    color: var(--bg-dark-blue);
+}
+.popup-content p{
+    text-align: start;
+    margin-bottom: 0.5rem;
+}
+.popup-content p strong{
+    font-weight: 500;
+    color: cadetblue;
+}
+.popup-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    flex-wrap: wrap;
+}
+
+@media only screen and (max-width: 500px){
+    .popup-buttons button ,
+    .popup-buttons a{
+        width: 100%;
+        margin-bottom: 0.2rem;
+    }
+}
+
+.btn-primary {
+    background-color: var(--bg-dark-blue);
+    border-color: var(--bg-dark-blue);
+}
+.btn-primary:hover{
+    background-color:var(--bg-dark-blue);
+    opacity: 0.8;
+}
+
+.btn-secondary {
+    background-color: var(--bg-light-green);
+    border-color: var(--bg-light-green);
+}
+
+
+
+
+/* ====================== lab-details ==================================== */
+.lab-details .card{
+    box-shadow: 0.5px 0.5px 3px 0 rgba(0, 0, 0, 0.18);
+    position: relative;
+    border-radius: 10px;
+    border: none;
+}
+.lab-details .card {
+    /* background-color: var(--bg-head); */
+}
+.lab-details .card-dicount{
+    position: absolute;
+    right: 0;
+    top: 5%;
+    background: var(--bg-light-greenblue);
+    padding: 5px 10px;
+    border-bottom-left-radius: 5px;
+    border-top-left-radius: 5px;
+}
+.lab-details .test-name{
+    color: var(--bg-dark-blue);
+    font-weight: 500;
+}
+.lab-details .card-title {
+    color: var(--color-blue);
+}
+
+.lab-details .card-text {
+    margin-bottom: 0.5rem;
+}

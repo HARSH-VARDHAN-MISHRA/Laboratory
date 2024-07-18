@@ -1,0 +1,109 @@
+.booking .top-heading{
+    background: var(--bg-dark-blue);
+    color: white;
+    padding: 0.2rem 0.5rem;
+}
+.booking h2{
+    margin-bottom: 0rem;
+}
+.booking table thead tr th{
+    background: var(--bg-greenblue);
+    color: white;
+    font-weight: 500;
+}
+.booking table thead tr th:nth-child(1){
+    width: 70%;
+}
+.booking table td ,
+.booking table tr{
+    background: var(--bg-light-greenblue);
+    border-color: white;
+}
+
+.booking table tr strong{
+    font-weight: 600;
+}
+
+.booking .delete{
+    color: white;
+    background: red;
+    display: block;
+    text-align: center;
+    cursor: pointer;
+    padding: 0.2rem;
+}
+
+.booking .bg-green{
+    padding: 2rem 0rem;
+    background: var(--bg-light-greenblue);
+}
+
+.moreTest a{
+    background: var(--bg-greenblue);
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 1.2rem;
+    padding: 0.4rem  0.2rem;
+    width: 60%;
+    display: block;
+    text-align: center;
+    margin: 1rem auto;
+    transition: var(--transition-3);
+}
+.moreTest a i{
+    margin-left: 0.5rem;
+    transition: var(--transition-3);
+}
+.moreTest a:hover{
+    opacity: 0.8;
+}
+.moreTest a:hover i{
+    margin-left: 1rem;
+}
+
+
+
+
+
+.booking .nav-tabs{
+    display: flex;
+    align-items: center;
+    justify-content:space-evenly;
+    flex-wrap: wrap;
+    border-bottom: none;
+}
+.booking .nav-tabs a{
+    text-decoration: none;
+    color: black;
+}
+.booking .nav-tabs input[type="radio"]{
+    cursor: pointer;
+}
+.booking .nav-tabs input[type="radio"]:checked{
+    accent-color: var(--bg-dark-blue);
+}
+
+
+.booking .tab-content{
+    max-width: 80%;
+    margin: 2rem auto;
+}
+@media only screen and (max-width: 600px){
+    .booking .tab-content{
+        max-width: 95%;
+    }
+}
+
+.booking .form-control {
+    border-color: var(--bg-greenblue);
+    border-radius: 0px;
+}
+.booking .form-control:focus {
+    border-color: var(--bg-dark-blue);
+    box-shadow: none;
+}
+
+
+
+

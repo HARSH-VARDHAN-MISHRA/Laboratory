@@ -1,0 +1,23 @@
+.about-sec h1{
+    color: var(--bg-dark-blue);
+    font-weight: 600;
+}
+
+
+.about-sec h2{
+    color: cadetblue;
+    font-weight: 600;
+}
+.about-sec p{
+    text-align: justify;
+}
+
+
+
+
+
+
+
+
+
+

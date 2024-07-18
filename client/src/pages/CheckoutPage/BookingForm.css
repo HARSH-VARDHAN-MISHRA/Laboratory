@@ -1,0 +1,60 @@
+.booking-form {
+    background-color: var(--bg-head);
+    padding: 30px 0;
+}
+
+.booking-form h2 {
+    color: var(--color-blue);
+}
+.booking-form .forms label {
+    color: var(--color-blue);
+}
+.booking-form h3{
+    color: var(--color-blue-light);
+    text-align: center;
+}
+
+.booking-form h4{
+    color: var(--color-blue);
+    margin: 1rem 0rem;
+    margin-bottom: 0rem;
+}
+
+.booking-form select.form-control,
+.booking-form input.form-control,
+.booking-form textarea.form-control {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border: 1px solid var(--bg-greenblue);
+    color: #555;
+}
+
+.booking-form select.form-control:focus,
+.booking-form input.form-control:focus,
+.booking-form textarea.form-control:focus {
+    border-color: var(--color-blue);
+    box-shadow: 0 0 0 0.2rem rgba(67, 119, 162, 0.25);
+}
+
+.booking-form button[type="submit"] {
+    background-color: var(--bg-greenblue);
+    border: none;
+    color: #fff;
+}
+
+.booking-form button[type="submit"]:hover {
+    background-color: var(--bg-dark-blue);
+    color: #fff;
+}
+
+.booking-form .breadcrumb-item a {
+    color: var(--color-blue);
+}
+
+.booking-form .breadcrumb-item.active {
+    color: var(--color-blue-light);
+}
+
+.booking-form .breadcrumb-item.active a {
+    color: var(--color-blue-light);
+}

@@ -1,0 +1,123 @@
+.head-line{
+    border-bottom: 3px solid var(--bg-greenblue);
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+}
+.head-line .flex{
+    flex-wrap: wrap;
+}
+.head-line h2{
+    color: var(--bg-dark-blue);
+    font-size: 1.3rem;
+    margin-bottom: 0rem;
+}
+.head-line .addTest{
+    color: white;
+    text-decoration: none;
+    background: var(--bg-greenblue);
+    padding: 0.5rem 1rem;
+    border-radius: 50rem;
+    font-weight: 500;
+}
+
+.cart-page{
+    background-color: rgba(38, 122, 211, 0.04);
+}
+.cart-items .cart-item{
+    background: white;
+    border-radius: 10px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+}
+.cart-items .cart-item .test-name{
+    font-size: 1.2rem;
+    color: var(--bg-greenblue);
+    font-weight: 600;
+}
+
+.cart-items .cart-item .re-btn{
+    color: var(--bg-greenblue);
+    border: none;
+    outline: none;
+    font-size: 1.2rem;
+    background: transparent;
+}
+
+.cart-page .cart-side {
+    border: 1px solid var(--bg-greenblue);
+    padding: 0.5rem;
+    border-radius: 10px;
+}
+
+.cart-page .cart-side .coupon{
+    background: white;
+    background: var(--bg-light-greenblue);
+    border-radius: 10px;
+}
+.coupon .appy-cop{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+.coupon .appy-cop input{
+    border: 1px solid var(--bg-greenblue);
+    padding: 0.2rem 0.5rem;
+    border-radius: 5px;
+    outline: none;
+}
+.coupon .appy-cop button{
+    background: var(--bg-greenblue);
+    outline: none;
+    border: none;
+    color: white;
+    padding: 0.3rem 0.2rem;
+    border-radius: 50rem;
+}
+.coupon p{
+    margin-bottom: 0rem;
+    margin-top: 0.5rem;
+    display: block;
+    color: red;
+    text-transform: uppercase;
+    text-align: center;
+}
+.cart-side .totals{
+    padding: 0.6rem 0rem;
+}
+.cart-side .totals .pay{
+    font-size: 1.2rem;
+    color: var(--bg-greenblue);
+    font-weight: 600;
+    border-top: 2px dashed var(--bg-dark-blue);
+    margin-top: 0.5rem;
+    padding-top: 0.3rem;
+}
+.cart-side .link{
+    color: white;
+    text-decoration: none;
+    background: var(--bg-greenblue);
+    display: block;
+    text-align: center;
+    border-radius: 50rem;
+    padding: 0.3rem 0.2rem;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    width: 100%;
+    border: none;
+    outline: none;
+}
+
+@media only screen and (max-width:420px){
+    .head-line h2{
+        color: var(--bg-dark-blue);
+        font-size: 1.2rem;
+        margin-bottom: 0rem;
+    }
+}
+
+
+
+/* ======== emptycart ==========  */
+.emptycart h1{
+    color: var(--color-blue);
+}

@@ -1,0 +1,30 @@
+.service h3{
+    color: var(--bg-greenblue);
+    margin-bottom: 0rem;
+}
+
+.service h4{
+    margin: 1rem 0rem;
+    margin-top: 2rem;
+    color: cadetblue;
+}
+.service h4>small{
+    color: red;
+    font-size: 1rem;
+    display: block;
+    margin-top: 1rem;
+}
+.service img{
+    margin-bottom: 1rem;
+}
+.service h5{
+    color: var(--bg-dark-blue);
+}
+
+
+
+
+
+
+
+

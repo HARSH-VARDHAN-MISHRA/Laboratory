@@ -1,0 +1,80 @@
+.serivce-grid {
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    gap: 1rem;
+}
+
+.serivce-grid .single-serv {
+    padding: 0.3rem;
+    text-decoration: none;
+    transition: var(--transition-3);
+}
+.serivce-grid .single-serv .img{
+    overflow: hidden;
+    margin-bottom: 0.8rem;
+}
+.serivce-grid .single-serv .img img{
+    height: 250px;
+    width: 100%;
+    object-fit: cover;
+    transition: var(--transition-3);
+}
+.serivce-grid .single-serv:hover .img img{
+    scale: 1.2;
+}
+.serivce-grid .single-serv h4{
+    color: var(--bg-dark-blue);
+}
+.serivce-grid .single-serv p{
+    color: var(--color-blue-light);
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+.serivce-grid .single-serv .known-more{
+    color: white;
+    padding: 0.5rem 0.8rem;
+    background: var(--bg-dark-blue);
+    text-decoration: none;
+    text-transform: capitalize;
+    border-radius: 5px;
+    transition: var(--transition-3);
+}
+.serivce-grid .single-serv .known-more:hover{
+    opacity: 0.9;
+}
+
+
+
+
+
+
+
+
+
+@media only screen and (max-width: 1000px){
+    .serivce-grid {
+        grid-template-columns: repeat(3,1fr);
+    }
+}
+@media only screen and (max-width: 650px){
+    .serivce-grid {
+        display: grid;
+        grid-template-columns: repeat(2,1fr);
+        gap: 1rem;
+    }
+}
+@media only screen and (max-width: 420px){
+    .serivce-grid .single-serv .img img{
+        height: 150px;
+    }
+}
+
+
+
+
+
+
+
+

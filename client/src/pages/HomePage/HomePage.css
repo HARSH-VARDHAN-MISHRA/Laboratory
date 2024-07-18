@@ -1,0 +1,239 @@
+.all-sec .grid-2{
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.all-sec .grid-2 .sin-sec{
+    background: var(--bg-light-green);
+    border-radius: 10px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    gap: 1rem;
+}
+.input-fd {
+    position: relative;
+  }
+  
+  .suggestions-wrapper {
+    position: absolute;
+    top: 100%;
+    width: 100%;
+    z-index: 1000;
+    max-height: 150px;
+    overflow-y: auto;
+  }
+  
+  
+.all-sec .grid-2 .sin-sec .secImg svg{
+    height: 7rem;
+}
+.all-sec .grid-2 .sin-sec .content{
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 80%;
+}
+.all-sec .grid-2 .sin-sec h4 ,
+.all-sec .grid-2 .sin-sec p{
+    margin-bottom: 0rem;
+}
+.all-sec .grid-2 .sin-sec .text{
+    color: var(--color-blue);
+}
+.all-sec .grid-2 .sin-sec .arrow{
+    font-size: 2rem;
+    color: var(--color-blue-light);
+}
+
+@media only screen and (max-width: 770px){
+    .all-sec .grid-2{
+        grid-template-columns: repeat(1,1fr);
+    }
+}
+@media only screen and (max-width: 420px){
+    .all-sec .grid-2 .sin-sec {
+        background: var(--bg-light-green);
+        border-radius: 10px;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        padding: 0.5rem;
+        gap: 0.5rem;
+    }
+}
+
+
+
+
+
+
+/* -------- Banner  Location --------  */
+.locate{
+    /* background: var(--bg-light-green); */
+    background-image: linear-gradient(to left bottom, #b5e7e6, #99dcda, #7cd2cf, #5bc7c2, #2dbcb6);
+    padding: 5rem 0rem;
+}
+.locate .flex-loc{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+.locate .flex-content{
+    width: 50%;
+}
+.locate h1{
+    font-weight: 600;
+    color: var(--color-light-weight);
+    font-size: 3rem;
+}
+.locate h1 span{
+    color: var(--color-blue);
+}
+.locate .flex-content form{
+    width: 80%;
+    margin: auto;
+    display: flex;
+    gap: 1rem;
+    flex-direction: column;
+    padding: 2rem 1rem;
+    background: var(--color-blue-light);
+    border-radius: 10px;
+
+}
+.locate .flex-content form .input-fd{
+    display: flex;
+    align-items: center;
+    max-width: 100%;
+    padding: 0.8rem 0.5rem;
+    background: white;
+    border-radius: 50rem;
+}
+.locate .flex-content form .input-fd i{
+    font-size: 1.2rem;
+    width: 10%;
+    text-align: center;
+    color: var(--color-blue-light);
+}
+.locate .flex-content form .input-fd input , 
+.locate .flex-content form .input-fd select{
+    width: 90%;
+    border: none;
+    outline: none;
+}
+.locate .flex-content form button[type="submit"]{
+    border: none;
+    outline: none;
+    padding: 0.6rem 0.5rem;
+    width: 80%;
+    margin: auto;
+    border-radius: 50rem;
+    font-weight: 600;
+    text-transform: capitalize;
+    background: var(--color-blue);
+    box-shadow: 3px -1px 8px #25b2ee;
+    color: white;
+    transition: var(--transition-3);
+}
+.locate .flex-content form button[type="submit"]:hover{
+    opacity: 0.8;
+}
+@media only screen and (max-width: 780px) {
+    .locate .flex-content{
+        width: 100%;
+    }
+    .locate .flex-loc {
+        flex-direction: column-reverse;
+        gap: 1rem;
+    }
+    .locate {
+        padding: 3rem 0rem;
+    }
+    .locate h1 {
+        font-weight: 500;
+        font-size: 2.5rem;
+        text-align: center;
+    }
+}
+@media only screen and (max-width: 490px){
+    .locate .flex-content form {
+        width: 95%;
+    }
+    .locate h1 {
+        font-weight: 500;
+        font-size: 2rem;
+        text-align: center;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.location-popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  
+  .popup-content {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    max-width: 500px;
+    width: 100%;
+  }
+  
+  .popup-content h2 {
+    margin-bottom: 20px;
+  }
+  
+  .popup-content p {
+    margin-bottom: 20px;
+  }
+  
+  .popup-content button {
+    background: #2dbcb6;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  .popup-content button:hover {
+    background: #28a89a;
+  }
+  
+
+
+
+
+
+
