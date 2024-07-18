@@ -232,3 +232,110 @@ exports.getSingleTestByTestId = async (req, res) => {
         res.status(500).json({ success: false, message: 'Internal server error' });
     }
 };
+
+
+
+exports.getAllTestsWithLabInfoInBuild = async (req, res) => {
+    try {
+        // Fetch all lab details with tests included
+        const allLabs = await LaboratoryDetail.find().populate('tests');
+
+        // Extract all tests with lab information
+        let allTests = [];
+        allLabs.forEach(lab => {
+            lab.tests.forEach(test => {
+                allTests.push({
+                    testNo: test.testNo,
+                    testName: test.TestName,
+                    price: test.Price,
+                    discountPercentage: test.DiscountPercentage,
+                    discountPrice: test.DiscountPrice,
+                    labInfo: {
+                        labName: lab.LabName,
+                        labLocation: lab.address,
+                        city: lab.city,
+                        state: lab.state,
+                        pinCode: lab.pinCode,
+                        representedName: lab.RepresentedName,
+                        phoneNumber: lab.PhoneNumber,
+                        representedPhoneNumber: lab.RepresentedPhoneNumber,
+                        latitude: lab.Latitude,
+                        longitude: lab.Longitude,
+                        discountPercentage: lab.discountPercentage
+                    }
+                });
+            });
+        });
+
+        // Remove duplicate tests (by testName and price) and sort by discount prices
+        const uniqueTestsMap = new Map();
+        allTests.forEach(test => {
+            const key = `${test.testName}_${test.price}`;
+            if (!uniqueTestsMap.has(key)) {
+                uniqueTestsMap.set(key, test);
+            }
+        });
+
+        // Convert the map back to an array and sort by discount price
+        let uniqueTests = Array.from(uniqueTestsMap.values());
+        uniqueTests.sort((a, b) => a.discountPrice - b.discountPrice);
+
+        // Shuffle the rates of tests
+        for (let i = uniqueTests.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [uniqueTests[i], uniqueTests[j]] = [uniqueTests[j], uniqueTests[i]];
+        }
+
+        // Combine test data with lab information
+        const combinedData = uniqueTests.map(test => ({
+            testNo: test.testNo,
+            testName: test.testName,
+            price: test.price,
+            discountPercentage: test.discountPercentage,
+            discountPrice: test.discountPrice,
+            labInfo: test.labInfo
+        }));
+
+        res.status(200).json({ success: true, data: combinedData });
+    } catch (error) {
+        res.status(500).json({ success: false, message: error.message });
+    }
+};
+exports.ByTestNameShowAllLabsWithWhichDoThisTestWithPrices = async (req, res) => {
+    try {
+        const { testName } = req.params;
+
+        // Fetch all lab details with tests included
+        const allLabs = await LaboratoryDetail.find().populate('tests');
+
+        // Extract the labs offering the specified test along with their prices
+        let labsWithTest = [];
+        allLabs.forEach(lab => {
+            lab.tests.forEach(test => {
+                if (test.TestName === testName) {
+                    labsWithTest.push({
+                        labName: lab.LabName,
+                        labLocation: lab.address,
+                        city: lab.city,
+                        state: lab.state,
+                        pinCode: lab.pinCode,
+                        representedName: lab.RepresentedName,
+                        phoneNumber: lab.PhoneNumber,
+                        representedPhoneNumber: lab.RepresentedPhoneNumber,
+                        latitude: lab.Latitude,
+                        longitude: lab.Longitude,
+                        discountPercentage: lab.discountPercentage,
+                        testNo: test.testNo,
+                        price: test.Price,
+                        discountPercentage: test.DiscountPercentage,
+                        discountPrice: test.DiscountPrice
+                    });
+                }
+            });
+        });
+
+        res.status(200).json({ success: true, data: labsWithTest });
+    } catch (error) {
+        res.status(500).json({ success: false, message: error.message });
+    }
+};
