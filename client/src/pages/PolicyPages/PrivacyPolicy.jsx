@@ -12,9 +12,9 @@ const PrivacyPolicy = () => {
   return (
     <>
       <MetaTag
-          title="Privacy Policy - Lab Mantra"
-          description="Read our privacy policy to understand how Lab Mantra collects, uses, and protects your personal information."
-          keyword="Lab Mantra, privacy policy, personal information, data protection"
+          title="Privacy Policy - YUGI Health Provider LLP"
+          description="Read our privacy policy to understand how YUGI Health Provider LLP collects, uses, and protects your personal information."
+          keyword="YUGI Health Provider LLP, privacy policy, personal information, data protection"
       />
         <section className="bread">
             <div className="container">

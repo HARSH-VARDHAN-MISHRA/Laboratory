@@ -11,7 +11,7 @@ const Footer = () => {
           <div className="row">
             <div className="col-md-4">
               <Link to="/" className="logo"><img src={logo} alt="logo" /></Link>
-              <p>Lab Mantra is an initiative to make quality healthcare affordable and accessible for all Indian Citizens. We believe in and value affordability but our priority is to provide quality diagnostic services being offered by our lab Partners.</p>
+              <p>YUGI Health Provider LLP is an initiative to make quality healthcare affordable and accessible for all Indian Citizens. We believe in and value affordability but our priority is to provide quality diagnostic services being offered by our lab Partners.</p>
             </div>
             <div className="col-md-1"></div>
             <div className="col-md-3">
@@ -34,7 +34,7 @@ const Footer = () => {
             </div>
 
             <div className="copy text-center">
-              <p>Copyright © 2024 Lab Mantra. Designed By <a href="https://www.digiindiasolutions.com/" target="_blank">DIGI INDIA SOLUTIONS</a></p>
+              <p>Copyright © 2024 YUGI Health Provider LLP. Designed By <a href="https://www.digiindiasolutions.com/" target="_blank">DIGI INDIA SOLUTIONS</a></p>
             </div>
 
           </div>

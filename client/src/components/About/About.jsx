@@ -7,8 +7,8 @@ const About = () => {
             <div className="container">
                 <div className="row">
                     <div className="col-md-8">
-                        <h1>Welcome To Lab Mantra </h1>
-                        <p>Lab Mantra is an initiative to make quality healthcare affordable and accessible for all Indian Citizens. We believe in and value affordability but our priority is to provide quality diagnostic services being offered by our lab Partners.</p>
+                        <h1>Welcome To YUGI Health Provider LLP </h1>
+                        <p>YUGI Health Provider LLP is an initiative to make quality healthcare affordable and accessible for all Indian Citizens. We believe in and value affordability but our priority is to provide quality diagnostic services being offered by our lab Partners.</p>
                         <p>A small hand of friendship for a better relationship between the country and healthcare providers.</p>
                         <div className="row">
                             <div className="col-md-6">

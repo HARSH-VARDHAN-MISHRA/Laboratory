@@ -156,9 +156,9 @@ const HomePage = () => {
   return (
     <>
       <MetaTag
-          title="Lab Mantra - Quality Healthcare for All Indian Citizens"
-          description="Welcome to Lab Mantra. Our initiative is to make quality healthcare affordable and accessible for all Indian citizens. Explore our diagnostic services and find out how we can assist you with your healthcare needs."
-          keyword="Lab Mantra, quality healthcare, affordable healthcare, diagnostic services, Indian healthcare"
+          title="YUGI Health Provider LLP - Quality Healthcare for All Citizens"
+          description="Welcome to YUGI Health Provider LLP. Our initiative is to make quality healthcare affordable and accessible for all Indian citizens. Explore our diagnostic services and find out how we can assist you with your healthcare needs."
+          keyword="Lab Mantra, YUGI Health Provider LLP, quality healthcare, affordable healthcare, diagnostic services, Indian healthcare"
       />
 
 
