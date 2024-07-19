@@ -114,6 +114,7 @@ const AllPackage = () => {
                     <thead>
                         <tr>
                             <th scope="col">Sr.No.</th>
+                            <th scope="col">Laboratory Name</th>
                             <th scope="col">Package Name</th>
                             <th scope="col">Test Groups</th>
                             <th scope="col">Test Quantity</th>
@@ -129,10 +130,11 @@ const AllPackage = () => {
                         {currentItems.map((pkg, index) => (
                             <tr key={index}>
                                 <th scope="row">{index + 1}</th>
+                                <td className='text-wrap'>{pkg.laboratoryId.LabName}</td>
                                 <td className='text-wrap'>{pkg.packageName}</td>
                                 <td>
-                                    {pkg.testCategoryId.map((testGroupName, idx) => (
-                                        <div key={idx}>{testGroupName}, </div>
+                                    {pkg.testCategoryId.map((testGroup, idx) => (
+                                        <div key={idx}>{testGroup.testCategoryName}</div>
                                     ))}
                                 </td>
                                 <td>{pkg.testQuantity}</td>

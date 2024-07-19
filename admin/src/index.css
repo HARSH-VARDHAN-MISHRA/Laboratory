@@ -188,3 +188,17 @@ button[type="submit"]{
   font-size: 1.1rem;
 }
 
+/* ------ Pagination -------  */
+.page-link {
+  color: var(--color-blue-light) !important;
+}
+.active>.page-link, .page-link.active {
+  z-index: 3;
+  color: var(--bs-pagination-active-color);
+  color: white !important;
+  background-color: var(--color-blue-light) !important;
+  border-color: var(--bg-head) !important;
+}
+
+
+
