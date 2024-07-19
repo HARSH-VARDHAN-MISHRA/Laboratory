@@ -13,15 +13,15 @@ const AllTest = () => {
     const [maxPrice, setMaxPrice] = useState('');
 
     // --- Pagination ---
-    const [currentPage, setCurrentPage] = useState('1');
+    const [currentPage, setCurrentPage] = useState(1);
     const itemPerPage = 20;
 
     const handleFetch = async () => {
         try {
             const res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/get-all-test`);
-            const reverseData = res.data.data
+            const reverseData = res.data.data;
             setTests(reverseData);
-            console.log(reverseData)
+            console.log(reverseData);
         } catch (error) {
             console.error('There was an error fetching the tests!', error);
         }
@@ -98,6 +98,12 @@ const AllTest = () => {
     const handleMaxPriceChange = (event) => {
         setMaxPrice(event.target.value ? parseFloat(event.target.value) : '');
     };
+
+    // Pagination with Ellipsis
+    const totalPages = Math.ceil(filteredTests.length / itemPerPage);
+    const pageRange = 2; // Number of pages to show before and after the current page
+    const startPage = Math.max(1, currentPage - pageRange);
+    const endPage = Math.min(totalPages, currentPage + pageRange);
 
     return (
         <>
@@ -198,25 +204,76 @@ const AllTest = () => {
                 </table>
                 <nav>
                     <ul className="pagination justify-content-center">
-                        {Array.from(
-                            { length: Math.ceil(filteredTests.length / itemPerPage) },
-                            (_, i) => (
-                                <li
-                                    key={i + 1}
-                                    className={`page-item ${currentPage === i + 1 ? 'active' : ''
-                                        }`}
-                                >
+                        {/* Previous Page Button */}
+                        <li className="page-item">
+                            <button
+                                className="page-link"
+                                onClick={() => handlePageChange(currentPage - 1)}
+                                disabled={currentPage === 1}
+                            >
+                                &laquo;
+                            </button>
+                        </li>
+
+                        {/* Start Ellipsis */}
+                        {startPage > 1 && (
+                            <>
+                                <li className="page-item">
                                     <button
                                         className="page-link"
-                                        onClick={() =>
-                                            handlePageChange(i + 1)
-                                        }
+                                        onClick={() => handlePageChange(1)}
                                     >
-                                        {i + 1}
+                                        1
                                     </button>
                                 </li>
-                            )
+                                <li className="page-item disabled">
+                                    <span className="page-link">...</span>
+                                </li>
+                            </>
                         )}
+
+                        {/* Page Numbers */}
+                        {Array.from({ length: endPage - startPage + 1 }, (_, i) => startPage + i).map(page => (
+                            <li
+                                key={page}
+                                className={`page-item ${currentPage === page ? 'active' : ''}`}
+                            >
+                                <button
+                                    className="page-link"
+                                    onClick={() => handlePageChange(page)}
+                                >
+                                    {page}
+                                </button>
+                            </li>
+                        ))}
+
+                        {/* End Ellipsis */}
+                        {endPage < totalPages && (
+                            <>
+                                <li className="page-item disabled">
+                                    <span className="page-link">...</span>
+                                </li>
+                                <li className="page-item">
+                                    <button
+                                        className="page-link"
+                                        onClick={() => handlePageChange(totalPages)}
+                                    >
+                                        {totalPages}
+                                    </button>
+                                </li>
+                            </>
+                        )}
+
+                        {/* Next Page Button */}
+                        <li className="page-item">
+                            <button
+                                className="page-link"
+                                onClick={() => handlePageChange(currentPage + 1)}
+                                disabled={currentPage === totalPages}
+                            >
+                                &raquo;
+                            </button>
+                        </li>
                     </ul>
                 </nav>
             </section>

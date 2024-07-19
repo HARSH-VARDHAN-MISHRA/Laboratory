@@ -108,6 +108,48 @@ exports.getAllPackage = async (req, res) => {
         });
     }
 };
+// Function to get a single package by ID
+exports.getPackageById = async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        // Fetch the package by ID and populate related fields
+        const package = await packageModel.findById(id).populate('testCategoryId').populate('laboratoryId');
+
+        if (!package) {
+            return res.status(404).json({
+                success: false,
+                message: "Package not found."
+            });
+        }
+
+        // Fetch test details for the package
+        const testCategoryIds = package.testCategoryId.map(category => category._id.toString());
+        const matchedTestCategories = await testCategoryModel.find({ _id: { $in: testCategoryIds } }).populate('testId');
+        
+        // Flatten the test details from matched test categories
+        const matchedTestDetails = matchedTestCategories.flatMap(category => category.testId);
+
+        const transformedPackage = {
+            ...package.toObject(),
+            testCategoryId: package.testCategoryId.map(category => category._id),
+            testDetails: matchedTestDetails // Assign matched test details
+        };
+
+        res.status(200).json({
+            success: true,
+            data: transformedPackage,
+            message: "Package found."
+        });
+    } catch (error) {
+        console.error("Error:", error);
+        res.status(500).json({
+            success: false,
+            message: "Internal Server Error"
+        });
+    }
+};
+
 // Function to delete a package by ID
 exports.deletePackage = async (req, res) => {
     try {
