@@ -56,27 +56,19 @@ exports.checkout = async (req, res) => {
 
 exports.MakeCashOnDeliveryCheckOut = async (req, res) => {
     try {
-        const { BookingInfo, Cart, Prices } = req.body;
-
-        // Create and save the order in MongoDB
         const newOrder = new OrderModel({
-            BookingInfo,
-            Cart,
-            Prices,
-        
+            requestBody: req.body, // Save the entire req.body
+            razorpayOrderId: req.body.razorpayOrderId,
+            razorpayPaymentId: req.body.razorpayPaymentId,
+            razorpaySignature: req.body.razorpaySignature,
+            transactionId: req.body.transactionId,
+            PaymentDone: req.body.PaymentDone,
+            PatientId: req.body.PatientId
         });
 
-        const savedOrder = await newOrder.save();
-
-        // Return the order details to the client
-        res.json({
-            success: true,
-            order: savedOrder,
-           
-        });
-
+        await newOrder.save();
+        res.status(201).json(newOrder);
     } catch (error) {
-        console.log(error);
-        res.status(500).send('Internal Server Error');
+        res.status(500).json({ error: error.message });
     }
 };

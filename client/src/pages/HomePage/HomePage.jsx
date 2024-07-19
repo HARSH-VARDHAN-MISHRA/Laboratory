@@ -123,9 +123,9 @@ const HomePage = () => {
 
 
   const sendRequirementInQuery = (selectedTest) => {
-    window.location.href = `/your-nearest-lab?TestName=${selectedTest.replace(/\s+/g, '-')}&longitude=${long}&latitude=${lat}&PinCode=${pincode}&City=${city.replace(/\s+/g, '-')}`;
+    navigate(`/your-nearest-lab?TestName=${selectedTest.replace(/\s+/g, '-')}&longitude=${long}&latitude=${lat}&PinCode=${pincode}&City=${city.replace(/\s+/g, '-')}`);
 
-    navigate(`/find-your-test/${selectedTest.replace(/\s+/g, '-')}`)
+    // navigate(`/find-your-test/${selectedTest.replace(/\s+/g, '-')}`)
   };
   const defaultCities = ["Delhi", "Kolkata", "Chennai", "Mumbai", "Bangalore", "Hyderabad", "Pune", "Ahmedabad", "Jaipur", "Surat", "Lucknow", "Kanpur", "Nagpur", "Visakhapatnam", "Bhopal", "Patna", "Ludhiana", "Agra", "Nashik", "Faridabad", "Meerut", "Rajkot", "Kalyan-Dombivli", "Vasai-Virar", "Varanasi", "Srinagar", "Aurangabad", "Dhanbad"];
 

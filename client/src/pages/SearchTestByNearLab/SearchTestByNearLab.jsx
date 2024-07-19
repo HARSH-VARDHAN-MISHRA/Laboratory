@@ -80,76 +80,99 @@ const SearchTestByNearLab = () => {
                         <Loading />
                     ) : (
                         <>
+                            {labDetails && labDetails.length > 0 ? (
+                                <>
+                                    <div className="row">
+                                        {labDetails.map((lab, index) => (
+                                            <div className="col-md-4" key={index}>
+                                                <div className="card mb-4">
+                                                    <div className="card-body">
+                                                        <h5 className="card-title">{lab.labName}</h5>
+                                                        <p className="card-text"><strong>Location:</strong> {lab.labLocation}</p>
+                                                        <p className="card-text test-name">{testName}</p>
+                                                        {lab.discountPercentage && lab.discountPercentage > 0 ? (
+                                                            <>
+                                                                <p className="price">
+                                                                    <span className='fs-4 pe-1' style={{ color: "var(--bg-dark-blue)", fontWeight: "500" }}>₹{lab.discountPrice.toFixed(0)}</span>
+                                                                    <span className='text-decoration-line-through'>₹{lab.price.toFixed(0)}</span>
+                                                                </p>
+                                                            </>
+                                                        ) : (
+                                                            <>
+                                                                <p className="price">
+                                                                    <span className='fs-4 pe-1' style={{ color: "var(--bg-dark-blue)", fontWeight: "500" }}>₹{lab.price.toFixed(0)}</span>
 
-                            <div className="row">
-                                {labDetails.map((lab, index) => (
-                                    <div className="col-md-4" key={index}>
-                                        <div className="card mb-4">
-                                            <div className="card-body">
-                                                <h5 className="card-title">{lab.labName}</h5>
-                                                <p className="card-text"><strong>Location:</strong> {lab.labLocation}</p>
-                                                <p className="card-text test-name">{testName}</p>
-                                                {lab.discountPercentage && lab.discountPercentage > 0 ? (
-                                                    <>
-                                                        <p className="price">
-                                                            <span className='fs-4 pe-1' style={{ color: "var(--bg-dark-blue)", fontWeight: "500" }}>₹{lab.discountPrice.toFixed(0)}</span>
-                                                            <span className='text-decoration-line-through'>₹{lab.price.toFixed(0)}</span>
-                                                        </p>
-                                                    </>
-                                                ) : (
-                                                    <>
-                                                     <p className="price">
-                                                            <span className='fs-4 pe-1' style={{ color: "var(--bg-dark-blue)", fontWeight: "500" }}>₹{lab.price.toFixed(0)}</span>
-                                                            
-                                                        </p>
-                                                        
-                                                    </>
-                                                )}
+                                                                </p>
 
-                                                {lab.discountPercentage && lab.discountPercentage > 0 ? (
-                                                    <p className="card-dicount">{lab.discountPercentage}% Off</p>
-                                                ) : null}
+                                                            </>
+                                                        )}
 
-                                                {isInCart({ ...lab, id: `${lab.labName}-${testName}` }) ? (
-                                                    <button
-                                                        className="btn btn-danger"
-                                                        onClick={() => removeFromCart({
-                                                            ...lab,
-                                                            testName,
-                                                            id: `${lab.labName}-${testName}`,
-                                                            actualPrice: lab.price,
-                                                            discountPrice: lab.discountPrice,
-                                                            discountPercentage: lab.discountPercentage,
-                                                            Branch: lab.Branch
-                                                        })}
-                                                    >
-                                                        Remove
-                                                    </button>
-                                                ) : (
-                                                    <button
-                                                        className="btn btn-primary"
-                                                        onClick={() => addToCart({
-                                                            ...lab,
-                                                            testName,
-                                                            id: `${lab.labName}-${testName}`,
-                                                            actualPrice: lab.price,
-                                                            discountPrice: lab.discountPrice,
-                                                            discountPercentage: lab.discountPercentage,
-                                                            Branch: lab.Branch
-                                                        })}
-                                                    >
-                                                        Book Test
-                                                    </button>
-                                                )}
+                                                        {lab.discountPercentage && lab.discountPercentage > 0 ? (
+                                                            <p className="card-dicount">{lab.discountPercentage}% Off</p>
+                                                        ) : null}
+
+                                                        {isInCart({ ...lab, id: `${lab.labName}-${testName}` }) ? (
+                                                            <button
+                                                                className="btn btn-danger"
+                                                                onClick={() => removeFromCart({
+                                                                    ...lab,
+                                                                    testName,
+                                                                    id: `${lab.labName}-${testName}`,
+                                                                    actualPrice: lab.price,
+                                                                    discountPrice: lab.discountPrice,
+                                                                    discountPercentage: lab.discountPercentage,
+                                                                    Branch: lab.Branch
+                                                                })}
+                                                            >
+                                                                Remove
+                                                            </button>
+                                                        ) : (
+                                                            <button
+                                                                className="btn btn-primary"
+                                                                onClick={() => addToCart({
+                                                                    ...lab,
+                                                                    testName,
+                                                                    id: `${lab.labName}-${testName}`,
+                                                                    actualPrice: lab.price,
+                                                                    discountPrice: lab.discountPrice,
+                                                                    discountPercentage: lab.discountPercentage,
+                                                                    Branch: lab.Branch
+                                                                })}
+                                                            >
+                                                                Book Test
+                                                            </button>
+                                                        )}
+                                                    </div>
+                                                </div>
                                             </div>
+                                        ))}
+                                    </div>
+                                </>
+                            ) : (
+                                <section className="no-results my-5">
+                                    <div className="container text-center">
+                                        <div className="alert alert-warning" style={{
+                                            backgroundColor: "var(--bg-light-green)",
+                                            color: "var(--bg-dark-blue)",
+                                            padding: "20px",
+                                            borderRadius: "10px",
+                                            fontSize: "1.25rem",
+                                            fontWeight: "bold"
+                                        }}>
+                                            <h1>No Results Found</h1>
+                                            <p style={{ marginTop: "10px" }}>Unfortunately, there are no labs available in your area at this time.</p>
                                         </div>
                                     </div>
-                                ))}
-                            </div>
+                                </section>
+
+                            )}
+
                         </>
                     )}
                 </div>
             </section>
+
+
             {showPopup && selectedTest && (
                 <div className="cart-popup">
                     <div className="popup-content">
