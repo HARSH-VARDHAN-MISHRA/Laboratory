@@ -417,6 +417,7 @@ exports.UploadXlsxFileAndExtractTest = async (req, res) => {
 exports.getDownLoadTestOfLabByLabId = async (req, res) => {
     try {
         const labId = req.params.labId;
+        console.log(labId)
         if (!labId) {
             return res.status(400).json({ success: false, message: 'No labId provided' });
         }

@@ -27,83 +27,90 @@ const OrderSummary = () => {
 
     // //=======//=======//=======//=======//=======//========== 
     const [visibleTests, setVisibleTests] = useState({});
-    const checkoutHandler = async (e) => {
-        e.preventDefault();
-        const token = localStorage.getItem('labMantraToken');
+    // const checkoutHandler = async (e) => {
+    //     e.preventDefault();
+    //     const token = localStorage.getItem('labMantraToken');
     
-        if (paymentOption === 'payOnline') {
-            try {
-                const { data: { order } } = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/Create-payment`, 
-                {
-                    amount: totalToPay,
-                    OrderDetails: {
-                        TestInfos: bookingFormData,
-                        CartData: cartDetails
-                    }
-                },
-                {
-                    headers: {
-                        Authorization: `Bearer ${token}`
-                    }
-                });
+    //     if (paymentOption === 'payOnline') {
+    //         try {
+    //             const { data: { order } } = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/Create-payment`, 
+               
+    //             {
+    //                 headers: {
+    //                     Authorization: `Bearer ${token}`
+    //                 }
+    //             });
     
-                const options = {
-                    key: "rzp_test_gU4w4jM7ASo0XA",
-                    amount: order.totalToPay || 100,
-                    currency: "INR",
-                    name: "Lab Mantra",
-                    description: "Payment Of Products",
-                    image: "https://i.ibb.co/nQw5cNf/logo.png",
-                    order_id: order.id,
-                    callback_url: `${process.env.REACT_APP_BACKEND_URL}/paymentverification`,
-                    notes: {
-                        "address": "Labmantra Pvt Ltd"
-                    },
-                    theme: {
-                        "color": "#2dbcb6"
-                    }
-                };
+    //             // const options = {
+    //             //     key: "rzp_test_gU4w4jM7ASo0XA",
+    //             //     amount: order.totalToPay || 100,
+    //             //     currency: "INR",
+    //             //     name: "Lab Mantra",
+    //             //     description: "Payment Of Products",
+    //             //     image: "https://i.ibb.co/nQw5cNf/logo.png",
+    //             //     order_id: order.id,
+    //             //     callback_url: `${process.env.REACT_APP_BACKEND_URL}/paymentverification`,
+    //             //     notes: {
+    //             //         "address": "Labmantra Pvt Ltd"
+    //             //     },
+    //             //     theme: {
+    //             //         "color": "#2dbcb6"
+    //             //     }
+    //             // };
     
-                const razor = new window.Razorpay(options);
-                razor.open();
-            } catch (error) {
-                console.error('Error in creating order:', error);
-                // Handle error scenario
-            }
-        } else if (paymentOption === 'cashOnDelivery') {
-            try {
-                const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/Create-Cod-Orders`, 
-                {
-                    amount: totalToPay,
-                    OrderDetails: {
-                        TestInfos: bookingFormData,
-                        CartData: cartDetails
-                    }
-                },
-                {
-                    headers: {
-                        Authorization: `Bearer ${token}`
-                    }
-                });
-                console.log(response.data)
+    //             // const razor = new window.Razorpay(options);
+    //             // razor.open();
+    //         } catch (error) {
+    //             console.error('Error in creating order:', error);
+    //             // Handle error scenario
+    //         }
+    //     } else if (paymentOption === 'cashOnDelivery') {
+    //         try {
+    //             const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/Create-Cod-Orders`, 
+    //             {
+    //                 amount: totalToPay,
+    //                 OrderDetails: {
+    //                     TestInfos: bookingFormData,
+    //                     CartData: cartDetails
+    //                 }
+    //             },
+    //             {
+    //                 headers: {
+    //                     Authorization: `Bearer ${token}`
+    //                 }
+    //             });
+    //             console.log(response.data)
       
              
-            } catch (error) {
-                console.error('Error in creating order:', error);
-                // Handle error scenario
-            }
-            // // Handle cash on delivery scenario
-            // const queryString = Object.keys(bookingFormData)
-            //     .map(key => {
-            //         const encodedValue = encodeURIComponent(bookingFormData[key]);
-            //         return `${key}=${encodedValue}`;
-            //     })
-            //     .join('&');
+    //         } catch (error) {
+    //             console.error('Error in creating order:', error);
+    //             // Handle error scenario
+    //         }
+    //         // // Handle cash on delivery scenario
+    //         // const queryString = Object.keys(bookingFormData)
+    //         //     .map(key => {
+    //         //         const encodedValue = encodeURIComponent(bookingFormData[key]);
+    //         //         return `${key}=${encodedValue}`;
+    //         //     })
+    //         //     .join('&');
     
-            // navigate(`/booking-confirmed?Collection-Type=home-collection&${queryString}`);
+    //         // navigate(`/booking-confirmed?Collection-Type=home-collection&${queryString}`);
+    //     }
+    // };
+
+    const checkoutHandler = async (e)=>{
+        const token = localStorage.getItem('labMantraToken');
+        e.preventDefault();
+        try {
+            const res = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/Create-payment`,{},{headers:{
+                Authorization:`Bearer ${token}`
+            }})
+            console.log(res.data)
+        } catch (error) {
+            console.error(error)
         }
-    };
-    
+    }
+
     const toggleVisibility = (packageId) => {
         setVisibleTests(prevState => ({
             ...prevState,

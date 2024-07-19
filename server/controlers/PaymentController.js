@@ -10,106 +10,10 @@ const instance = new Razorpay({
 });
 
 exports.checkout = async (req, res) => {
-    const cart = req.body.OrderDetails.CartData.cart;
-    const testDetailsFromCart = cart.filter(item => item.testName);
-
     try {
-        const userId = req.user._id;
-        const orderData = req.body;
-        const testData = orderData.OrderDetails.TestInfos;
-
-        // Creating order options for Razorpay
-        const options = {
-            amount: Number(req.body.amount * 100),
-            currency: "INR",
-        };
-
-        // Attempting to create an order with Razorpay
-        let order;
-        try {
-            order = await instance.orders.create(options);
-        } catch (razorpayError) {
-            return res.status(502).json({
-                success: false,
-                message: 'Failed to create order with Razorpay',
-                error: razorpayError.message,
-            });
-        }
-
-        // Constructing the new order object
-        const newOrder = new Order({
-            pincode: testData.pinCode,
-            city: testData.city,
-            fullName: testData.fullName,
-            phone: testData.phone,
-            optionalPhone: testData.optionalPhone,
-            email: testData.email,
-            date: new Date(testData.date), // Convert date string to Date object
-            age: parseInt(testData.age), // Convert age string to number
-            gender: testData.gender,
-            appointTime: testData.appointTime,
-            bookingType: testData.bookingType,
-            subtotal: orderData.OrderDetails.CartData.subtotal,
-            homeCollectionCharges: orderData.OrderDetails.CartData.homeCollectionCharges,
-            discount: orderData.OrderDetails.CartData.discount,
-            totalToPay: orderData.amount, // Assuming totalToPay comes from amount in OrderData
-            cartDetails: cart.map(item => ({
-                _id: false, // Disable auto _id for subdocuments
-                packageName: item.packageName,
-                testCategoryId: item.testCategoryId ? item.testCategoryId.map(id => new mongoose.Types.ObjectId(id)) : [],
-                testQuantity: item.testQuantity,
-                testGroupQuantity: item.testGroupQuantity,
-                actualPrice: item.actualPrice,
-                currentPrice: item.currentPrice,
-                offPercentage: item.offPercentage,
-                testDetails: Array.isArray(item.testDetails) ? item.testDetails.map(test => ({
-                    testName: test.testName,
-                    // Add more fields from testDetails array if needed
-                })) : [],
-                labBranchId: item.labBranchId ? new mongoose.Types.ObjectId(item.labBranchId) : null,
-                branchName: item.branchName,
-                branchEMail: item.branchEMail,
-                branchLocation: item.branchLocation,
-                HowManyDiscountAppliedForThisLab: item.HowManyDiscountAppliedForThisLab,
-                testPrice: item.testPrice,
-                discountedPrice: item.discountedPrice,
-                discountPercentage: item.discountPercentage,
-            })),
-            testCartDetail: testDetailsFromCart.map(item => ({
-                _id: false, // Disable auto _id for subdocuments
-                test_id: new mongoose.Types.ObjectId(item.test_id),
-                testName: item.testName,
-                actualPrice: item.actualPrice,
-                discountPrice: item.discountPrice,
-                discountPercentage: item.discountPercentage,
-                labBranchId: item.labBranchId ? new mongoose.Types.ObjectId(item.labBranchId) : null,
-                branchName: item.branchName,
-                branchEMail: item.branchEMail,
-                branchLocation: item.branchLocation,
-                HowManyDiscountAppliedForThisLab: item.HowManyDiscountAppliedForThisLab,
-                testPrice: item.testPrice,
-                discountedPrice: item.discountedPrice,
-            })),
-
-            OrderId:order.id,
-            paymentStatus:order.status,
-            PatientId: userId,
-            // Default status
-        });
-
-        // Save the new order to the database
-        const savedOrder = await newOrder.save();
-
-        res.status(200).json({
-            success: true,
-            order,
-        });
+        console.log(req.body)
     } catch (error) {
-        res.status(500).json({
-            success: false,
-            message: 'Something went wrong in checkout',
-            error: error.message,
-        });
+        console.log(error)
     }
 };
 
