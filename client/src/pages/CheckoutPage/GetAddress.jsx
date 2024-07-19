@@ -1,13 +1,26 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import './CheckoutPage.css'
-import '../Booking/Booking.css'
-import axios from 'axios'
+import './CheckoutPage.css';
+import '../Booking/Booking.css';
+import axios from 'axios';
+
 const OrderSummary = () => {
-    const navigate = useNavigate()
+    const navigate = useNavigate();
     const [cartDetails, setCartDetails] = useState({});
     const [bookingFormData, setBookingFormData] = useState({});
     const [paymentOption, setPaymentOption] = useState('cashOnDelivery');
+    const [formData, setFormData] = useState({
+        BookingInfo: {},
+        Cart: [],
+        Prices: {
+            subtotal: 0,
+            homeCollectionCharges: 0,
+            discount: 0,
+            totalToPay: 0
+        }
+    });
+    const [visibleTests, setVisibleTests] = useState({});
+
     useEffect(() => {
         const storedDetails = JSON.parse(localStorage.getItem('cartDetails')) || {};
         setCartDetails(storedDetails);
@@ -16,98 +29,56 @@ const OrderSummary = () => {
         setBookingFormData(storedBookingData);
     }, []);
 
-    const { cart, subtotal, homeCollectionCharges, discount, totalToPay } = cartDetails;
-    console.log("bookingFormData",bookingFormData)
     useEffect(() => {
-        window.scrollTo({
-            top: 0,
-            behavior: "smooth"
-        })
-    }, [])
+        if (Object.keys(cartDetails).length !== 0 && Object.keys(bookingFormData).length !== 0) {
+            const { cart, subtotal, homeCollectionCharges, discount, totalToPay } = cartDetails;
+            setFormData({
+                BookingInfo: bookingFormData,
+                Cart: cart,
+                Prices: {
+                    subtotal: subtotal || 0,
+                    homeCollectionCharges: homeCollectionCharges || 0,
+                    discount: discount || 0,
+                    totalToPay: totalToPay || 0
+                }
+            });
+        }
+    }, [cartDetails, bookingFormData]);
 
-    // //=======//=======//=======//=======//=======//========== 
-    const [visibleTests, setVisibleTests] = useState({});
     const checkoutHandler = async (e) => {
         e.preventDefault();
         const token = localStorage.getItem('labMantraToken');
-    
-        if (paymentOption === 'payOnline') {
+
+        if (paymentOption === "cashOnDelivery") {
             try {
-                const { data: { order } } = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/Create-payment`, 
-                {
-                    amount: totalToPay,
-                    OrderDetails: {
-                        TestInfos: bookingFormData,
-                        CartData: cartDetails
-                    }
-                },
-                {
+                const res = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/Create-Cod-Orders`, formData, {
                     headers: {
                         Authorization: `Bearer ${token}`
                     }
                 });
-    
-                const options = {
-                    key: "rzp_test_gU4w4jM7ASo0XA",
-                    amount: order.totalToPay || 100,
-                    currency: "INR",
-                    name: "Lab Mantra",
-                    description: "Payment Of Products",
-                    image: "https://i.ibb.co/nQw5cNf/logo.png",
-                    order_id: order.id,
-                    callback_url: `${process.env.REACT_APP_BACKEND_URL}/paymentverification`,
-                    notes: {
-                        "address": "Labmantra Pvt Ltd"
-                    },
-                    theme: {
-                        "color": "#2dbcb6"
-                    }
-                };
-    
-                const razor = new window.Razorpay(options);
-                razor.open();
+                console.log(res.data)
             } catch (error) {
-                console.error('Error in creating order:', error);
-                // Handle error scenario
+                console.error('Error in processing payment:', error);
             }
-        } else if (paymentOption === 'cashOnDelivery') {
+        } else {
             try {
-                const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/Create-Cod-Orders`, 
-                {
-                    amount: totalToPay,
-                    OrderDetails: {
-                        TestInfos: bookingFormData,
-                        CartData: cartDetails
-                    }
-                },
-                {
+                const res = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/Create-payment`, formData, {
                     headers: {
                         Authorization: `Bearer ${token}`
                     }
                 });
-                console.log(response.data)
-      
-             
+                console.log(res.data)
             } catch (error) {
-                console.error('Error in creating order:', error);
-                // Handle error scenario
+                console.error('Error in processing payment:', error);
             }
-            // // Handle cash on delivery scenario
-            // const queryString = Object.keys(bookingFormData)
-            //     .map(key => {
-            //         const encodedValue = encodeURIComponent(bookingFormData[key]);
-            //         return `${key}=${encodedValue}`;
-            //     })
-            //     .join('&');
-    
-            // navigate(`/booking-confirmed?Collection-Type=home-collection&${queryString}`);
         }
+
     };
-    
-    const toggleVisibility = (packageId) => {
+
+    const toggleVisibility = (id) => {
         setVisibleTests(prevState => ({
             ...prevState,
-            [packageId]: !prevState[packageId]
+            [id]: !prevState[id]
         }));
     };
 
@@ -115,7 +86,7 @@ const OrderSummary = () => {
         <>
             <section className="bread">
                 <div className="container">
-                    <nav aria-label="breadcrumb ">
+                    <nav aria-label="breadcrumb">
                         <h2>Order Summary</h2>
                         <ol className="breadcrumb">
                             <li className="breadcrumb-item"><Link to="/">Home</Link></li>
@@ -129,8 +100,6 @@ const OrderSummary = () => {
             <section className="my-5">
                 <div className="container">
                     <div className="row">
-
-                        {/* === Booking Details ==  */}
                         <div className="col-md-6">
                             <div
                                 className="booking-details"
@@ -143,7 +112,7 @@ const OrderSummary = () => {
                                 <h3 className="mb-3" style={{ color: '#003873' }}>
                                     Booking Details
                                 </h3>
-                                <div className="row ">
+                                <div className="row">
                                     <div className="col-12">
                                         {bookingFormData.fullName && (
                                             <p><strong>Full Name:</strong> {bookingFormData.fullName}</p>
@@ -188,17 +157,14 @@ const OrderSummary = () => {
                                             <p><strong>Booking Type:</strong> {bookingFormData.bookingType}</p>
                                         )}
                                     </div>
-
-
                                 </div>
                             </div>
                         </div>
 
-                        {/* ==== Order Summary ====  */}
                         <div className="col-md-6">
                             <div className="order-summary mb-4" style={{ backgroundColor: '#f0fffe', padding: '20px', borderRadius: '8px' }}>
                                 <h3 className="mb-3" style={{ color: '#003873' }}>Test Details</h3>
-                                {cart && cart.map(item => (
+                                {cartDetails.cart && cartDetails.cart.map(item => (
                                     <div key={item._id} className="cart-item mb-4" style={{ backgroundColor: '#ddf3f2', padding: '15px', borderRadius: '8px', boxShadow: '0 2px 4px rgba(0,0,0,0.1)' }}>
                                         {item.packageName ? (
                                             <>
@@ -224,12 +190,10 @@ const OrderSummary = () => {
                                                                 return (
                                                                     <li key={index} className="d-flex justify-content-between mb-2">
                                                                         <span>{test.testName}</span>
-                                                                        {/* <span>₹{test.discountPrice || test.actualPrice}</span> */}
                                                                     </li>
                                                                 );
                                                             })}
                                                         </ul>
-
                                                     </>
                                                 )}
                                             </>
@@ -247,58 +211,37 @@ const OrderSummary = () => {
                             </div>
                         </div>
 
-                        {/* ==== Payment Details ====  */}
                         <div className="col-md-6 my-4">
                             <div className="tot" style={{ backgroundColor: 'var(--bg-head)', padding: '20px', borderRadius: '8px' }}>
                                 <h3 className="mb-3 h4" style={{ color: 'var(--bg-dark-blue)' }}>Payment Details</h3>
                                 <div className="d-flex justify-content-between mt-3">
                                     <span style={{ color: 'var(--color-blue)' }}>Subtotal:</span>
-                                    <span>₹{subtotal}</span>
+                                    <span>₹{formData.Prices.subtotal}</span>
                                 </div>
                                 <div className="d-flex justify-content-between mt-1">
                                     <span style={{ color: 'var(--color-blue)' }}>Home Collection Charges:</span>
-                                    <span>₹{homeCollectionCharges}</span>
+                                    <span>₹{formData.Prices.homeCollectionCharges}</span>
                                 </div>
                                 <div className="d-flex justify-content-between mt-1">
                                     <span style={{ color: 'var(--color-blue)' }}>Discount:</span>
-                                    <span>₹{discount}</span>
+                                    <span>₹{formData.Prices.discount}</span>
                                 </div>
-                                <div className="d-flex justify-content-between mt-1 font-weight-bold fs-5">
-                                    <span style={{ color: 'var(--bg-dark-blue)' }}>Total to Pay:</span>
-                                    <span style={{ color: 'var(--color-blue-light)' }}>₹{totalToPay}</span>
-                                </div>
-                                {/* Payment Option */}
-                                <div className="mt-4">
-                                    <label htmlFor="paymentOption" className="form-label" style={{ color: 'var(--bg-dark-blue)' }}>Payment Option:</label>
-                                    <select
-                                        id="paymentOption"
-                                        className="form-select"
-                                        value={paymentOption}
-                                        onChange={(e) => setPaymentOption(e.target.value)}
-                                    >
-                                        <option value="cashOnDelivery">Cash on Delivery</option>
-                                        <option value="payOnline">Pay Online</option>
-                                    </select>
-                                </div>
-
-                                {/* Confirm Booking Button */}
-                                <div className="mt-4 d-grid">
-                                    <button onClick={checkoutHandler} className="btn btn-success" style={{ backgroundColor: '#2dbcb6', color: '#f0fffe', border: 'none', padding: '10px 0', borderRadius: '4px' }}>
-                                        Confirm Booking
-                                    </button>
+                                <div className="d-flex justify-content-between mt-3">
+                                    <span className="total-payment" style={{ color: 'var(--color-blue)', fontWeight: 'bold' }}>Total to Pay:</span>
+                                    <span>₹{formData.Prices.totalToPay}</span>
                                 </div>
                             </div>
+                            <div className="mt-4 d-grid">
+                                <button onClick={checkoutHandler} className="btn btn-success" style={{ backgroundColor: '#2dbcb6', color: '#f0fffe', border: 'none', padding: '10px 0', borderRadius: '4px' }}>
+                                    Confirm Booking
+                                </button>
+                            </div>
                         </div>
-
                     </div>
-
                 </div>
             </section>
-
-
-
         </>
     );
-}
+};
 
 export default OrderSummary;
