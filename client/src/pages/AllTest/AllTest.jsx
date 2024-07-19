@@ -6,7 +6,7 @@ import MetaTag from '../../components/Meta/MetaTag';
 const AllTest = () => {
     const [tests, setTests] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
-    const [itemsPerPage] = useState(12);
+    const [itemsPerPage] = useState(30);
     const [totalItems, setTotalItems] = useState(0);
     const [searchTerm, setSearchTerm] = useState('');
     const [cart, setCart] = useState([]);

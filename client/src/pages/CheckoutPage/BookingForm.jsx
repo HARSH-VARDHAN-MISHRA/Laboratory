@@ -211,13 +211,14 @@ const BookingForm = () => {
                                             />
                                         </div>
                                         <div className="col-md-6">
-                                            <label htmlFor="email">Email ID (optional):</label>
+                                            <label htmlFor="email">Email ID :</label>
                                             <input
                                                 type="email"
                                                 id="email"
                                                 className="form-control"
                                                 value={formData.email}
                                                 onChange={handleChange}
+                                                required
                                             />
                                         </div>
                                         <div className="col-md-6">
@@ -385,13 +386,14 @@ const BookingForm = () => {
                                             />
                                         </div>
                                         <div className="col-md-6">
-                                            <label htmlFor="email">Email ID (optional):</label>
+                                            <label htmlFor="email">Email ID :</label>
                                             <input
                                                 type="email"
                                                 id="email"
                                                 className="form-control"
                                                 value={formData.email}
                                                 onChange={handleChange}
+                                                required
                                             />
                                         </div>
                                         <div className="col-md-6">

@@ -135,7 +135,7 @@ const CartPage = () => {
                                                                     {item.testDetails.map((test, index) => (
                                                                         <li key={index} className="d-flex justify-content-between">
                                                                             <span>{test.testName}</span>
-                                                                            <span>₹{test.discountPrice || test.actualPrice}</span>
+                                                                            <span>₹{test.discountPrice.toFixed(0) || test.actualPrice.toFixed(0)}</span>
                                                                         </li>
                                                                     ))}
                                                                 </ul>
