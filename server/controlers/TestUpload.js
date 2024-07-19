@@ -1,5 +1,6 @@
 const LaboratoryDetail = require('../models/laboratory.model');
 const xlsx = require('xlsx');
+const ExcelJS = require('exceljs');
 const path = require('path');
 const Tests = require('../models/test.model')
 // Function to format the data
@@ -378,6 +379,7 @@ function formatDataTest(data) {
     return formattedData;
 }
 
+
 exports.UploadXlsxFileAndExtractTest = async (req, res) => {
     try {
         const ExcelFile = req.file;
@@ -407,6 +409,61 @@ exports.UploadXlsxFileAndExtractTest = async (req, res) => {
         res.status(200).json({ success: true, message: 'File uploaded and data extracted successfully', data: formattedData });
     } catch (error) {
         console.error('Error processing file', error);
+        res.status(500).json({ success: false, message: 'Internal server error' });
+    }
+};
+
+
+exports.getDownLoadTestOfLabByLabId = async (req, res) => {
+    try {
+        const labId = req.params.labId;
+        if (!labId) {
+            return res.status(400).json({ success: false, message: 'No labId provided' });
+        }
+
+        // Find the laboratory by its ID
+        const lab = await LaboratoryDetail.findById(labId);
+        if (!lab) {
+            return res.status(404).json({ success: false, message: 'Laboratory not found' });
+        }
+
+        // Return all tests associated with the laboratory
+        const tests = lab.tests;
+
+        // Create a new workbook and a sheet
+        const workbook = new ExcelJS.Workbook();
+        const worksheet = workbook.addWorksheet('Tests');
+
+        // Add columns to the worksheet
+        worksheet.columns = [
+            { header: 'Test No', key: 'testNo', width: 30 },
+            { header: 'Test Name', key: 'TestName', width: 50 },
+            { header: 'Price', key: 'Price', width: 20 },
+            { header: 'Discount Percentage', key: 'DiscountPercentage', width: 20 },
+            { header: 'Discount Price', key: 'DiscountPrice', width: 20 },
+            // Add more columns as needed
+        ];
+
+        // Add rows to the worksheet
+        tests.forEach(test => {
+            worksheet.addRow({
+                testNo: test.testNo,
+                TestName: test.TestName,
+                Price: test.Price,
+                DiscountPercentage: test.DiscountPercentage,
+                DiscountPrice: test.DiscountPrice,
+            });
+        });
+
+        // Write the workbook to a buffer
+        const buffer = await workbook.xlsx.writeBuffer();
+
+        // Set the response headers and send the file
+        res.setHeader('Content-Disposition', `attachment; filename="lab_${labId}_tests.xlsx"`);
+        res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        res.send(buffer);
+    } catch (error) {
+        console.error('Error fetching tests by labId', error);
         res.status(500).json({ success: false, message: 'Internal server error' });
     }
 };

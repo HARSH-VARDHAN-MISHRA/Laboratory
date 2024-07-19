@@ -142,6 +142,27 @@ const AddLaboratoryTest = () => {
     const indexOfFirstItem = indexOfLastItem - pageSize;
     const currentTests = filteredTests.slice(indexOfFirstItem, indexOfLastItem);
     //   const currentTests = tests.slice(indexOfFirstItem, indexOfLastItem);
+    const handleDownloadTests = async () => {
+        try {
+            const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/lab/download-xlsx-test/${selectedLabId}`, {
+                responseType: 'blob', // Important for handling binary data
+            });
+            
+            // Create a link element
+            const url = window.URL.createObjectURL(new Blob([response.data]));
+            const link = document.createElement('a');
+            link.href = url;
+            link.setAttribute('download', 'lab_tests.xlsx'); // You can specify the filename here
+            document.body.appendChild(link);
+            link.click();
+            
+            // Clean up and remove the link
+            link.parentNode.removeChild(link);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
 
     return (
         <div>
@@ -179,6 +200,12 @@ const AddLaboratoryTest = () => {
                     />
                 </div>
             </div>
+            <div className='download-tests'>
+                <div className='container col-md-10 mx-auto position-relative'>
+                    <button onClick={handleDownloadTests} className='btn btn-danger btn-outline '>Download Test</button>
+                </div>
+            </div>
+
 
 
             {selectedLabId && (

@@ -1,6 +1,6 @@
 const express = require('express');
 const multer = require('multer');
-const { UploadXlsxFileAndExtractTest,UploadXlsxFileAndExtractData,singleTestDeleteByTestId,getAllTestsWithLabInfoInBuild,UpdateTestDetails,DeleteAllTestsByLabId,getSingleTestByTestId,getALLTestByLabId ,ByTestNameShowAllLabsWithWhichDoThisTestWithPrices} = require('../controlers/TestUpload');
+const { UploadXlsxFileAndExtractTest,UploadXlsxFileAndExtractData,getDownLoadTestOfLabByLabId,singleTestDeleteByTestId,getAllTestsWithLabInfoInBuild,UpdateTestDetails,DeleteAllTestsByLabId,getSingleTestByTestId,getALLTestByLabId ,ByTestNameShowAllLabsWithWhichDoThisTestWithPrices} = require('../controlers/TestUpload');
 const router = express.Router();
 
 // Set up multer for file upload
@@ -17,6 +17,7 @@ router.get('/get-all-Tests',getAllTestsWithLabInfoInBuild)
 router.get('/get-all-Tests/:testName',ByTestNameShowAllLabsWithWhichDoThisTestWithPrices)
 router.post('/upload-xlsx-test', upload.single('file'),UploadXlsxFileAndExtractTest)
 
+router.get('/download-xlsx-test/:labId',getDownLoadTestOfLabByLabId)
 
 
 
