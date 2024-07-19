@@ -1,7 +1,7 @@
 const LaboratoryDetail = require('../models/laboratory.model');
 const xlsx = require('xlsx');
 const path = require('path');
-
+const Tests = require('../models/test.model')
 // Function to format the data
 function formatData(data) {
     const formattedData = [];
@@ -337,5 +337,76 @@ exports.ByTestNameShowAllLabsWithWhichDoThisTestWithPrices = async (req, res) =>
         res.status(200).json({ success: true, data: labsWithTest });
     } catch (error) {
         res.status(500).json({ success: false, message: error.message });
+    }
+};
+
+
+function formatDataTest(data) {
+    const formattedData = [];
+
+    data.forEach((row, index) => {
+        if (index === 0) return; // Skip header row
+
+        if (row.length >= 3) {
+            const srNo = row[0];
+            const testName = row[1];
+            let price = row[2];
+            let discountPercentage = row[3] || 0; // Default to 0 if not provided
+            let discountPrice = row[4] || 0; // Default to 0 if not provided
+
+            // Remove commas and convert to number
+            if (typeof price === 'string') {
+                price = parseFloat(price.replace(/,/g, ''));
+            }
+            if (typeof discountPercentage === 'string') {
+                discountPercentage = parseFloat(discountPercentage.replace(/,/g, ''));
+            }
+            if (typeof discountPrice === 'string') {
+                discountPrice = parseFloat(discountPrice.replace(/,/g, ''));
+            }
+
+            formattedData.push({
+                srNo: srNo,
+                testName: testName,
+                actualPrice: price,
+                discountPercentage: discountPercentage,
+                discountPrice: discountPrice
+            });
+        }
+    });
+
+    return formattedData;
+}
+
+exports.UploadXlsxFileAndExtractTest = async (req, res) => {
+    try {
+        const ExcelFile = req.file;
+        if (!ExcelFile) {
+            return res.status(400).json({ success: false, message: 'No file uploaded' });
+        }
+
+        const workbook = xlsx.readFile(ExcelFile.path);
+        const sheetName = workbook.SheetNames[0];
+        const sheet = workbook.Sheets[sheetName];
+        const jsonData = xlsx.utils.sheet_to_json(sheet, { header: 1 });
+
+        const formattedData = formatDataTest(jsonData);
+        // console.log(formattedData);
+
+        // Iterate over the formatted data and save each test
+        for (const test of formattedData) {
+            const newTest = new Tests({
+                testName: test.testName,
+                actualPrice: test.actualPrice,
+                discountPrice: test.discountPrice,
+                discountPercentage: test.discountPercentage
+            });
+            await newTest.save();
+        }
+
+        res.status(200).json({ success: true, message: 'File uploaded and data extracted successfully', data: formattedData });
+    } catch (error) {
+        console.error('Error processing file', error);
+        res.status(500).json({ success: false, message: 'Internal server error' });
     }
 };
