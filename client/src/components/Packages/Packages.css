@@ -8,7 +8,6 @@
     transition: var(--transition-3);
 }
 .single-package:hover{
-    background: var(--bg-light-green);
     background: var(--bg-head);
 }
 .single-package .main-head{
@@ -66,7 +65,7 @@
     background: var(--bg-light-green);
     z-index: 50;
     font-size: 0.7rem;
-    color: white;
+    color: var(--bg-dark-blue);
     padding: 0.2rem;
     border-radius: 2px;
     bottom: 100%;
