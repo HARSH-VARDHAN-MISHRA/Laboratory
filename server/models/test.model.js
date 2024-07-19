@@ -15,15 +15,7 @@ const testSchema = new mongoose.Schema({
     discountPercentage: {
         type: Number,
     },
-    Branch: [{
-        labBranchId: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'LaboratoryBranchDetail'
-        },
-        HowManyDiscountAppliedForThisLab: {
-            type: Number,
-        }
-    }]
+   
 });
 
 module.exports = mongoose.model('TestDetail', testSchema);

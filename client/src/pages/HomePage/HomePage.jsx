@@ -300,12 +300,12 @@ const HomePage = () => {
                   <div className="price">
                     {item.discountPrice ? (
                       <>
-                        <span className="discount_price">₹{item.discountPrice}</span>
-                        <span className="actual_price">₹{item.actualPrice}</span>
+                        <span className="discount_price">₹{item.discountPrice.toFixed(0)}</span>
+                        <span className="actual_price">₹{item.actualPrice.toFixed(0)}</span>
                       </>
                     ) : (
                       <>
-                        <span className="discount_price">₹{item.actualPrice}</span>
+                        <span className="discount_price">₹{item.actualPrice.toFixed(0)}</span>
                       </>
                     )}
                   </div>

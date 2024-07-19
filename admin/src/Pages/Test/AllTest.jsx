@@ -19,8 +19,9 @@ const AllTest = () => {
     const handleFetch = async () => {
         try {
             const res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/get-all-test`);
-            const reverseData = res.data.data.reverse();
+            const reverseData = res.data.data
             setTests(reverseData);
+            console.log(reverseData)
         } catch (error) {
             console.error('There was an error fetching the tests!', error);
         }
@@ -169,7 +170,7 @@ const AllTest = () => {
                                 <td>
                                     {test.discountPercentage
                                         ? `${test.discountPercentage}%`
-                                        : ''}
+                                        : 0}
                                 </td>
                                 <td>
                                     <Link
@@ -202,9 +203,8 @@ const AllTest = () => {
                             (_, i) => (
                                 <li
                                     key={i + 1}
-                                    className={`page-item ${
-                                        currentPage === i + 1 ? 'active' : ''
-                                    }`}
+                                    className={`page-item ${currentPage === i + 1 ? 'active' : ''
+                                        }`}
                                 >
                                     <button
                                         className="page-link"
