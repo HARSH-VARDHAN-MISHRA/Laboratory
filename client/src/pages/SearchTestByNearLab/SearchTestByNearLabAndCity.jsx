@@ -4,9 +4,19 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 import Loading from '../../components/Loading/Loading';
 import './SearchTestByNearLab.css';
 
-const SearchTestByNearLab = () => {
-    const { testName } = useParams();
-    const formattedTestName = testName.replace(/-/g, ' ');
+const SearchTestByNearLabAndCity = () => {
+    const QueryParams = new URLSearchParams(window.location.search)
+    const testName = QueryParams.get('TestName')
+    const longitude = QueryParams.get('longitude')
+    const latitude = QueryParams.get('latitude')
+    const PinCode = QueryParams.get('PinCode')
+    const City = QueryParams.get('City')
+
+    // console.log("TestName", testName);
+    // console.log("longitude", longitude);
+    // console.log("latitude", latitude);
+    // console.log("PinCode", PinCode);
+    // console.log("City", City);
 
     const [labDetails, setLabDetails] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -14,12 +24,17 @@ const SearchTestByNearLab = () => {
     const [selectedTest, setSelectedTest] = useState(null);
     const [cart, setCart] = useState(JSON.parse(localStorage.getItem('lab-cart')) || []);
     const navigate = useNavigate()
-
+    const formattedTestName = testName.replace(/-/g, ' ');
     const fetchTestNearestLab = async () => {
         try {
             const res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/lab/get-all-Tests/${formattedTestName}`);
-            setLabDetails(res.data.data);
-
+            const data = res.data.data;
+            let dataFilter;
+            if (City || PinCode) {
+                dataFilter = data.filter((item) => item.pinCode === PinCode || item.city === City)
+            }
+            
+            setLabDetails(dataFilter)
         } catch (error) {
             console.error("Error While Fetching the Test Nearest Labs : ", error);
         } finally {
@@ -58,7 +73,7 @@ const SearchTestByNearLab = () => {
             top: 0,
             behavior: 'smooth'
         });
-    }, [testName]);
+    }, []);
 
     return (
         <>
@@ -170,4 +185,4 @@ const SearchTestByNearLab = () => {
     );
 }
 
-export default SearchTestByNearLab;
+export default SearchTestByNearLabAndCity;

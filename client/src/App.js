@@ -31,6 +31,7 @@ import LabsBranchLocations from './pages/Labs/LabsBranchLocations';
 
 import ErrorPage from './pages/Error/ErrorPage';
 import SearchTestByNearLab from './pages/SearchTestByNearLab/SearchTestByNearLab';
+import SearchTestByNearLabAndCity from './pages/SearchTestByNearLab/SearchTestByNearLabAndCity';
 
 
 function App() {
@@ -48,6 +49,7 @@ function App() {
             <Route path='/lab-tests/:testname' element={<SearchByTest />} />
 
             <Route path='/find-your-test/:testName' element={<SearchTestByNearLab />} />
+            <Route path='/your-nearest-lab' element={<SearchTestByNearLabAndCity />} />
 
             <Route path='/our-packages' element={<PackagesPage />} />
             <Route path='/our-packages/:packagename' element={<PackageByTitlePage />} />

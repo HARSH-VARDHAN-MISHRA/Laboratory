@@ -206,12 +206,12 @@ const AllTest = () => {
                                             <div className="price">
                                                 {item.discountPrice ? (
                                                     <>
-                                                        <span className="discount_price">₹{item.discountPrice}</span>
-                                                        <span className="actual_price">₹{item.price}</span>
+                                                        <span className="discount_price">₹{item.discountPrice.toFixed(0)}</span>
+                                                        <span className="actual_price">₹{item.price.toFixed(0)}</span>
                                                     </>
                                                 ) : (
                                                     <>
-                                                        <span className="discount_price">₹{item.price}</span>
+                                                        <span className="discount_price">₹{item.price.toFixed(0)}</span>
                                                     </>
                                                 )}
                                             </div>

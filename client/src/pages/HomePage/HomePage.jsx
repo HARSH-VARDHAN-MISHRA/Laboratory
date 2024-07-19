@@ -107,26 +107,6 @@ const HomePage = () => {
   };
 
 
-
-  const handleAddToCart = (test) => {
-    let updatedCart = [...cart];
-    let message = '';
-    if (cart.some(item => item._id === test._id)) {
-      updatedCart = updatedCart.filter(item => item._id !== test._id);
-      message = `${test.testName} Removed from cart`;
-    } else {
-      updatedCart.push(test);
-      message = `${test.testName} added to cart`;
-    }
-    setCart(updatedCart);
-    localStorage.setItem('lab-cart', JSON.stringify(updatedCart));
-    setPopupMessage(message);
-    setShowPopup(true);
-    setTimeout(() => {
-      setShowPopup(false);
-    }, 2000);
-  };
-
   const requestLocationAccess = () => {
     setLocationPopup(false);
     checkLocationAccess();
@@ -142,23 +122,23 @@ const HomePage = () => {
   };
 
 
-  const sendRequirementInQuery = (e) => {
-    e.preventDefault(); // Prevent the default form submission
-    // window.location.href = `/Nearest-Lab?TestName=${testName.replace(/\s+/g, '-')}&longitude=${long}&latitude=${lat}&PinCode=${pincode}&City=${city.replace(/\s+/g, '-')}`;
-    window.location.href = `/find-your-test/${testName}`;
+  const sendRequirementInQuery = (selectedTest) => {
+    window.location.href = `/your-nearest-lab?TestName=${selectedTest.replace(/\s+/g, '-')}&longitude=${long}&latitude=${lat}&PinCode=${pincode}&City=${city.replace(/\s+/g, '-')}`;
+
+    navigate(`/find-your-test/${selectedTest.replace(/\s+/g, '-')}`)
   };
   const defaultCities = ["Delhi", "Kolkata", "Chennai", "Mumbai", "Bangalore", "Hyderabad", "Pune", "Ahmedabad", "Jaipur", "Surat", "Lucknow", "Kanpur", "Nagpur", "Visakhapatnam", "Bhopal", "Patna", "Ludhiana", "Agra", "Nashik", "Faridabad", "Meerut", "Rajkot", "Kalyan-Dombivli", "Vasai-Virar", "Varanasi", "Srinagar", "Aurangabad", "Dhanbad"];
 
   // ============= mm ===================== 
-  const SearchNearLabByTest = (testName) =>{
-      navigate(`/find-your-test/${testName}`)
+  const SearchNearLabByTest = (testName) => {
+    navigate(`/find-your-test/${testName.replace(/\s+/g, '-')}`)
   }
   return (
     <>
       <MetaTag
-          title="YUGI Health Provider LLP - Quality Healthcare for All Citizens"
-          description="Welcome to YUGI Health Provider LLP. Our initiative is to make quality healthcare affordable and accessible for all Indian citizens. Explore our diagnostic services and find out how we can assist you with your healthcare needs."
-          keyword="Lab Mantra, YUGI Health Provider LLP, quality healthcare, affordable healthcare, diagnostic services, Indian healthcare"
+        title="YUGI Health Provider LLP - Quality Healthcare for All Citizens"
+        description="Welcome to YUGI Health Provider LLP. Our initiative is to make quality healthcare affordable and accessible for all Indian citizens. Explore our diagnostic services and find out how we can assist you with your healthcare needs."
+        keyword="Lab Mantra, YUGI Health Provider LLP, quality healthcare, affordable healthcare, diagnostic services, Indian healthcare"
       />
 
 
@@ -180,6 +160,7 @@ const HomePage = () => {
                     ))}
                   </select>
                 </div>
+                
                 <div className="input-fd mb-3 position-relative">
                   <i className="fa-brands fa-searchengin"></i>
                   <input
@@ -190,8 +171,21 @@ const HomePage = () => {
                   />
                   {testSuggestions.length > 0 && (
                     <div className="suggestions-wrapper">
-                      <select onChange={(e) => setTestName(e.target.value)} size={testSuggestions.length + 1}>
-                        <option value="">Select a Test</option>
+                      <select
+                        onChange={(e) => {
+                          const selectedTest = e.target.value;
+                          setTestName(selectedTest);
+                          // sendRequirementInQuery(selectedTest); 
+                          setTimeout(() => {
+                            sendRequirementInQuery(selectedTest);
+                           
+                          }, 1000);
+                
+                        }}
+                        size={testSuggestions.length + 1}
+                        value={testName} // Keep the dropdown synchronized with the input field
+                      >
+                        <option >Choose Your test</option>
                         {testSuggestions.map((suggestion, index) => (
                           <option key={index} value={suggestion.testName}>
                             {suggestion.testName}
@@ -201,6 +195,7 @@ const HomePage = () => {
                     </div>
                   )}
                 </div>
+
 
                 <button type="submit">Find Nearest Location</button>
               </form>
@@ -310,7 +305,7 @@ const HomePage = () => {
                     )}
                   </div>
                   <button onClick={() => SearchNearLabByTest(item.testName)} className="bookBtn">
-                      View Lab
+                    View Lab
                   </button>
                   {/* {cart.some(cartItem => cartItem._id === item._id) ? (
                     <button onClick={() => handleAddToCart(item)} className="bookBtn">
