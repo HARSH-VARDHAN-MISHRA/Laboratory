@@ -22,32 +22,22 @@ const EditPackage = () => {
 
     useEffect(() => {
         fetchPackage();
+        fetchTestCategories(); // Fetch test categories for Select options
     }, [id]);
 
     const fetchPackage = async () => {
         try {
-            const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/get-all-package`);
-            const allPackages = response.data.data;
+            const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/get-package/${id}`);
+            const packageData = response.data.data;
             
-            // Find the package with matching ID
-            const packageData = allPackages.find(pkg => pkg._id === id);
-
-            if (!packageData) {
-                throw new Error(`Package with ID ${id} not found`);
-            }
-
-            // Prepare testCategoryName array and options for Select component
-            const selectedTests = packageData.testCategoryName.map(category => ({
-                label: category,
-                value: category
-            }));
-
-            // Fetch all test categories to populate options in Select
-            const testRes = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/get-all-test-category`);
-            const options = testRes.data.data.map(test => ({
-                value: test.testCategoryName,
-                label: test.testCategoryName,
-                testNumber: test.testNumber
+            // Fetch the test category details based on IDs from the package
+            const testCategoryResponses = await Promise.all(packageData.testCategoryId.map(id =>
+                axios.get(`${process.env.REACT_APP_BACKEND_URL}/get-test-category/${id}`)
+            ));
+            const selectedTests = testCategoryResponses.map(res => ({
+                label: res.data.testCategoryName,
+                value: res.data.testCategoryName,
+                testNumber: res.data.testNumber
             }));
 
             setFormData({
@@ -59,11 +49,24 @@ const EditPackage = () => {
                 currentPrice: packageData.currentPrice ? packageData.currentPrice.toString() : '',
                 offPercentage: packageData.offPercentage ? packageData.offPercentage.toString() : ''
             });
-
-            setTestOptions(options);
         } catch (error) {
             console.error('Error fetching package details:', error);
             toast.error('Error fetching package details');
+        }
+    };
+
+    const fetchTestCategories = async () => {
+        try {
+            const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/get-all-test-category`);
+            const options = response.data.data.map(test => ({
+                value: test.testCategoryName,
+                label: test.testCategoryName,
+                testNumber: test.testNumber
+            }));
+            setTestOptions(options);
+        } catch (error) {
+            console.error('Error fetching test categories:', error);
+            toast.error('Error fetching test categories');
         }
     };
 
@@ -78,7 +81,8 @@ const EditPackage = () => {
     const handleTestChange = (selectedOptions) => {
         const selectedTests = selectedOptions ? selectedOptions.map(option => ({
             label: option.label,
-            testNumber: option.testNumber // Retrieve testNumber from selected options
+            value: option.value,
+            testNumber: option.testNumber
         })) : [];
         
         // Calculate total test group quantity
@@ -208,7 +212,7 @@ const EditPackage = () => {
                     </div>
                     <div className="col-12 text-center">
                         <button type="submit" disabled={isLoading} className={`${isLoading ? 'not-allowed' : 'allowed'}`}>
-                            {isLoading ? "Please Wait..." : "Update Package"}
+                            {isLoading ? "Please wait..." : "Save Changes"}
                         </button>
                     </div>
                 </form>

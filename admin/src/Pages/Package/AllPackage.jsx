@@ -129,7 +129,7 @@ const AllPackage = () => {
                         {currentItems.map((pkg, index) => (
                             <tr key={index}>
                                 <th scope="row">{index + 1}</th>
-                                <td>{pkg.packageName}</td>
+                                <td className='text-wrap'>{pkg.packageName}</td>
                                 <td>
                                     {pkg.testCategoryId.map((testGroupName, idx) => (
                                         <div key={idx}>{testGroupName}, </div>

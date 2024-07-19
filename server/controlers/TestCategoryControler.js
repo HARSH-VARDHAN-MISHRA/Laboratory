@@ -68,6 +68,43 @@ exports.getAllTestCategory = async (req, res) => {
     }
 };
 
+// Get Single Test Category by ID
+exports.getTestCategoryById = async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        if (!id) {
+            return res.status(400).json({
+                success: false,
+                message: "Test Category ID is required."
+            });
+        }
+
+        const testCategory = await testCategoryModel.findById(id).populate('testId');
+
+        if (!testCategory) {
+            return res.status(404).json({
+                success: false,
+                message: "Test Category not found."
+            });
+        }
+
+        res.status(200).json({
+            success: true,
+            data: testCategory,
+            message: "Test Category found."
+        });
+
+    } catch (error) {
+        console.log("Error:", error);
+        return res.status(500).json({
+            success: false,
+            message: "Internal Server Error"
+        });
+    }
+};
+
+
 // Delete Test Category
 exports.deleteTestCategory = async (req, res) => {
     try {

@@ -1,8 +1,8 @@
 const express = require('express');
 const { createTest, getAllTest, deleteTest, updateTest, AddBranchIdAndDiscount, getAllTestsForBranch, RemoveAllBranchIdsWithDiscount, removeBranchByBranchId, searchByTestName } = require('../controlers/TestControler');
 const { createPackageTitle, getAllPackageTitle, deletePackageTitle, updatePackageTitle } = require('../controlers/packageTitleControler');
-const { createTestCategory, getAllTestCategory, deleteTestCategory, updateTestCategory } = require('../controlers/TestCategoryControler');
-const { createPackage, getAllPackage, deletePackage, updatePackage } = require('../controlers/packageControler');
+const { createTestCategory, getAllTestCategory, deleteTestCategory, updateTestCategory, getTestCategoryById } = require('../controlers/TestCategoryControler');
+const { createPackage, getAllPackage, deletePackage, updatePackage, getPackageById } = require('../controlers/packageControler');
 const { createLaboratory, getLaboratories, findNearestLaboratories, updateLabLocations, getLabInformationByCityAndPinCode, deleteLaboratory } = require('../controlers/laboratoryControler');
 const { register, PasswordChangeRequest, ResendOtp, ResendSignOtp, verifyOtpForSignIn, VerifyOtp, LoginUser, getAllUsers } = require('../controlers/UserControler');
 const { getAllVouchers, applyVoucher, createVoucher, activateVoucher, deactivateVoucher, deleteVoucher } = require('../controlers/VoucherController');
@@ -42,12 +42,14 @@ route.put("/update-package-title/:id",updatePackageTitle );
 // Test Group
 route.post("/create-test-category",createTestCategory );
 route.get("/get-all-test-category",getAllTestCategory );
+route.get("/get-test-category/:id",getTestCategoryById );
 route.delete("/delete-test-category/:id",deleteTestCategory );
 route.put("/update-test-category/:id",updateTestCategory );
 
 // Package
 route.post("/create-package",createPackage );
 route.get("/get-all-package",getAllPackage );
+route.get("/get-package/:id",getPackageById );
 route.delete("/delete-package/:id",deletePackage );
 route.put("/update-package/:id",updatePackage );
 
