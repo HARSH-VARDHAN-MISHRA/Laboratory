@@ -6,7 +6,7 @@ import logo from '../../Assets/logo.png'
 const Footer = () => {
   return (
     <>
-      <footer>
+      <footer className='mt-5'>
         <div className="container">
           <div className="row">
             <div className="col-md-4">
@@ -17,11 +17,11 @@ const Footer = () => {
             <div className="col-md-3">
               <h4>Quick Links</h4>
               <ul>
-                <li><Link>Home</Link></li>
-                <li><Link>About Us</Link></li>
-                <li><Link>Book Test</Link></li>
-                <li><Link>Download Report</Link></li>
-                <li><Link>Contact Us</Link></li>
+                <li><Link to={`/`}>Home</Link></li>
+                <li><Link to={`/about-us`}>About Us</Link></li>
+                <li><Link to={`/lab-tests`}>Book Test</Link></li>
+                <li><Link to={`/our-packages`}>Download Report</Link></li>
+                <li><Link to={`/contact-us`}>Contact Us</Link></li>
               </ul>
             </div>
             <div className="col-md-3">

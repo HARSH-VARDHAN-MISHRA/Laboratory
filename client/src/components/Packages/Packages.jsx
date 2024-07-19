@@ -146,6 +146,7 @@ const Packages = () => {
                                                         );
                                                     })}
                                                 </div>
+                                                <div className="lab-name">{pack.laboratoryId.LabName}</div>
                                                 <div className="content">
                                                     <div className="book-btn">
                                                         {cart.some(item => item._id === packageDetails._id) ? (

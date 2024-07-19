@@ -57,10 +57,62 @@ exports.createPackage = async (req, res) => {
 };
 
 // Function to get all packages
+// exports.getAllPackage = async (req, res) => {
+//     try {
+//         const getAllPackage = await packageModel.find().populate('testCategoryId').populate('laboratoryId');
+        
+//         if (getAllPackage.length === 0) {
+//             return res.status(404).json({
+//                 success: false,
+//                 message: "No packages found."
+//             });
+//         }
+
+//         // getAllPackage.map((pkgs)=>(
+//         //     console.log(pkgs.laboratoryId)
+//         // ))
+
+//         const transformedPackages = await Promise.all(getAllPackage.map(async (pkg) => {
+            
+//             try {
+//                 const testCategoryIds = pkg.testCategoryId.map(category => category._id.toString()); // Convert test category IDs to strings
+
+//                 const matchedTestCategories = await testCategoryModel.find({ _id: { $in: testCategoryIds } }).populate('testId');
+//                 console.log("Test Category IDs:", testCategoryIds);
+//                 // console.log("Matched Test Categories:", matchedTestCategories);
+
+//                 // Flatten the test details from matched test categories
+//                 const matchedTestDetails = matchedTestCategories.flatMap(category => category.testId);
+
+//                 return {
+//                     ...pkg.toObject(),
+//                     // testCategoryId: pkg.testCategoryId.map(category => category._id),
+//                     testDetails: matchedTestDetails // Assign matched test details
+//                 };
+//             } catch (error) {
+//                 console.error("Error:", error);
+//                 throw new Error("Error fetching test details");
+//             }
+//         }));
+
+//         res.status(200).json({
+//             success: true,
+//             data: transformedPackages,
+//             message: "All packages found."
+//         });
+//     } catch (error) {
+//         console.error("Error:", error);
+//         res.status(500).json({
+//             success: false,
+//             message: "Internal Server Error"
+//         });
+//     }
+// };
+
 exports.getAllPackage = async (req, res) => {
     try {
         const getAllPackage = await packageModel.find().populate('testCategoryId').populate('laboratoryId');
-        
+
         if (getAllPackage.length === 0) {
             return res.status(404).json({
                 success: false,
@@ -68,25 +120,22 @@ exports.getAllPackage = async (req, res) => {
             });
         }
 
-        // getAllPackage.map((pkgs)=>(
-        //     console.log(pkgs.laboratoryId)
-        // ))
-
         const transformedPackages = await Promise.all(getAllPackage.map(async (pkg) => {
-            
             try {
                 const testCategoryIds = pkg.testCategoryId.map(category => category._id.toString()); // Convert test category IDs to strings
 
                 const matchedTestCategories = await testCategoryModel.find({ _id: { $in: testCategoryIds } }).populate('testId');
-                // console.log("Test Category IDs:", testCategoryIds);
-                // console.log("Matched Test Categories:", matchedTestCategories);
 
                 // Flatten the test details from matched test categories
                 const matchedTestDetails = matchedTestCategories.flatMap(category => category.testId);
 
+                // Remove the 'tests' property from the 'laboratoryId' object
+                const laboratory = pkg.laboratoryId.toObject();
+                delete laboratory.tests;
+
                 return {
                     ...pkg.toObject(),
-                    testCategoryId: pkg.testCategoryId.map(category => category._id),
+                    laboratoryId: laboratory,
                     testDetails: matchedTestDetails // Assign matched test details
                 };
             } catch (error) {
@@ -108,6 +157,8 @@ exports.getAllPackage = async (req, res) => {
         });
     }
 };
+
+
 // Function to get a single package by ID
 exports.getPackageById = async (req, res) => {
     try {
