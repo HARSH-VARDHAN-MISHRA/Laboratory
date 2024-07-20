@@ -4,13 +4,13 @@ import Swal from 'sweetalert2';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-
+import { Link } from 'react-router-dom'
 const AllOrders = () => {
     const [orders, setOrders] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [showModal, setShowModal] = useState(false);
     const [selectedOrder, setSelectedOrder] = useState({});
-    const [cart,setCart] = useState([])
+    const [cart, setCart] = useState([])
     const itemsPerPage = 20;
 
     const handleFetch = async () => {
@@ -18,10 +18,10 @@ const AllOrders = () => {
             const res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/all-orders`);
             const reverseData = res.data.data.reverse();
             // console.log(res.data.data);
-            const filterData = reverseData.map((item)=>item.requestBody.Cart)
+            const filterData = reverseData.map((item) => item.requestBody.Cart)
             setCart(filterData)
             setOrders(reverseData);
-     
+
         } catch (error) {
             console.error('There was an error fetching the Orders!', error);
         }
@@ -116,11 +116,10 @@ const AllOrders = () => {
                     <thead>
                         <tr>
                             <th scope="col">Sr.No.</th>
-                            <th scope="col">Lab Name</th>
-                            <th scope="col">Lab Address</th>
+                            <th scope="col">Full Name</th>
+                     
                             <th scope="col">Pincode</th>
                             <th scope="col">City</th>
-                            <th scope="col">Full Name</th>
                             <th scope="col">Phone</th>
                             <th scope="col">Email</th>
                             <th scope="col">Date</th>
@@ -130,6 +129,8 @@ const AllOrders = () => {
                             <th scope="col">Booking Type</th>
                             <th scope="col">Total to Pay</th>
                             <th scope="col">Payment Status</th>
+                            <th scope="col">Upload Test</th>
+
                             <th scope="col">View Details</th>
                             <th scope="col">Change Status</th>
                             <th scope="col">Delete</th>
@@ -139,11 +140,10 @@ const AllOrders = () => {
                         {currentItems.map((order, index) => (
                             <tr key={order._id}>
                                 <th scope="row">{index + 1}</th>
-                                <td>{order.requestBody?.Cart[0]?.labName || 'N/A'}</td>
-                                <td>{order.requestBody?.Cart[0]?.labLocation || 'N/A'}</td>
+                                <td>{order.requestBody?.BookingInfo.fullName}</td>
+                           
                                 <td>{order.requestBody?.BookingInfo.pinCode}</td>
                                 <td>{order.requestBody?.BookingInfo.city}</td>
-                                <td>{order.requestBody?.BookingInfo.fullName}</td>
                                 <td>{order.requestBody?.BookingInfo.phone}</td>
                                 <td>{order.requestBody?.BookingInfo.email}</td>
                                 <td>{formatDate(order.requestBody?.BookingInfo.date)}</td>
@@ -153,6 +153,11 @@ const AllOrders = () => {
                                 <td>{order.requestBody?.BookingInfo.bookingType}</td>
                                 <td>{order.requestBody?.Prices.totalToPay}</td>
                                 <td>{order.paymentStatus}</td>
+                                <td>
+                                    <Link to={`/Upload-test/${order.PatientId}`} className="bt info" >
+                                        Upload
+                                    </Link>
+                                </td>
                                 <td>
                                     <button className="bt info" onClick={() => handleShowModal(order)}>
                                         View Details
@@ -217,7 +222,7 @@ const AllOrders = () => {
                                 <p><strong>Booking Type:</strong> {selectedOrder.requestBody?.BookingInfo.bookingType}</p>
                                 <p><strong>Total to Pay:</strong> {selectedOrder.requestBody?.Prices.totalToPay}</p>
                                 <p><strong>Payment Status:</strong> {selectedOrder.paymentStatus}</p>
-                                
+
                                 {/* Displaying cart items */}
                                 <h6>Cart Items:</h6>
                                 {selectedOrder.requestBody?.Cart.map((item, index) => (

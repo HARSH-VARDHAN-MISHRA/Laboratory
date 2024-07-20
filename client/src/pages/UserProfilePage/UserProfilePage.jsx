@@ -5,40 +5,33 @@ import { toast } from 'react-toastify';
 import MetaTag from '../../components/Meta/MetaTag';
 import axios from 'axios';
 
-
 const UserProfilePage = () => {
     const [activeTab, setActiveTab] = useState('profile');
     const [userData, setUserData] = useState(null); // State to hold user data
+    const [bookings, setBookings] = useState([]);
 
-    const [bookings,setBookings] = useState([]);
-    
-
-    
-    
-      useEffect(() => {
-          
+    useEffect(() => {
         // Fetch user data from localStorage
         const user = JSON.parse(localStorage.getItem('labMantraUser'));
         if (user) {
             setUserData(user);
+
+            const fetchBooking = async () => {
+                try {
+                    const res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/get-order-by-user/${user._id}`);
+                    setBookings(res.data.data);
+                } catch (error) {
+                    console.error("Something Issue to fetch Bookings: ", error);
+                }
+            };
+
+            fetchBooking();
         }
-        
 
-        const fetchBooking = async () => {
-            try {
-              const res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/get-order-by-user/${user._id}`);
-              console.log(res.data.data);
-              setBookings(res.data.data);
-            } catch (error) {
-              console.error("Something Issue to fetch Bookings: ", error);
-            }
-          };
-
-          fetchBooking()
         window.scrollTo({
-            top:0,
-            behavior:'smooth'
-        })
+            top: 0,
+            behavior: 'smooth'
+        });
     }, []); // Empty dependency array ensures this runs only once on component mount
 
     const handleTabChange = (tab) => {
@@ -46,11 +39,9 @@ const UserProfilePage = () => {
     };
 
     const handleLogout = () => {
-        
         localStorage.removeItem('labMantraToken');
         localStorage.removeItem('labMantraUser');
         toast.success('Logged out successfully');
-
         window.location.href = '/login'; 
     };
 
@@ -61,7 +52,7 @@ const UserProfilePage = () => {
                 description="View and manage your Lab Mantra user profile. Check your bookings, update personal information, and logout securely."
                 keyword="Lab Mantra, user profile, bookings, logout"
             />
-            <section className="bread" >
+            <section className="bread">
                 <div className="container">
                     <nav aria-label="breadcrumb">
                         <h2>Your Profile</h2>
@@ -104,61 +95,55 @@ const UserProfilePage = () => {
                     <div className="tab-content">
                         {activeTab === 'profile' && userData && (
                             <div className="tab-pane active">
-                                <h3>Welcome {userData.name} !</h3>
+                                <h3>Welcome {userData.name}!</h3>
                                 <p>Name: {userData.name}</p>
                                 <p>Email: {userData.email}</p>
                                 <p>Phone Number: {userData.phoneNumber}</p>
                                 <p>Joined: {new Date(userData.createdAt).toLocaleDateString('en-US', { day: 'numeric', month: 'long', year: 'numeric' })}</p>
 
                                 <button className="btn btn-danger" onClick={handleLogout}>Logout</button>
-
                             </div>
                         )}
-                       {activeTab === 'bookings' && (
-          <div className="tab-pane active">
-            <h3>My Booking History</h3>
-            {bookings.length === 0 ? (
-              <p>No bookings yet.</p>
-            ) : (
-              bookings.map(booking => (
-                <div key={booking._id} className="booking">
-                  <h4>Booking Details:</h4>
-                  <ul>
-                    <li><strong>Transaction ID:</strong> {booking._id}</li>
-                    <li><strong>Amount Paid:</strong> ₹{booking.totalToPay}</li>
-                    <li><strong>Payment Status:</strong> {booking.paymentStatus}</li>
-                    <li><strong>Appointment Time:</strong> {booking.appointTime}</li>
-                    <li><strong>Lab Name:</strong> {booking.fullName}</li>
-                    {/* <li><strong>Address:</strong> {booking.labAddress || "N/A"}</li> */}
-                  </ul>
-                  <h4>Test Details:</h4>
-                  {booking.cartDetails.map((item, index) => (
-                    <ul key={index}>
-                      {/* <li><strong>Package Name:</strong> {item.packageName || "N/A"}</li>
-                      <li><strong>Test Quantity:</strong> {item.testQuantity || "N/A"}</li>
-                      <li><strong>Test Group Quantity:</strong> {item.testGroupQuantity || "N/A"}</li> */}
-                      <li><strong>Actual Price:</strong> ₹{item.actualPrice || "N/A"}</li>
-                      {/* <li><strong>Current Price:</strong> ₹{item.currentPrice || "N/A"}</li> */}
-                      <li><strong>Off Percentage:</strong> {item.offPercentage}%</li>
-               
-                      {/* <li><strong>Discount Applied For This Lab:</strong> {item.HowManyDiscountAppliedForThisLab}</li> */}
-                      {/* <li><strong>Test Price:</strong> ₹{item.testPrice || "N/A"}</li> */}
-                      {/* <li><strong>Discounted Price:</strong> ₹{item.discountedPrice || "N/A"}</li> */}
-                      {/* <li><strong>Discount Percentage:</strong> {item.discountPercentage}%</li> */}
-                      <li><strong>Test Details:</strong>
-                        <ul>
-                          {item.testDetails.map((test, index) => (
-                            <li key={index}>{test.testName}</li>
-                          ))}
-                        </ul>
-                      </li>
-                    </ul>
-                  ))}
-                </div>
-              ))
-            )}
-          </div>
+                        {activeTab === 'bookings' && (
+    <div className="tab-pane active">
+        <h3>My Booking History</h3>
+        {bookings.length === 0 ? (
+            <p>No bookings yet.</p>
+        ) : (
+            <table className="table ">
+                <thead>
+                    <tr>
+                        <th>Booking ID</th>
+                        <th>Test Name</th>
+                        <th>Date</th>
+                        <th>Status</th>
+                        <th>Details</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {bookings.map((booking) => (
+                        <tr key={booking._id}>
+                            <td>{booking._id}</td>
+                            <td>{booking.requestBody.Cart[0].formattedTestName || 'N/A'}</td> {/* Show test name or 'N/A' if not available */}
+                            <td>
+                                {booking.createdAt
+                                    ? new Date(booking.createdAt).toLocaleDateString('en-US', { day: 'numeric', month: 'long', year: 'numeric' })
+                                    : 'Invalid Date'} {/* Handle invalid dates */}
+                            </td>
+                            <td>{booking.paymentStatus}</td>
+                            <td>
+                                <Link to={`/booking-details/${booking._id}`} className="btn btn-primary btn-sm">
+                                    View Details
+                                </Link>
+                            </td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
         )}
+    </div>
+)}
+
                         {activeTab === 'reports' && (
                             <div className="tab-pane active">
                                 <h3>My Reports</h3>
