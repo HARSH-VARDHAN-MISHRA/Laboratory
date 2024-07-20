@@ -89,7 +89,7 @@ const SearchTestByNearLab = () => {
                                                     <div className="card-body">
                                                         <h5 className="card-title">{lab.labName}</h5>
                                                         <p className="card-text"><strong>Location:</strong> {lab.labLocation}</p>
-                                                        <p className="card-text test-name">{testName}</p>
+                                                        <p className="card-text test-name">{formattedTestName}</p>
                                                         {lab.discountPercentage && lab.discountPercentage > 0 ? (
                                                             <>
                                                                 <p className="price">
@@ -116,7 +116,7 @@ const SearchTestByNearLab = () => {
                                                                 className="btn btn-danger"
                                                                 onClick={() => removeFromCart({
                                                                     ...lab,
-                                                                    testName,
+                                                                    formattedTestName,
                                                                     id: `${lab.labName}-${testName}`,
                                                                     actualPrice: lab.price,
                                                                     discountPrice: lab.discountPrice,
@@ -131,7 +131,7 @@ const SearchTestByNearLab = () => {
                                                                 className="btn btn-primary"
                                                                 onClick={() => addToCart({
                                                                     ...lab,
-                                                                    testName,
+                                                                    formattedTestName,
                                                                     id: `${lab.labName}-${testName}`,
                                                                     actualPrice: lab.price,
                                                                     discountPrice: lab.discountPrice,
@@ -177,7 +177,7 @@ const SearchTestByNearLab = () => {
                 <div className="cart-popup">
                     <div className="popup-content">
                         <h4>Test Added to Cart</h4>
-                        <p><strong>Test Name:</strong> {selectedTest.testName}</p>
+                        <p><strong>Test Name:</strong> {selectedTest.formattedTestName}</p>
                         <p><strong>Lab:</strong> {selectedTest.labName}</p>
                         <p><strong>Location:</strong> {selectedTest.labLocation || selectedTest.branchLocation}</p>
                         <p><strong>Price:</strong> ₹{selectedTest.actualPrice}</p>
