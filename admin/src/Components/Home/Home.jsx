@@ -27,6 +27,7 @@ import ErrorPage from '../../Pages/Error/ErrorPage'
 import AllEnquiry from '../../Pages/Enquiry/AllEnquiry'
 import AllCity from '../../Pages/City/AllCity'
 import AddLaboratoryTest from '../../Pages/LaboratoryTest/AddLaboratoryTest'
+import Upload from '../../Pages/Orders/Upload'
 
 
 const Home = () => {
@@ -76,6 +77,7 @@ const Home = () => {
 
           {/* --- Users --- */}
           <Route path={"/all-users"} element={<AllUser/>}/>
+          <Route path={"/Upload-test/:id"} element={<Upload/>}/>
 
           {/* --- Vouchers --- */}
           <Route path={"/all-voucher"} element={<AllVoucher/>}/>   {/* // All Vouchers */}
