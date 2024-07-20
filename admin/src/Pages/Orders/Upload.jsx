@@ -20,7 +20,7 @@ const Upload = () => {
 
     const handleUpload = async () => {
         try {
-            await axios.post('http://localhost:6842/api/v1/lab/upload-test-result', formData);
+            await axios.post(`${process.env.REACT_APP_BACKEND_URL}/lab/upload-test-result`, formData);
             handleFetchAll();
         } catch (error) {
             console.error('Error uploading report:', error);
@@ -29,7 +29,7 @@ const Upload = () => {
 
     const handleFetchAll = async () => {
         try {
-            const response = await axios.get('http://localhost:6842/api/v1/lab/reports');
+            const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/lab/reports`);
             setAllTestRecords(response.data.data);
             filterReports(response.data.data); // Initial filter with empty criteria
         } catch (error) {
@@ -63,7 +63,7 @@ const Upload = () => {
 
     const handleDelete = async (reportId) => {
         try {
-            await axios.delete(`http://localhost:6842/api/v1/lab/reports/${reportId}`);
+            await axios.delete(`${process.env.REACT_APP_BACKEND_URL}/lab/reports/${reportId}`);
             handleFetchAll();
         } catch (error) {
             console.error('Error deleting report:', error);
@@ -72,7 +72,7 @@ const Upload = () => {
 
     const resendReport = async (reportId) => {
         try {
-            await axios.post(`http://localhost:6842/api/v1/lab/reports/${reportId}/resend`);
+            await axios.post(`${process.env.REACT_APP_BACKEND_URL}/lab/reports/${reportId}/resend`);
             alert('Report resent successfully');
         } catch (error) {
             console.error('Error resending report:', error);

@@ -11,7 +11,7 @@ const UserReport = () => {
     const handleFetchReports = async (event) => {
         event.preventDefault();
         try {
-            const res = await axios.get(`http://localhost:6842/api/v1/lab/reports/patient/${patientId}`);
+            const res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/lab/reports/patient/${patientId}`);
             console.log(res.data.data);
             setTestDetails(res.data.data || []); // Ensure data is an array
             setError('');

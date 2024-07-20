@@ -25,7 +25,7 @@ const AllTest = () => {
         formData.append('file', uploadFile); // Append file to FormData
 
         try {
-            const res = await axios.post('http://localhost:6842/api/v1/lab/upload-xlsx-test', formData, {
+            const res = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/lab/upload-xlsx-test`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
@@ -42,7 +42,7 @@ const AllTest = () => {
 
     const DeleteAllTest = async () => {
         try {
-            const response = await axios.delete('http://localhost:6842/api/v1/lab/delete-all-test')
+            const response = await axios.delete(`${process.env.REACT_APP_BACKEND_URL}/lab/delete-all-test`)
             console.log(response.data)
             // window.location.reload()
 

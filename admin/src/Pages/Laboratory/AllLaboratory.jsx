@@ -37,7 +37,7 @@ const AllLaboratory = () => {
 
     const handleDelete = async (id) => {
         try {
-           const res = await axios.delete(`http://localhost:6842/api/v1/delete-laboratory/${id}`)
+           const res = await axios.delete(`${process.env.REACT_APP_BACKEND_URL}/delete-laboratory/${id}`)
            toast.success("Lab Delete Successful")
            handleFetch()
         } catch (error) {
@@ -76,7 +76,7 @@ const AllLaboratory = () => {
         formData.append('file', uploadFile); // Append file to FormData
 
         try {
-            const res = await axios.post('http://localhost:6842/api/v1/lab/upload-xlsx', formData, {
+            const res = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/lab/upload-xlsx`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }

@@ -144,7 +144,7 @@ const AddLaboratoryTest = () => {
     //   const currentTests = tests.slice(indexOfFirstItem, indexOfLastItem);
     const handleDownloadTests = async () => {
         try {
-            const response = await axios.get(`http://localhost:6842/api/v1/lab/download-xlsx-test/${selectedLabId}`, {
+            const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/lab/download-xlsx-test/${selectedLabId}`, {
                 responseType: 'blob', // Important for handling binary data
             });
             

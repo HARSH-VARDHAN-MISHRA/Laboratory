@@ -153,7 +153,7 @@ exports.createLaboratory = async (req, res) => {
                   thereby enhancing their experience and trust in your services.
                 </p>
                 <div>
-                  <a href="http://localhost:3001/give-location?LabId=${newLaboratory._id}" class="button">Give Location Access</a>
+                  <a href="https://labmantra.com/give-location?LabId=${newLaboratory._id}" class="button">Give Location Access</a>
                 </div>
                 <p class="footer">
                   Thank you for your cooperation. Together, we can make Lab Mantra a more valuable resource for everyone.
