@@ -16,12 +16,6 @@ router.get('/get-single-test/:id',getSingleTestByTestId)
 router.get('/get-all-Tests',getAllTestsWithLabInfoInBuild)
 router.get('/get-all-Tests/:testName',ByTestNameShowAllLabsWithWhichDoThisTestWithPrices)
 router.post('/upload-xlsx-test', upload.single('file'),UploadXlsxFileAndExtractTest)
-
 router.get('/download-xlsx-test/:labId',getDownLoadTestOfLabByLabId)
-
-
-
-
-
 
 module.exports = router;

@@ -88,7 +88,7 @@ route.delete('/vouchers/deleteVoucher/:id', deleteVoucher)
 route.post('/Create-payment',isAuthenticatedUser,checkout)
 route.post('/Create-Cod-Orders',isAuthenticatedUser,MakeCashOnDeliveryCheckOut)
 
-route.post('/paymentverification',paymentVerification)
+// route.post('/paymentverification',paymentVerification)
 
 //  = Orders   //
 route.get('/all-orders',getAllOrders)
