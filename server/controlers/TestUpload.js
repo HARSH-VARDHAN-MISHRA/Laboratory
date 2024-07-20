@@ -252,8 +252,12 @@ exports.getAllTestsWithLabInfoInBuild = async (req, res) => {
                     discountPercentage: test.DiscountPercentage,
                     discountPrice: test.DiscountPrice,
                     labInfo: {
+                        labId:lab._id,
                         labName: lab.LabName,
+                        LabEmail: lab.email,
+
                         labLocation: lab.address,
+                        isTestTrue:true,
                         city: lab.city,
                         state: lab.state,
                         pinCode: lab.pinCode,
@@ -315,6 +319,9 @@ exports.ByTestNameShowAllLabsWithWhichDoThisTestWithPrices = async (req, res) =>
             lab.tests.forEach(test => {
                 if (test.TestName === testName) {
                     labsWithTest.push({
+                        labId:lab._id,
+                        isTestTrue:true,
+                        LabEmail: lab.email,
                         labName: lab.LabName,
                         labLocation: lab.address,
                         city: lab.city,

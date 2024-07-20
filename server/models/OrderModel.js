@@ -7,6 +7,7 @@ const OrderSchema = new mongoose.Schema({
     razorpaySignature: { type: String },
     transactionId: { type: String },
     PaymentDone: { type: Boolean, default: false },
+    paymentStatus:{ type: String},
     PatientId: { type: mongoose.Schema.Types.ObjectId, ref: "UserSchemaDetails" }
 }, { timestamps: true });
 

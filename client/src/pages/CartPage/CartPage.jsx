@@ -116,9 +116,9 @@ const CartPage = () => {
                                         {cart.map(item => (
                                             <div key={item._id} className="cart-item d-flex justify-content-between align-items-start py-2">
                                                 <div>
-                                                    {item.testName && (
+                                                    {item.formattedTestName && (
                                                         <>
-                                                            <h5 className='test-name'>Test : <span className='fw-normal'>{item.testName}</span></h5>
+                                                            <h5 className='test-name'>Test : <span className='fw-normal'>{item.formattedTestName}</span></h5>
                                                             <div className="text-muted">₹{item.discountPrice || item.actualPrice}</div>
 
                                                         </>

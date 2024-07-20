@@ -136,6 +136,7 @@ exports.getAllPackage = async (req, res) => {
                 return {
                     ...pkg.toObject(),
                     laboratoryId: laboratory,
+                    isPackage: true,
                     testDetails: matchedTestDetails // Assign matched test details
                 };
             } catch (error) {

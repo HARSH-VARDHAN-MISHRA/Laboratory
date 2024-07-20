@@ -1,6 +1,7 @@
 const express = require('express');
 const multer = require('multer');
 const { UploadXlsxFileAndExtractTest,UploadXlsxFileAndExtractData,getDownLoadTestOfLabByLabId,singleTestDeleteByTestId,getAllTestsWithLabInfoInBuild,UpdateTestDetails,DeleteAllTestsByLabId,getSingleTestByTestId,getALLTestByLabId ,ByTestNameShowAllLabsWithWhichDoThisTestWithPrices} = require('../controlers/TestUpload');
+const { createReports, getReportByReportId, getReportsByPatientId, getAllReports, deleteReportByReportId, resendReportByReportId, updateReportStatus } = require('../controlers/GoogleDriveController');
 const router = express.Router();
 
 // Set up multer for file upload
@@ -18,4 +19,13 @@ router.get('/get-all-Tests/:testName',ByTestNameShowAllLabsWithWhichDoThisTestWi
 router.post('/upload-xlsx-test', upload.single('file'),UploadXlsxFileAndExtractTest)
 router.get('/download-xlsx-test/:labId',getDownLoadTestOfLabByLabId)
 
+
+router.post('/upload-test-result',createReports)
+router.get('/reports/:reportId', getReportByReportId);
+router.get('/reports/patient/:patientId', getReportsByPatientId);
+router.get('/reports', getAllReports);
+router.patch('/reports/:reportId/status',updateReportStatus);
+router.delete('/reports/:reportId', deleteReportByReportId)
+router.post('/reports/:reportId/resend', resendReportByReportId);
+1
 module.exports = router;

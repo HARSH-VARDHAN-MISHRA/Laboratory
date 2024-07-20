@@ -140,6 +140,9 @@ ol, ul {
 .main-table .bt.edit{
   background: var(--color-green);
 }
+.main-table .bt.info{
+  background: var(--bg-dark-blue);
+}
 .main-table .bt.delete{
   background: red;
 }
