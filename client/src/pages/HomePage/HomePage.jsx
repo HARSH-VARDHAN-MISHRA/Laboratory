@@ -8,10 +8,12 @@ import { Link, useNavigate } from 'react-router-dom';
 import './HomePage.css';
 import Tests from '../../components/Tests/Tests';
 import Contact from '../../components/Contact/Contact';
-import About from '../../components/About/About';
 import Packages from '../../components/Packages/Packages';
 import axios from 'axios';
 import MetaTag from '../../components/Meta/MetaTag';
+
+import AboutImg from '../../Assets/aboutSide.png'
+import Testimonial from '../../components/Testimonial/Testimonial';
 
 const HomePage = () => {
   const navigate = useNavigate();
@@ -279,7 +281,22 @@ const HomePage = () => {
       </section>
 
 
-      <About />
+      <section className="about-sec mt-5">
+            <div className="container">
+                <div className="row">
+                    <div className="col-md-8">
+                        <h1>Welcome To YUGI Health Provider LLP </h1>
+                        <p>YUGI Health Provider LLP is an initiative to make quality healthcare affordable and accessible for all Indian Citizens. We believe in and value affordability but our priority is to provide quality diagnostic services being offered by our lab Partners.</p>
+                        <p>A small hand of friendship for a better relationship between the country and healthcare providers.</p>
+                        
+                    </div>
+                    <div className="col-md-4">
+                        <img src={AboutImg} alt="" />
+                    </div>
+                </div>
+            </div>
+        </section>
+      
       <Head title="Our Services" />
       <OurServices />
       <Packages />
@@ -336,6 +353,8 @@ const HomePage = () => {
         </div>
       </section>
 
+      <Testimonial/>
+      
       <section className="heading pb-0">
         <div className="container">
           <h2>Contact Us</h2>
@@ -343,6 +362,7 @@ const HomePage = () => {
       </section>
 
       <Contact />
+      
 
       {showPopup && (
         <div className="popup">

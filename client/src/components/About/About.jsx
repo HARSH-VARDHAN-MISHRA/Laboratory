@@ -1,5 +1,7 @@
 import React from 'react'
 import './About.css'
+import AboutImg from '../../Assets/aboutSide.png'
+
 const About = () => {
   return (
     <>
@@ -22,7 +24,7 @@ const About = () => {
                         </div>
                     </div>
                     <div className="col-md-4">
-                        <img src="https://img.freepik.com/free-photo/team-medical-scientist-modern-laboratory-searching-coronavirus-vaccine-wearing-ppe-chemist-researcher-during-global-pandemic-with-covid-19-checking-sample-biochemistry-lab_482257-8802.jpg?size=626&ext=jpg&ga=GA1.1.201442503.1690221148&semt=ais_user_b" alt="" />
+                        <img src={AboutImg} alt="" />
                     </div>
                 </div>
             </div>

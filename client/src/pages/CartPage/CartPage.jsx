@@ -119,7 +119,7 @@ const CartPage = () => {
                                                     {item.formattedTestName && (
                                                         <>
                                                             <h5 className='test-name'>Test : <span className='fw-normal'>{item.formattedTestName}</span></h5>
-                                                            <div className="text-muted">₹{item.discountPrice || item.actualPrice}</div>
+                                                            <div className="text-muted">₹{item.discountPrice.toFixed(0) || item.actualPrice.toFixed(0)}</div>
 
                                                         </>
                                                     )}
@@ -167,19 +167,19 @@ const CartPage = () => {
                                         <div className="totals">
                                             <div className="d-flex justify-content-between">
                                                 <span>Subtotal</span>
-                                                <span>₹{subtotal}</span>
+                                                <span>₹{subtotal.toFixed(0)}</span>
                                             </div>
                                             <div className="d-flex justify-content-between">
                                                 <span>Home Collection Charges</span>
-                                                <span>₹{homeCollectionCharges}</span>
+                                                <span>₹{homeCollectionCharges.toFixed(0)}</span>
                                             </div>
                                             <div className="discount d-flex justify-content-between">
                                                 <span>Discount</span>
-                                                <span>₹{discount}</span>
+                                                <span>₹{discount.toFixed(0)}</span>
                                             </div>
                                             <div className="pay d-flex justify-content-between font-weight-bold">
                                                 <span>To Pay</span>
-                                                <span>₹{totalToPay}</span>
+                                                <span>₹{totalToPay.toFixed(0)}</span>
                                             </div>
                                         </div>
                                         {token ? (

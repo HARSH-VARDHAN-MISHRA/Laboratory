@@ -7,9 +7,9 @@ import axios from 'axios';
 
 const Contact = () => {
 
-    const [loading,setLoading] = useState(false);
-    const [sended,setSended] = useState(false);
-    const [formData,setFormData] = useState({
+    const [loading, setLoading] = useState(false);
+    const [sended, setSended] = useState(false);
+    const [formData, setFormData] = useState({
         firstName: '',
         lastName: '',
         phoneNumber: '',
@@ -17,19 +17,19 @@ const Contact = () => {
         address: ''
     })
 
-    const handleChange = (e) =>{
-        const {name,value} = e.target;
+    const handleChange = (e) => {
+        const { name, value } = e.target;
         setFormData({
             ...formData,
-            [name]:value
+            [name]: value
         })
     }
 
-    const handleSubmit = async (event)=>{
+    const handleSubmit = async (event) => {
         setLoading(true);
         event.preventDefault();
         try {
-            const res = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/apply-enquiry`,formData);
+            const res = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/apply-enquiry`, formData);
             toast.success(res.data.message);
             setFormData({
                 firstName: '',
@@ -40,9 +40,9 @@ const Contact = () => {
             })
             setSended(true);
         } catch (error) {
-            console.error("Error while Submit the Form",error.response.data);
-            toast.success(error.res)
-        }finally{
+            console.error("Error while submitting the form", error.response.data);
+            toast.error(error.response?.data?.message || "Something went wrong");
+        } finally {
             setLoading(false);
         }
     }
@@ -53,18 +53,28 @@ const Contact = () => {
             <section className="contact">
                 <div className="container">
                     <div className="row">
-                        <div className="col-12">
+                        <div className="col-md-6">
+                            <h3>Contact Us</h3>
+                            <p>Have questions or feedback? Feel free to reach out to us.</p>
+                            <p><strong>Address:</strong> 128/129 Sector 2 Rohini New Delhi - 110085</p>
+                            <p><strong>Email Id:</strong> <a href="mailto:info@labmantra.com">info@labmantra.com</a></p>
+                            <p><strong>Phone Number:</strong> <a href="tel:+918826936006">+91-8826936006</a> , <a href="tel:+918882864997">+91-8882864997</a></p>
+                            <div className="social-icons">
+                                <a href="https://www.facebook.com/profile.php?id=61560951015517&mibextid=ZbWKwL" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-square-facebook"></i></a>
+                            </div>
+                        </div>
+                        <div className="col-md-6">
                             <form className="row" onSubmit={handleSubmit}>
                                 {sended ? (
                                     <div className="col-md-12 row">
-                                        <div className="col-md-6 mx-auto">
-                                            <div class="alert alert-info" role="alert">
+                                        <div className="col-md-12 mx-auto">
+                                            <div class="alert alert-info text-center" role="alert">
                                                 Inquiry Send Successfully !!
                                             </div>
                                         </div>
 
                                     </div>
-                                    ) 
+                                )
                                     : ""
                                 }
                                 <div className="col-md-6 mb-3">
@@ -84,14 +94,14 @@ const Contact = () => {
                                 </div>
 
                                 <div className="col-12 text-center">
-                                    <button type="submit" className="form-control">{loading ? "Please Wait" : "Send Message"}</button>
+                                    <button type="submit" className="form-control w-100">{loading ? "Please Wait" : "Send Message"}</button>
                                 </div>
 
                             </form>
                         </div>
                     </div>
 
-                    
+
                 </div>
             </section>
         </>

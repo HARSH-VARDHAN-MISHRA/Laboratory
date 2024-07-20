@@ -1,28 +1,48 @@
 .contact {
     padding: 2rem 0rem;
 }
-.contact  h4{
-    font-size: 2rem;
+.contact h3 {
     color: var(--bg-dark-blue);
 }
-.contact button[type="submit"]{
-    
+
+.contact button[type="submit"] {
+
     width: max-content;
     display: inline-block;
     color: white;
     background: var(--bg-dark-blue);
     font-size: 1.1rem;
 }
+
 .contact .form-control:focus {
     border-color: var(--bg-greenblue);
     box-shadow: none;
 }
-.contact iframe{
-    width: 100%;
-    height: 450px;
-    margin-top: 2rem;
+
+.contact strong {
+    font-weight: 500;
+    color: cadetblue;
+}
+.contact a{
+    color: var(--bg-greenblue);
+    
 }
 
-
-
-
+.contact .social-icons a {
+    border: 2px solid var(--bg-greenblue);
+    border-radius: 50%;
+    color: var(--bg-greenblue);
+    display: grid;
+    height: 2.2rem;
+    place-items: center;
+    text-decoration: none;
+    transition: var(--transition-3);
+    width: 2.2rem;
+}
+.contact .social-icons a i{
+    font-size: 1.2rem;
+}
+.contact .social-icons a:hover{
+    background: var(--bg-greenblue);
+    color: white;
+}

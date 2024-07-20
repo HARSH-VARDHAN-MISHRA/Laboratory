@@ -42,10 +42,10 @@ const OurServices = () => {
                             </div>
                             <div className="content">
                                 <h4>{item.ServName}</h4>
-                                <p>{item.desc}</p>
+                                {/* <p>{item.desc}</p>
                                 <Link className="known-more">
                                     Known More
-                                </Link>
+                                </Link> */}
                             </div>
                         </div>
                         

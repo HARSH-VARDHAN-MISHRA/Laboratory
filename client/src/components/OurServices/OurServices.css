@@ -24,6 +24,7 @@
 }
 .serivce-grid .single-serv h4{
     color: var(--bg-dark-blue);
+    text-align: center;
 }
 .serivce-grid .single-serv p{
     color: var(--color-blue-light);
