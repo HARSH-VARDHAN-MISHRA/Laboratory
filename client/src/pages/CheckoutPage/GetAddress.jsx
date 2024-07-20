@@ -266,12 +266,12 @@ const OrderSummary = () => {
                                 </div>
                             </div>
                             <div >
-                                <div class="p-4 " style={{ backgroundColor: '#F0FFFE' }} >
-                                    <h2 class="card-title text-center mb-4">Select Payment Option</h2>
+                                <div className="p-4 " style={{ backgroundColor: '#F0FFFE' }} >
+                                    <h2 className="card-title text-center mb-4">Select Payment Option</h2>
                                     <form>
-                                        <div class="form-check mb-3">
+                                        <div className="form-check mb-3">
                                             <input
-                                                class="form-check-input"
+                                                className="form-check-input"
                                                 type="radio"
                                                 id="onlinePayment"
                                                 name="paymentOption"
@@ -279,14 +279,14 @@ const OrderSummary = () => {
                                                 checked={paymentOption === 'onlinePayment'}
                                                 onChange={handlePaymentOptionChange}
                                             />
-                                            <label class="form-check-label" for="onlinePayment">
+                                            <label className="form-check-label" for="onlinePayment">
                                                 Online Payment
                                             </label>
                                         </div>
 
-                                        <div class="form-check mb-3">
+                                        <div className="form-check mb-3">
                                             <input
-                                                class="form-check-input"
+                                                className="form-check-input"
                                                 type="radio"
                                                 id="cashOnDelivery"
                                                 name="paymentOption"
@@ -294,7 +294,7 @@ const OrderSummary = () => {
                                                 checked={paymentOption === 'cashOnDelivery'}
                                                 onChange={handlePaymentOptionChange}
                                             />
-                                            <label class="form-check-label" for="cashOnDelivery">
+                                            <label className="form-check-label" for="cashOnDelivery">
                                                 Cash on Delivery
                                             </label>
                                         </div>

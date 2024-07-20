@@ -60,7 +60,7 @@ const Contact = () => {
                             <p><strong>Email Id:</strong> <a href="mailto:info@labmantra.com">info@labmantra.com</a></p>
                             <p><strong>Phone Number:</strong> <a href="tel:+918826936006">+91-8826936006</a> , <a href="tel:+918882864997">+91-8882864997</a></p>
                             <div className="social-icons">
-                                <a href="https://www.facebook.com/profile.php?id=61560951015517&mibextid=ZbWKwL" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-square-facebook"></i></a>
+                                <a href="https://www.facebook.com/profile.php?id=61560951015517&mibextid=ZbWKwL" target="_blank" rel="noopener noreferrer"><i className="fa-brands fa-square-facebook"></i></a>
                             </div>
                         </div>
                         <div className="col-md-6">
@@ -68,7 +68,7 @@ const Contact = () => {
                                 {sended ? (
                                     <div className="col-md-12 row">
                                         <div className="col-md-12 mx-auto">
-                                            <div class="alert alert-info text-center" role="alert">
+                                            <div className="alert alert-info text-center" role="alert">
                                                 Inquiry Send Successfully !!
                                             </div>
                                         </div>

@@ -79,7 +79,7 @@ const AllEnquiry = () => {
                     <h4>All Enquiry </h4>
                 </div>
                 <div className="links">
-                    <Link onClick={handleFetch} className="add-new"><i class="fa-solid fa-arrows-rotate"></i> Refresh </Link>
+                    <Link onClick={handleFetch} className="add-new"><i className="fa-solid fa-arrows-rotate"></i> Refresh </Link>
                 </div>
             </div>
 

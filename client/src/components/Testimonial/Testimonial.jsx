@@ -39,11 +39,11 @@ const Testimonial = () => {
                                     <img src={testimonial.img} alt="User Image" />
                                     <h5 className="card-title mt-2 mb-0">{testimonial.name}</h5>
                                     <div className="stars">
-                                        <i class="fa-solid fa-star"></i>
-                                        <i class="fa-solid fa-star"></i>
-                                        <i class="fa-solid fa-star"></i>
-                                        <i class="fa-solid fa-star"></i>
-                                        <i class="fa-solid fa-star"></i>
+                                        <i className="fa-solid fa-star"></i>
+                                        <i className="fa-solid fa-star"></i>
+                                        <i className="fa-solid fa-star"></i>
+                                        <i className="fa-solid fa-star"></i>
+                                        <i className="fa-solid fa-star"></i>
                                     </div>
                                     <p className="card-text">{testimonial.review}</p>
                                 </div>
