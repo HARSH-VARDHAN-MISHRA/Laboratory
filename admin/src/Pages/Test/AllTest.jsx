@@ -11,6 +11,45 @@ const AllTest = () => {
     const [searchQuery, setSearchQuery] = useState('');
     const [minPrice, setMinPrice] = useState('');
     const [maxPrice, setMaxPrice] = useState('');
+    const [uploadFile, setUploadFile] = useState(null); // State to manage uploaded file
+    const handleFileChange = (e) => {
+        setUploadFile(e.target.files[0]);
+    };
+    const handleFileUpload = async () => {
+        if (!uploadFile) {
+            toast.error('Please select a file to upload.');
+            return;
+        }
+
+        const formData = new FormData();
+        formData.append('file', uploadFile); // Append file to FormData
+
+        try {
+            const res = await axios.post('http://localhost:6842/api/v1/lab/upload-xlsx-test', formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            });
+            console.log(res.data);
+            toast.success('File uploaded successfully.');
+            window.location.reload()
+            // Optionally close modal or perform other actions upon successful upload
+        } catch (error) {
+            console.error('Error uploading file', error);
+            toast.error('Error uploading file. Please try again.');
+        }
+    };
+
+    const DeleteAllTest = async () => {
+        try {
+            const response = await axios.delete('http://localhost:6842/api/v1/lab/delete-all-test')
+            console.log(response.data)
+            // window.location.reload()
+
+        } catch (error) {
+            console.log(error)
+        }
+    }
 
     // --- Pagination ---
     const [currentPage, setCurrentPage] = useState(1);
@@ -113,8 +152,13 @@ const AllTest = () => {
                     <h4>All Tests List </h4>
                 </div>
                 <div className="links">
-                    <Link to="/add-test" className="add-new">
+                    <Link
+                        data-bs-toggle="modal"
+                        data-bs-target="#exampleModal" className="add-new mr-2 me-2">
                         Add New <i className="fa-solid fa-plus"></i>
+                    </Link>
+                    <Link onClick={DeleteAllTest} className="btn-danger mr-2">
+                        Delete All
                     </Link>
                 </div>
             </div>
@@ -276,6 +320,48 @@ const AllTest = () => {
                         </li>
                     </ul>
                 </nav>
+                <div
+                    className="modal fade"
+                    id="exampleModal"
+                    tabIndex="-1"
+                    aria-labelledby="exampleModalLabel"
+                    aria-hidden="true"
+                >
+                    <div className="modal-dialog">
+                        <div className="modal-content">
+                            <div className="modal-header">
+                                <h5 className="modal-title" id="exampleModalLabel">
+                                    Add Test
+                                </h5>
+                                <button
+                                    type="button"
+                                    className="btn-close"
+                                    data-bs-dismiss="modal"
+                                    aria-label="Close"
+                                ></button>
+                            </div>
+                            <div className="modal-body">
+                                {/* Add your form elements here for file upload */}
+                                <form>
+                                    <div className="mb-3">
+                                        <label htmlFor="fileUpload" className="form-label">
+                                            Upload Excel File
+                                        </label>
+                                        <input
+                                            type="file"
+                                            className="form-control"
+                                            id="fileUpload"
+                                            onChange={handleFileChange}
+                                        />
+                                    </div>
+                                    <button type="button" className="btn btn-primary" onClick={handleFileUpload}>
+                                        Upload
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </section>
         </>
     );

@@ -252,12 +252,12 @@ exports.getAllTestsWithLabInfoInBuild = async (req, res) => {
                     discountPercentage: test.DiscountPercentage,
                     discountPrice: test.DiscountPrice,
                     labInfo: {
-                        labId:lab._id,
+                        labId: lab._id,
                         labName: lab.LabName,
                         LabEmail: lab.email,
 
                         labLocation: lab.address,
-                        isTestTrue:true,
+                        isTestTrue: true,
                         city: lab.city,
                         state: lab.state,
                         pinCode: lab.pinCode,
@@ -319,8 +319,8 @@ exports.ByTestNameShowAllLabsWithWhichDoThisTestWithPrices = async (req, res) =>
             lab.tests.forEach(test => {
                 if (test.TestName === testName) {
                     labsWithTest.push({
-                        labId:lab._id,
-                        isTestTrue:true,
+                        labId: lab._id,
+                        isTestTrue: true,
                         LabEmail: lab.email,
                         labName: lab.LabName,
                         labLocation: lab.address,
@@ -417,6 +417,33 @@ exports.UploadXlsxFileAndExtractTest = async (req, res) => {
     } catch (error) {
         console.error('Error processing file', error);
         res.status(500).json({ success: false, message: 'Internal server error' });
+    }
+};
+
+exports.deleteAllTestForTestModel = async (req, res) => {
+    try {
+        const allTests = await Tests.find();
+        if (allTests.length === 0) {
+            return res.status(404).json({
+                success: false,
+                msg: "No Test"
+            });
+        }
+
+        await Tests.deleteMany({}); // Correct way to delete all documents
+
+        res.status(200).json({
+            success: true,
+            data: allTests,
+            msg: "All tests deleted successfully"
+        });
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            success: false,
+            msg: "Server Error",
+            error: error.message
+        });
     }
 };
 

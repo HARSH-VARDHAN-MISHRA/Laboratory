@@ -56,9 +56,9 @@ const sendEmail = require('../utils/SendEmail');
                     </p>
                     <p>If you have any questions or need further assistance, please do not hesitate to contact us.</p>
                     <p style="color: #003873;"><strong>Thank you for choosing YUGI Health Provider LLP.</strong></p>
-                    <p>Best regards,<br>cYUGI Health Provider LLP Team</p>
+                    <p>Best regards,<br>YUGI Health Provider LLP Team</p>
                     <div style="border-top: 1px solid #ddd; margin-top: 20px; padding-top: 10px;">
-                        <p style="font-size: 12px; color: #777;">This email was sent by YUGI Health Provider LLP, committed to providing quality healthcare for all citizens.</p>
+                        <p style="font-size: 12px; color: #777;">This email was sent by Lab Mantra Team, committed to providing quality healthcare for all citizens.</p>
                     </div>
                 </div>
             </div>
@@ -228,9 +228,9 @@ exports.resendReportByReportId = async (req, res) => {
                     </p>
                     <p>If you have any questions or need further assistance, please do not hesitate to contact us.</p>
                     <p style="color: #003873;"><strong>Thank you for choosing YUGI Health Provider LLP.</strong></p>
-                    <p>Best regards,<br>cYUGI Health Provider LLP Team</p>
+                    <p>Best regards,<br>YUGI Health Provider LLP Team</p>
                     <div style="border-top: 1px solid #ddd; margin-top: 20px; padding-top: 10px;">
-                        <p style="font-size: 12px; color: #777;">This email was sent by YUGI Health Provider LLP, committed to providing quality healthcare for all citizens.</p>
+                        <p style="font-size: 12px; color: #777;">This email was sent by  Lab Mantra Team,, committed to providing quality healthcare for all citizens.</p>
                     </div>
                 </div>
             </div>
