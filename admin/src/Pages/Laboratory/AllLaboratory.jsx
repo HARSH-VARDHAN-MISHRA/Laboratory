@@ -36,7 +36,15 @@ const AllLaboratory = () => {
     }, [searchQuery, laboratory]);
 
     const handleDelete = async (id) => {
-        // ... handle delete logic
+        try {
+           const res = await axios.delete(`http://localhost:6842/api/v1/delete-laboratory/${id}`)
+           toast.success("Lab Delete Successful")
+           handleFetch()
+        } catch (error) {
+            console.log(error)
+            toast.error("Error In  Delete Labs")
+
+        }
     };
 
     const handleSearchChange = (event) => {

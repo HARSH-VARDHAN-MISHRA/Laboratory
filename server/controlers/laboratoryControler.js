@@ -34,8 +34,7 @@ const validateCreateLaboratory = (body) => {
 exports.createLaboratory = async (req, res) => {
     try {
         const { LabName,LabPassword, address, email, city, PhoneNumber, state, SecondPhoneNumber, pinCode, RepresentedName, discountPercentage } = req.body;
-        // const { LabName,LabPassword, address, email, city, PhoneNumber, state, SecondPhoneNumber, pinCode, RepresentedName, discountPercentage ,tests } = req.body;
-        // Validate request body
+    
         console.log(req.body)
         const validationErrors = validateCreateLaboratory(req.body);
 
@@ -52,24 +51,7 @@ exports.createLaboratory = async (req, res) => {
             });
         }
 
-        // Retrieve all tests from the testModel
-        // const allTests = await testModel.find();
-        // const testIds = [];
-
-        // // Apply discount to each test and save
-        // for (let test of allTests) {
-        //     const { _id, ...testData } = test.toObject(); // Remove _id field
-        //     const discountPrice = test.actualPrice - (test.actualPrice * discountPercentage / 100);
-        //     const newTest = new testModel({
-        //         ...testData,
-        //         discountPrice,
-        //         discountPercentage
-        //     });
-
-        //     const savedTest = await newTest.save();
-        //     testIds.push(savedTest._id);
-        // }
-
+       
 
         // Create new laboratory instance
         const newLaboratory = new Laboratory({
