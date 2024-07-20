@@ -58,7 +58,8 @@ exports.getAllPackageTitle = async (req, res) => {
                 const testDetails = await testModel.find({ _id: packageId });
                 return {
                     packageId,
-                    testDetails
+                    testDetails,
+                    isPackage:true
                 };
             }));
 

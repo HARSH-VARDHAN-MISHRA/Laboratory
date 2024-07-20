@@ -20,8 +20,8 @@ const BookingForm = () => {
         address: '',
         labName: '',
         labAddress: '',
-        labId:'',
-        labEmail:'',
+        labId: '',
+        labEmail: '',
         appointTime: '',
         bookingType: 'homeCollection' // To track the current booking type
     });
@@ -349,8 +349,9 @@ const BookingForm = () => {
                             )}
 
                             {bookingType === 'labAppointment' && (
-                                <form className="lab-appointment-form mt-4" onSubmit={handleSubmit}>
-                                    <h3 className='h2 mb-3'>Lab Appointment Details</h3>
+
+                                <form className="home-collection-form mt-4" onSubmit={handleSubmit}>
+                                    <h3 className='h2 mb-3'>Appointment in Lab</h3>
                                     <div className="row g-3">
                                         <h4>Personal Details</h4>
                                         <div className="col-md-6">
@@ -458,27 +459,49 @@ const BookingForm = () => {
                                             />
                                         </div>
                                         <div className="col-md-6">
-                                            <label htmlFor="labName">Lab Name:<span className='text-danger'>*</span></label>
-                                            <select
-                                                id="labName"
+                                            <label htmlFor="address">Address:<span className='text-danger'>*</span></label>
+                                            <input
+                                                type="text"
+                                                id="address"
                                                 className="form-control"
-                                                value={formData.labName}
+                                                value={formData.address}
                                                 onChange={handleChange}
                                                 required
-                                            >
-                                                <option value="">Select Lab</option>
-                                                {renderLabOptions()}
-                                            </select>
-                                        </div>
-                                        <div className="col-md-6">
-                                            <label htmlFor="labAddress">Lab Address:</label>
-                                            <textarea
-                                                id="labAddress"
-                                                className="form-control"
-                                                value={formData.labAddress}
-                                                readOnly
                                             />
                                         </div>
+                                        <hr />
+                                        {/* <div className="col-md-6">
+        <label htmlFor="labName">Lab Name:<span className='text-danger'>*</span></label>
+        <select
+            id="labName"
+            className="form-control"
+            value={formData.labName}
+            onChange={handleChange}
+            required
+        >
+            <option value="">Select Lab</option>
+            {renderLabOptions()}
+        </select>
+    </div>
+    <div className="col-md-6">
+        <label htmlFor="labAddress">Lab Address:</label>
+        <textarea
+            id="labAddress"
+            className="form-control"
+            value={formData.labAddress}
+            readOnly
+        />
+    </div>
+    <div className="col-md-6">
+        <label htmlFor="labAddress">Lab Email:</label>
+        <input
+            id="labEmail"
+            type='text'
+            className="form-control"
+            value={formData.labEmail}
+            readOnly
+        />
+    </div> */}
                                         <div className="col-md-6">
                                             <label htmlFor="appointTime">Preferred Time:</label>
                                             <select
@@ -499,6 +522,157 @@ const BookingForm = () => {
                                         Add Details
                                     </button>
                                 </form>
+
+                                // <form className="lab-appointment-form mt-4" onSubmit={handleSubmit}>
+                                //     <h3 className='h2 mb-3'>Lab Appointment Details</h3>
+                                //     <div className="row g-3">
+                                //         <h4>Personal Details</h4>
+                                //         <div className="col-md-6">
+                                //             <label htmlFor="fullName">Full Name: <span className='text-danger'>*</span></label>
+                                //             <input
+                                //                 type="text"
+                                //                 id="fullName"
+                                //                 className="form-control"
+                                //                 value={formData.fullName}
+                                //                 onChange={handleChange}
+                                //                 required
+                                //             />
+                                //         </div>
+                                //         <div className="col-md-6">
+                                //             <label htmlFor="phone">Phone Number: <span className='text-danger'>*</span></label>
+                                //             <input
+                                //                 type="tel"
+                                //                 id="phone"
+                                //                 className="form-control"
+                                //                 value={formData.phone}
+                                //                 onChange={handleChange}
+                                //                 required
+                                //             />
+                                //         </div>
+                                //         <div className="col-md-6">
+                                //             <label htmlFor="optionalPhone">Optional Second Number:</label>
+                                //             <input
+                                //                 type="tel"
+                                //                 id="optionalPhone"
+                                //                 className="form-control"
+                                //                 value={formData.optionalPhone}
+                                //                 onChange={handleChange}
+                                //             />
+                                //         </div>
+                                //         <div className="col-md-6">
+                                //             <label htmlFor="email">Email ID :</label>
+                                //             <input
+                                //                 type="email"
+                                //                 id="email"
+                                //                 className="form-control"
+                                //                 value={formData.email}
+                                //                 onChange={handleChange}
+                                //                 required
+                                //             />
+                                //         </div>
+                                //         <div className="col-md-6">
+                                //             <label htmlFor="date">Preferred Date: <span className='text-danger'>*</span></label>
+                                //             <input
+                                //                 type="date"
+                                //                 id="date"
+                                //                 className="form-control"
+                                //                 value={formData.date}
+                                //                 onChange={handleChange}
+                                //                 required
+                                //             />
+                                //         </div>
+                                //         <div className="col-md-6">
+                                //             <label htmlFor="age">Age: <span className='text-danger'>*</span></label>
+                                //             <input
+                                //                 type="number"
+                                //                 id="age"
+                                //                 className="form-control"
+                                //                 value={formData.age}
+                                //                 onChange={handleChange}
+                                //                 required
+                                //             />
+                                //         </div>
+                                //         <div className="col-md-6">
+                                //             <label htmlFor="gender">Gender:<span className='text-danger'>*</span></label>
+                                //             <select
+                                //                 id="gender"
+                                //                 className="form-control"
+                                //                 value={formData.gender}
+                                //                 onChange={handleChange}
+                                //                 required
+                                //             >
+                                //                 <option value="">Select Gender</option>
+                                //                 <option value="male">Male</option>
+                                //                 <option value="female">Female</option>
+                                //                 <option value="other">Other</option>
+                                //             </select>
+                                //         </div>
+                                //         <div className="col-md-6">
+                                //             <label htmlFor="city">City:<span className='text-danger'>*</span></label>
+                                //             <select
+                                //                 id="city"
+                                //                 className="form-control"
+                                //                 value={formData.city}
+                                //                 onChange={handleChange}
+                                //                 required
+                                //             >
+                                //                 <option value="">Select City</option>
+                                //                 {statesOptions}
+                                //             </select>
+                                //         </div>
+                                //         <div className="col-md-6">
+                                //             <label htmlFor="pinCode">Pincode:<span className='text-danger'>*</span></label>
+                                //             <input
+                                //                 type="text"
+                                //                 id="pinCode"
+                                //                 className="form-control"
+                                //                 value={formData.pinCode}
+                                //                 onChange={handleChange}
+                                //                 required
+                                //             />
+                                //         </div>
+                                //         <div className="col-md-6">
+                                //             <label htmlFor="labName">Lab Name:<span className='text-danger'>*</span></label>
+                                //             <select
+                                //                 id="labName"
+                                //                 className="form-control"
+                                //                 value={formData.labName}
+                                //                 onChange={handleChange}
+                                //                 required
+                                //             >
+                                //                 <option value="">Select Lab</option>
+                                //                 {renderLabOptions()}
+                                //             </select>
+                                //         </div>
+                                //         <div className="col-md-6">
+                                //             <label htmlFor="labAddress">Lab Address:</label>
+                                //             <textarea
+                                //                 id="labAddress"
+                                //                 className="form-control"
+                                //                 value={formData.labAddress}
+                                //                 readOnly
+                                //             />
+                                //         </div>
+                                //         <div className="col-md-6">
+                                //             <label htmlFor="appointTime">Preferred Time:</label>
+                                //             <select
+                                //                 id="appointTime"
+                                //                 className="form-control"
+                                //                 value={formData.appointTime}
+                                //                 onChange={handleChange}
+                                //             >
+                                //                 <option value="">Select Time</option>
+                                //                 {generateTimeOptions().map((time, index) => (
+                                //                     <option key={index} value={time}>{time}</option>
+                                //                 ))}
+                                //             </select>
+                                //         </div>
+                                //     </div>
+
+                                //     <button type="submit" className="btn btn-primary mt-3">
+                                //         Add Details
+                                //     </button>
+                                // </form>
                             )}
                         </div>
                     </div>

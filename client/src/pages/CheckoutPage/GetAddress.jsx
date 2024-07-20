@@ -9,6 +9,10 @@ const OrderSummary = () => {
     const [cartDetails, setCartDetails] = useState({});
     const [bookingFormData, setBookingFormData] = useState({});
     const [paymentOption, setPaymentOption] = useState('cashOnDelivery');
+
+    const handlePaymentOptionChange = (event) => {
+        setPaymentOption(event.target.value);
+    };
     const [formData, setFormData] = useState({
         BookingInfo: {},
         Cart: [],
@@ -67,7 +71,35 @@ const OrderSummary = () => {
                         Authorization: `Bearer ${token}`
                     }
                 });
-                console.log(res.data)
+                const order = res.data.order;
+
+                const options = {
+                    key: "rzp_test_gU4w4jM7ASo0XA",
+                    amount: order?.amount || null,
+                    currency: "INR",
+                    name: "Lab Mantra",
+                    description: `Payment For Lab Testing`,
+                    image: "https://i.pinimg.com/originals/9e/ff/85/9eff85f9a3f9540bff61bbeffa0f6305.jpg",
+                    order_id: order?.id,
+                    callback_url: `${process.env.REACT_APP_BACKEND_URL}/paymentverification`,
+                    prefill: {
+                        name: formData.UserName,
+                        email: formData.Email,
+                        contact: formData.ContactNumber
+                    },
+                    notes: {
+                        "address": "Razorpay Corporate Office"
+                    },
+                    theme: {
+                        "color": "#2DBCB6"
+                    }
+                };
+
+                const razorpay = new window.Razorpay(options);
+                razorpay.on('payment.failed', function (response) {
+                    toast.error('Payment failed. Please try again.');
+                });
+                razorpay.open();
             } catch (error) {
                 console.error('Error in processing payment:', error);
             }
@@ -199,7 +231,7 @@ const OrderSummary = () => {
                                             </>
                                         ) : (
                                             <>
-                                                <h5 className="mb-2" style={{ color: '#4377a2' }}>Test: {item.testName}</h5>
+                                                <h5 className="mb-2" style={{ color: '#4377a2' }}>Test: {item.formattedTestName}</h5>
                                                 <div className="d-flex justify-content-between mb-2">
                                                     <span style={{ color: '#003873' }}>Test Price:</span>
                                                     <span style={{ color: '#00AAA9' }}>₹{item.discountPrice || item.actualPrice}</span>
@@ -229,6 +261,44 @@ const OrderSummary = () => {
                                 <div className="d-flex justify-content-between mt-3">
                                     <span className="total-payment" style={{ color: 'var(--color-blue)', fontWeight: 'bold' }}>Total to Pay:</span>
                                     <span>₹{formData.Prices.totalToPay}</span>
+                                </div>
+                            </div>
+                            <div >
+                                <div class="p-4 " style={{ backgroundColor: '#F0FFFE' }} >
+                                    <h2 class="card-title text-center mb-4">Select Payment Option</h2>
+                                    <form>
+                                        <div class="form-check mb-3">
+                                            <input
+                                                class="form-check-input"
+                                                type="radio"
+                                                id="onlinePayment"
+                                                name="paymentOption"
+                                                value="onlinePayment"
+                                                checked={paymentOption === 'onlinePayment'}
+                                                onChange={handlePaymentOptionChange}
+                                            />
+                                            <label class="form-check-label" for="onlinePayment">
+                                                Online Payment
+                                            </label>
+                                        </div>
+
+                                        <div class="form-check mb-3">
+                                            <input
+                                                class="form-check-input"
+                                                type="radio"
+                                                id="cashOnDelivery"
+                                                name="paymentOption"
+                                                value="cashOnDelivery"
+                                                checked={paymentOption === 'cashOnDelivery'}
+                                                onChange={handlePaymentOptionChange}
+                                            />
+                                            <label class="form-check-label" for="cashOnDelivery">
+                                                Cash on Delivery
+                                            </label>
+                                        </div>
+
+
+                                    </form>
                                 </div>
                             </div>
                             <div className="mt-4 d-grid">
