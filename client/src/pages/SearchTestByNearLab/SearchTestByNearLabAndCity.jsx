@@ -28,13 +28,16 @@ const SearchTestByNearLabAndCity = () => {
     const fetchTestNearestLab = async () => {
         try {
             const res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/lab/get-all-Tests/${formattedTestName}`);
-            const data = res.data.data;
-            let dataFilter;
-            if (City || PinCode) {
-                dataFilter = data.filter((item) => item.pinCode === PinCode || item.city === City)
-            }
+            // const data = res.data.data;
+            setLabDetails(res.data.data);
             
-            setLabDetails(dataFilter)
+            // This is for our Future aspects to Filter it by the City and pincode
+            // let dataFilter;
+            // if (City || PinCode) {
+            //     dataFilter = data.filter((item) => item.pinCode === PinCode || item.city === City)
+            // }
+            
+            // setLabDetails(dataFilter)
         } catch (error) {
             console.error("Error While Fetching the Test Nearest Labs : ", error);
         } finally {

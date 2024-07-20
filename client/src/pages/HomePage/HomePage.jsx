@@ -116,10 +116,10 @@ const HomePage = () => {
   const handleTestNameChange = (e) => {
     const value = e.target.value;
     setTestName(value);
-    console.log(tests)
+    // console.log(tests)
     // Filter tests for suggestions
     const suggestions = tests.filter(test => test.testName && test.testName.toLowerCase().includes(value.toLowerCase()));
-    console.log("Suggestions", suggestions)
+    // console.log("Suggestions", suggestions)
     setTestSuggestions(suggestions);
   };
 
