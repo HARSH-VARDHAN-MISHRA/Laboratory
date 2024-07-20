@@ -3,6 +3,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import './CheckoutPage.css';
 import '../Booking/Booking.css';
 import axios from 'axios';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const OrderSummary = () => {
     const navigate = useNavigate();
