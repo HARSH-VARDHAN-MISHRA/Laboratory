@@ -748,7 +748,51 @@ exports.LoginUser = async (req, res) => {
         });
     }
 }
+exports.LoginAdmin = async (req, res) => {
+  try {
+      const { email, password } = req.body
+      if (!email || !password) {
+          return res.status(403).json({
+              success: false,
+              msg: "Please Fill All Field"
+          })
+      }
+      console.log(req.body)
+      //after this check user
+      const existUser = await userModel.findOne({ email })
+      if (!existUser) {
+          return res.status(401).json({
+              success: false,
+              msg: "User not Avilable"
+          })
+      }
+      if (!existUser.Role === 'admin') {
+          return res.status(401).json({
+              success: false,
+              msg: "You have not Authorise to Access It."
+          })
+      }
 
+      //if user found
+      const checkPassword = await existUser.comparePassword(password)
+      if (!checkPassword) {
+          return res.status(401).json({
+              success: false,
+              msg: "Password is Invalid"
+          })
+      }
+
+       await sendToken(existUser, 200,res);
+      // console.log(sendToken(existUser, res, 200))
+
+  } catch (error) {
+      console.log(error);
+      res.status(500).json({
+          success: false,
+          error: "Internal Server Error"  
+      });
+  }
+}
 //Logout
 exports.Logout = async (req, res) => {
     try {

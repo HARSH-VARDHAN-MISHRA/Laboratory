@@ -30,7 +30,7 @@ const UserSchema = mongoose.Schema({
 
     Role: {
         type: String,
-        enum: ["User", "Admin"],
+        enum: ["User", "admin"],
         default: "User",
     },
     OtpForVerification: {

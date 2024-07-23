@@ -2,13 +2,14 @@ const express = require('express');
 const multer = require('multer');
 const { UploadXlsxFileAndExtractTest, UploadXlsxFileAndExtractData, getDownLoadTestOfLabByLabId, singleTestDeleteByTestId, getAllTestsWithLabInfoInBuild, UpdateTestDetails, DeleteAllTestsByLabId, getSingleTestByTestId, getALLTestByLabId, ByTestNameShowAllLabsWithWhichDoThisTestWithPrices, deleteAllTestForTestModel } = require('../controlers/TestUpload');
 const { createReports, getReportByReportId, getReportsByPatientId, getAllReports, deleteReportByReportId, resendReportByReportId, updateReportStatus } = require('../controlers/GoogleDriveController');
+const { isAuthenticatedAdmin } = require('../middlewares/admin');
 const router = express.Router();
 
 // Set up multer for file upload
 const upload = multer({ dest: 'files/' });
 
 // Route to handle file upload and extraction
-router.post('/upload-xlsx', upload.single('file'), UploadXlsxFileAndExtractData);
+router.post('/upload-xlsx', upload.single('file'), isAuthenticatedAdmin,UploadXlsxFileAndExtractData);
 router.post('/update-test/:id', UpdateTestDetails);
 router.delete('/laboratories/:labId/tests', DeleteAllTestsByLabId);
 router.delete('/delete-test/:id', singleTestDeleteByTestId)

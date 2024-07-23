@@ -4,7 +4,7 @@ const { createPackageTitle, getAllPackageTitle, deletePackageTitle, updatePackag
 const { createTestCategory, getAllTestCategory, deleteTestCategory, updateTestCategory, getTestCategoryById } = require('../controlers/TestCategoryControler');
 const { createPackage, getAllPackage, deletePackage, updatePackage, getPackageById } = require('../controlers/packageControler');
 const { createLaboratory, getLaboratories, findNearestLaboratories, updateLabLocations, getLabInformationByCityAndPinCode, deleteLaboratory } = require('../controlers/laboratoryControler');
-const { register, PasswordChangeRequest, ResendOtp, ResendSignOtp, verifyOtpForSignIn, VerifyOtp, LoginUser, getAllUsers } = require('../controlers/UserControler');
+const { register, PasswordChangeRequest, ResendOtp, ResendSignOtp, verifyOtpForSignIn, VerifyOtp, LoginUser, getAllUsers, LoginAdmin } = require('../controlers/UserControler');
 const { getAllVouchers, applyVoucher, createVoucher, activateVoucher, deactivateVoucher, deleteVoucher } = require('../controlers/VoucherController');
 const { checkout, paymentVerification, MakeCashOnDeliveryCheckOut } = require('../controlers/PaymentController');
 const { isAuthenticatedUser } = require('../middlewares/auth');
@@ -25,6 +25,7 @@ route.post('/resend-sign-Otp', ResendSignOtp);
 route.post('/Verify-Otp/:email/:newPassword', VerifyOtp)
 
 route.post("/login", LoginUser);
+route.post("/admin-login", LoginAdmin);
 route.get("/all-users", getAllUsers);
 
 // Test

@@ -12,6 +12,7 @@ const Header = () => {
 
   const handleLogOut =()=>{
     sessionStorage.removeItem("labadminToken");
+    sessionStorage.removeItem("labMantraUser");
     window.location.href="/";
   }
   return (
@@ -28,12 +29,12 @@ const Header = () => {
             </div>
           </div>
           <div className="left">
-            <a href="" target="_blank">
+            <a href="https://labmantra.com/" target="_blank">
               <i className="fa-solid fa-globe"></i>
               Go To Website
             </a>
 
-            <div className="logout">
+            <div className="logout" onClick={handleLogOut}>
               Log Out <i className="fa-solid fa-right-from-bracket"></i>
             </div>
           </div>
