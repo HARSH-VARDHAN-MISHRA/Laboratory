@@ -229,7 +229,7 @@ const AllTest = () => {
                                             )} */}
                                         </div>
                                         <div className='text-end mt-1' style={{ width: "100%" }}>
-                                            <div className="labs_deal">Explore More Offers at Labs</div>
+                                            <div className="labs_deal">Explore More Offers</div>
                                         </div>
                                         {item.discountPercentage ? (
                                             <div className="abso">
