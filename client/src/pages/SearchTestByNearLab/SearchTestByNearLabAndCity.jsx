@@ -62,7 +62,7 @@ const SearchTestByNearLabAndCity = () => {
 
     const handleClosePopup = () => {
         setShowPopup(false);
-        navigate('/lab-tests')
+        navigate('/')
     }
 
     const isInCart = (test) => {

@@ -18,7 +18,7 @@
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }
 .popup-content h4{
-    color: var(--bg-dark-blue);
+    color: var(--color-began);
 }
 .popup-content p{
     text-align: start;
@@ -26,7 +26,6 @@
 }
 .popup-content p strong{
     font-weight: 500;
-    color: cadetblue;
 }
 .popup-buttons {
     display: flex;
@@ -82,6 +81,7 @@
 .lab-details .test-name{
     color: var(--bg-dark-blue);
     font-weight: 500;
+    font-size: 1.1rem;
 }
 .lab-details .card-title {
     color: var(--color-blue);

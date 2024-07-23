@@ -6,9 +6,12 @@
 }
 .heading h2{
     text-transform: capitalize;
-    color: var(--bg-dark-blue);
     font-weight: 600;
     font-size: 2.5rem;
+    background: linear-gradient(135deg, var(--color-began), var(--color-blue-light));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
 }
 
 @media only screen and (max-width: 500px){

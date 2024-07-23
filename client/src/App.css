@@ -1,4 +1,4 @@
-#root{
+#root {
     overflow-x: hidden;
     width: 100%;
 }
@@ -19,14 +19,16 @@
     background-color: white;
     transition: background-color 0.3s;
 }
-.pagination-controls button.next-prev{
-    background: var(--bg-greenblue);
+
+.pagination-controls button.next-prev {
+    background: var(--color-began);
     color: white;
     border-radius: 5px;
 }
+
 .pagination-controls .active {
     font-weight: bold;
-    background-color: var(--bg-greenblue);
+    background-color: var(--color-began);
     color: white;
     border: none;
     border-radius: 3px;
@@ -39,17 +41,42 @@
 
 /* === Policies ===  */
 .highlight-link {
-    color: blue;
+    color: var(--color-began);
     text-decoration: underline;
-  }
-  
-  .highlight-email {
-    color: green;
+}
+
+.highlight-email {
+    color: var(--color-began);
     font-weight: bold;
-  }
-  
-  .highlight-phone {
+}
+
+.highlight-phone {
     color: red;
     font-style: italic;
-  }
-  
+}
+
+.labs_deal {
+    background: linear-gradient(135deg, rgb(125, 104, 191), #4f99a7);
+    color: white;
+    width: max-content;
+    float: right;
+    padding-left: 1.5rem;
+    padding-right: 1rem;
+    position: relative;
+}
+
+.labs_deal::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0px;
+    /* Adjust this value to position the triangle */
+    width: 0;
+    height: 0;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-left: 10px solid var(--bg-greenblue);
+    border-left: 10px solid white;
+    transform: translateY(-50%);
+    /* Center the triangle vertically */
+}

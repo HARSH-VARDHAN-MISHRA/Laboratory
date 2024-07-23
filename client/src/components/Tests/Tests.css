@@ -13,6 +13,7 @@
 }
 .single-test h4{
     font-size: 1.2rem;
+    font-weight: 600;
     color: var(--bg-greenblue);
     margin-bottom: 1rem;
     max-width: 85%;
@@ -49,9 +50,10 @@
 .single-test .abso{
     position: absolute;
     right: 0;
-    top: 10%;
-    background: var(--bg-light-greenblue);
-    padding: 5px 10px;
+    top: 4%;
+    /* background: var(--bg-light-greenblue); */
+    background: var(--bg-head);
+    padding: 3px 8px;
     border-bottom-left-radius: 5px;
     border-top-left-radius: 5px;
 }

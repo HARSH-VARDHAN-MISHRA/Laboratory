@@ -25,6 +25,7 @@
 
 .testimonial .card-title {
     color: var(--bg-dark-blue);
+    color: var(--color-began);
     font-size: 1.25rem;
     margin-bottom: 10px;
 }
@@ -35,6 +36,6 @@
 }
 
 .testimonial .stars {
-    color: var(--color-blue-light);
+    color: var(--color-began);
     margin-bottom: 0.5rem;
 }

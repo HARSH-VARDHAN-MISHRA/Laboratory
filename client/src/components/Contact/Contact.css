@@ -11,6 +11,7 @@
     display: inline-block;
     color: white;
     background: var(--bg-dark-blue);
+    background: var(--color-began);
     font-size: 1.1rem;
 }
 
@@ -24,14 +25,14 @@
     color: cadetblue;
 }
 .contact a{
-    color: var(--bg-greenblue);
+    color: var(--color-blue);
     
 }
 
 .contact .social-icons a {
-    border: 2px solid var(--bg-greenblue);
+    border: 2px solid var(--color-blue);
     border-radius: 50%;
-    color: var(--bg-greenblue);
+    color: var(--color-blue);
     display: grid;
     height: 2.2rem;
     place-items: center;
@@ -43,6 +44,6 @@
     font-size: 1.2rem;
 }
 .contact .social-icons a:hover{
-    background: var(--bg-greenblue);
+    background: var(--color-blue);
     color: white;
 }

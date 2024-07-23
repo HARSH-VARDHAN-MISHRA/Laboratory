@@ -7,6 +7,8 @@
 
 .all-sec .grid-2 .sin-sec {
     background: var(--bg-light-green);
+    background: var(--color-began-light);
+    color: white;
     border-radius: 10px;
     overflow: hidden;
     display: flex;
@@ -35,12 +37,14 @@
 }
 
 .all-sec .grid-2 .sin-sec .text {
-    color: var(--color-blue);
+    /* color: var(--color-blue); */
+    color: var(--color-began);
 }
 
 .all-sec .grid-2 .sin-sec .arrow {
     font-size: 2rem;
     color: var(--color-blue-light);
+    color: var(--color-began);
 }
 
 @media only screen and (max-width: 770px) {
@@ -51,7 +55,6 @@
 
 @media only screen and (max-width: 420px) {
     .all-sec .grid-2 .sin-sec {
-        background: var(--bg-light-green);
         border-radius: 10px;
         overflow: hidden;
         display: flex;
@@ -69,7 +72,8 @@
 /* -------- Banner  Location --------  */
 .locate {
     /* background: var(--bg-light-green); */
-    background-image: linear-gradient(to left bottom, #b5e7e6, #99dcda, #7cd2cf, #5bc7c2, #2dbcb6);
+    /* background-image: linear-gradient(to left bottom, #b5e7e6, #99dcda, #7cd2cf, #5bc7c2, #2dbcb6); */
+    background-image: linear-gradient(135deg, #7d68bf, #6a8abf, #4f99a7, #2dbcb6);
     padding: 5rem 0rem;
 }
 
@@ -86,12 +90,13 @@
 
 .locate h1 {
     font-weight: 600;
-    color: var(--color-light-weight);
+    /* color: var(--color-light-weight); */
+    color: white;
     font-size: 3rem;
 }
 
 .locate h1 span {
-    color: var(--color-blue);
+    /* color: var(--color-began-light); */
 }
 
 .locate .flex-content form {
@@ -101,9 +106,10 @@
     gap: 1rem;
     flex-direction: column;
     padding: 2rem 1rem;
-    background: var(--color-blue-light);
+    /* background: var(--color-blue-light); */
+    backdrop-filter: blur(10px);
+    background: #c4e3f23f;
     border-radius: 10px;
-
 }
 
 
@@ -144,26 +150,31 @@
     z-index: 1000;
     overflow-y: auto;
 }
+
 /* width */
 .locate .flex-content form .suggestions-wrapper::-webkit-scrollbar {
     width: 5px;
-  }
-  
-  /* Track */
-  .locate .flex-content form .suggestions-wrapper::-webkit-scrollbar-track {
+}
+
+/* Track */
+.locate .flex-content form .suggestions-wrapper::-webkit-scrollbar-track {
     background: #f1f1f1;
-  }
-  
-  /* Handle */
-  .locate .flex-content form .suggestions-wrapper::-webkit-scrollbar-thumb {
-    
-    background: var(--bg-light-green);
-  }
-  
-  /* Handle on hover */
-  .locate .flex-content form .suggestions-wrapper::-webkit-scrollbar-thumb:hover {
-    background: var(--color-blue-light);
-  }
+}
+
+/* Handle */
+.locate .flex-content form .suggestions-wrapper::-webkit-scrollbar-thumb {
+    background: var(--color-began);
+}
+
+/* Handle on hover */
+.locate .flex-content form .suggestions-wrapper::-webkit-scrollbar-thumb:hover {
+    background: var(--color-began-light);
+}
+
+.locate .flex-content form .suggestions-wrapper select::-webkit-scrollbar {
+    width: 5px;
+}
+
 
 .locate .flex-content form .suggestions-wrapper select {
     width: 100%;
@@ -180,12 +191,12 @@
 .locate .flex-content form .suggestions-wrapper option {
     padding: 0.5rem;
     background: white;
-    color: var(--color-blue);
+    color: var(--color-began);
 }
 
 .locate .flex-content form .suggestions-wrapper option:hover {
-    background: var(--bg-light-green);
-    color: var(--color-blue-light);
+    background: var(--color-began-light);
+    color: var(--color-began);
 }
 
 
@@ -284,14 +295,17 @@
 
 .popup-content h2 {
     margin-bottom: 20px;
+    color: var(--color-began);
 }
 
 .popup-content p {
     margin-bottom: 20px;
 }
-
+.popup-content strong{
+    color: var(--color-began);
+}
 .popup-content button {
-    background: #2dbcb6;
+    background: var(--color-began);
     color: white;
     border: none;
     padding: 10px 20px;
@@ -300,5 +314,5 @@
 }
 
 .popup-content button:hover {
-    background: #28a89a;
+    opacity: 0.8;
 }

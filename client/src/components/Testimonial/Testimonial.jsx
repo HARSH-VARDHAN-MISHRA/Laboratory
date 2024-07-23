@@ -6,18 +6,18 @@ import p3 from './p3.jpeg';
 
 const testimonials = [
     {
-        img: p1,
-        name: 'Gourav Panchal',
-        review: "Lab Mantra’s quality equipment has significantly enhanced our healthcare services. Highly recommended by YUGI Health Provider LLP."
-    },
-    {
         img: p2,
         name: 'Harsh Vardhan Mishra',
         review: "Exceptional service and reliable products. YUGI Health Provider LLP values Lab Mantra's commitment to excellence."
     },
     {
+        img: p1,
+        name: 'Gourav Panchal',
+        review: "Lab Mantra’s quality equipment has significantly enhanced our healthcare services. Highly recommended by YUGI Health Provider LLP."
+    },
+    {
         img: p3,
-        name: 'Rahul Sharma',
+        name: 'Anish Sharma',
         review: "Lab Mantra provides outstanding medical products. Our operations at YUGI Health Provider LLP benefit greatly from their support."
     }
 ];
@@ -28,7 +28,7 @@ const Testimonial = () => {
         <section className="testimonial my-5">
             <div className="container">
                 <div className="text-center mb-5">
-                    <h2 className="font-weight-bold" style={{color:"var(--bg-greenblue)"}}>Our Happy Clients</h2>
+                    <h2 className="font-weight-bold" style={{color:"var(--color-began)"}}>Our Happy Clients</h2>
                     <p className="text-muted">Here's what our clients have to say about Lab Mantra</p>
                 </div>
                 <div className="row">

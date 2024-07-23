@@ -44,7 +44,7 @@ const SearchTestByNearLab = () => {
 
     const handleClosePopup = () => {
         setShowPopup(false);
-        navigate('/lab-tests')
+        navigate('/')
     }
 
     const isInCart = (test) => {
@@ -87,20 +87,20 @@ const SearchTestByNearLab = () => {
                                             <div className="col-md-4" key={index}>
                                                 <div className="card mb-4">
                                                     <div className="card-body">
-                                                        <h5 className="card-title">{lab.labName}</h5>
-                                                        <p className="card-text"><strong>Location:</strong> {lab.labLocation}</p>
+                                                        <h3 className="card-title h2">{lab.labName}</h3>
+                                                        <p className="card-text" style={{fontSize:"0.9rem"}}><strong>Location:</strong> {lab.labLocation}</p>
                                                         <p className="card-text test-name">{formattedTestName}</p>
                                                         {lab.discountPercentage && lab.discountPercentage > 0 ? (
                                                             <>
                                                                 <p className="price">
-                                                                    <span className='fs-4 pe-1' style={{ color: "var(--bg-dark-blue)", fontWeight: "500" }}>₹{lab.discountPrice.toFixed(0)}</span>
+                                                                    <span className='fs-3 pe-1' style={{ color: "var(--bg-dark-blue)", fontWeight: "500" }}>₹{lab.discountPrice.toFixed(0)}</span>
                                                                     <span className='text-decoration-line-through'>₹{lab.price.toFixed(0)}</span>
                                                                 </p>
                                                             </>
                                                         ) : (
                                                             <>
                                                                 <p className="price">
-                                                                    <span className='fs-4 pe-1' style={{ color: "var(--bg-dark-blue)", fontWeight: "500" }}>₹{lab.price.toFixed(0)}</span>
+                                                                    <span className='fs-3 pe-1' style={{ color: "var(--bg-dark-blue)", fontWeight: "500" }}>₹{lab.price.toFixed(0)}</span>
 
                                                                 </p>
 

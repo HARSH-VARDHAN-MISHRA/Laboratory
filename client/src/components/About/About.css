@@ -1,4 +1,5 @@
 .about-sec h1{
+    /* color: var(--color-began); */
     color: var(--bg-dark-blue);
     font-weight: 600;
 }

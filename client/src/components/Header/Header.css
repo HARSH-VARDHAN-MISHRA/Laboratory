@@ -26,10 +26,12 @@ header .top-head {
     align-items: center;
     justify-content: space-between;
     background: var(--bg-head);
+    background: var(--color-began-light);
 }
 
 header .calls a {
     color: var(--bg-dark-blue);
+    color: var(--color-began);
     font-size: 1rem;
     display: flex;
     align-items: center;
@@ -63,6 +65,7 @@ header .search-bar i {
     cursor: pointer;
     width: 5%;
     color: var(--bg-greenblue);
+    color: var(--color-began);
 }
 
 header .search-bar .suggested-tests {
@@ -72,7 +75,7 @@ header .search-bar .suggested-tests {
     right: 0;
     max-height: 200px;
     overflow: auto;
-    background: var(--bg-light-green);
+    background: #9ca0e8;
     padding: 0.5rem 0.1rem;
     border-radius: 2px;
 }
@@ -128,7 +131,8 @@ header .search-bar .suggested-tests ul li div:hover {
 
 
 header .book-btn a {
-    background: var(--bg-dark-blue);
+    /* background: var(--bg-dark-blue); */
+    background: var(--color-began);
     color: white;
     padding: 0.5rem 1rem;
     border-radius: 10px;
@@ -167,7 +171,7 @@ header nav ul {
 }
 
 header nav ul li a {
-    color: var(--bg-greenblue);
+    color: var(--color-began);
     font-size: 1.1rem;
     text-transform: capitalize;
     font-weight: 500;
@@ -184,6 +188,7 @@ header nav .tabs a {
     position: relative;
     font-size: 1.5rem;
     color: var(--bg-greenblue);
+    color: var(--color-began);
 
 }
 
@@ -332,7 +337,7 @@ header nav .closeToggleMenu {
     right: -40%;
     height: 100dvh;
     overflow-y: auto;
-    background: var(--bg-head);
+    background: var(--bg-light-greenblue);
     width: 40%;
     z-index: 2500;
     transition: all 300ms ease-in;
@@ -346,7 +351,7 @@ header nav .closeToggleMenu {
 }
 .side-navbar .close{
     font-size: 1.8rem;
-    color: var(--bg-dark-blue);
+    color: var(--color-began);
     cursor: pointer;
 }
 .side-navbar .nav-link ul{
@@ -354,7 +359,7 @@ header nav .closeToggleMenu {
     list-style: none;
 }
 .side-navbar .nav-link li:nth-child(1) a{
-    border-top: 1px solid var(--bg-dark-blue);
+    border-top: 1px solid var(--color-began);
 }
 .side-navbar .nav-link li a{
     display: block;
@@ -362,15 +367,16 @@ header nav .closeToggleMenu {
     text-transform: uppercase;
     font-size: 1rem;
     padding: 0.4rem 0rem;
-    border-bottom: 1px solid var(--bg-dark-blue);
+    border-bottom: 1px solid var(--color-began);
+    color: var(--color-began);
 }
 .side-navbar .circle-icon a{
     border-radius: 50%;
-    border: 1px solid var(--bg-dark-blue);
+    border: 1px solid var(--color-began);
     position: relative;
     height: 3rem;
     width: 3rem;
-    color: var(--bg-dark-blue);
+    color: var(--color-began);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -383,12 +389,12 @@ header nav .closeToggleMenu {
 /* ----  */
 
 .side-navbar .lower .links a{
-    border: 1px solid var(--bg-dark-blue);
+    border: 1px solid var(--color-began);
     width: 100%;
     flex-basis: 48%;
     text-align: center;
     padding: 0.5rem 0.2rem;
-    color: var(--bg-dark-blue);
+    color: var(--color-began);
     text-decoration: none;
 }
 

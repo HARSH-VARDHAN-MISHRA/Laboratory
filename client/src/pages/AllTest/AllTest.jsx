@@ -154,16 +154,16 @@ const AllTest = () => {
 
 
     // --------------------------- SearchNearLabByTest  ----------------------------------
-    const SearchNearLabByTest = (testName) =>{
+    const SearchNearLabByTest = (testName) => {
         navigate(`/find-your-test/${testName}`)
     }
     return (
         <>
-        <MetaTag
-            title="YUGI Health Provider LLP Diagnostic Tests - Comprehensive Medical Imaging Services"
-            description="Explore the comprehensive range of diagnostic tests offered by YUGI Health Provider LLP, including CT Scan, MRI Scan, Ultrasound, X-ray, ECG, PET/CT, and Thyroid Scan. Our services are designed to provide high-quality, accessible, and affordable healthcare to all Indian citizens."
-            keyword="YUGI Health Provider LLP, diagnostic tests, CT Scan, MRI Scan, Ultrasound, X-ray, ECG, PET/CT, Thyroid Scan, medical imaging, healthcare services"
-        />
+            <MetaTag
+                title="YUGI Health Provider LLP Diagnostic Tests - Comprehensive Medical Imaging Services"
+                description="Explore the comprehensive range of diagnostic tests offered by YUGI Health Provider LLP, including CT Scan, MRI Scan, Ultrasound, X-ray, ECG, PET/CT, and Thyroid Scan. Our services are designed to provide high-quality, accessible, and affordable healthcare to all Indian citizens."
+                keyword="YUGI Health Provider LLP, diagnostic tests, CT Scan, MRI Scan, Ultrasound, X-ray, ECG, PET/CT, Thyroid Scan, medical imaging, healthcare services"
+            />
 
             <section className="bread">
                 <div className="container">
@@ -227,6 +227,9 @@ const AllTest = () => {
                                                     BOOK
                                                 </button>
                                             )} */}
+                                        </div>
+                                        <div className='text-end mt-1' style={{ width: "100%" }}>
+                                            <div className="labs_deal">Explore More Offers at Labs</div>
                                         </div>
                                         {item.discountPercentage ? (
                                             <div className="abso">

@@ -205,7 +205,7 @@ const OrderSummary = () => {
                                                 <h5 className="mb-2" style={{ color: '#4377a2' }}>Package: {item.packageName}</h5>
                                                 <div className="d-flex justify-content-between mb-2">
                                                     <span style={{ color: '#003873' }}>Package Price:</span>
-                                                    <span style={{ color: '#00AAA9' }}>₹{item.currentPrice || item.actualPrice}</span>
+                                                    <span style={{ color: '#00AAA9' }}>₹{item.currentPrice.toFixed(0) || item.actualPrice.toFixed(0)}</span>
                                                 </div>
 
                                                 <button
@@ -236,7 +236,7 @@ const OrderSummary = () => {
                                                 <h5 className="mb-2" style={{ color: '#4377a2' }}>Test: {item.formattedTestName}</h5>
                                                 <div className="d-flex justify-content-between mb-2">
                                                     <span style={{ color: '#003873' }}>Test Price:</span>
-                                                    <span style={{ color: '#00AAA9' }}>₹{item.discountPrice || item.actualPrice}</span>
+                                                    <span style={{ color: '#00AAA9' }}>₹{item.discountPrice.toFixed(0) || item.actualPrice.toFixed(0)}</span>
                                                 </div>
                                             </>
                                         )}
@@ -250,19 +250,19 @@ const OrderSummary = () => {
                                 <h3 className="mb-3 h4" style={{ color: 'var(--bg-dark-blue)' }}>Payment Details</h3>
                                 <div className="d-flex justify-content-between mt-3">
                                     <span style={{ color: 'var(--color-blue)' }}>Subtotal:</span>
-                                    <span>₹{formData.Prices.subtotal}</span>
+                                    <span>₹{formData.Prices.subtotal.toFixed(0)}</span>
                                 </div>
                                 <div className="d-flex justify-content-between mt-1">
                                     <span style={{ color: 'var(--color-blue)' }}>Home Collection Charges:</span>
-                                    <span>₹{formData.Prices.homeCollectionCharges}</span>
+                                    <span>₹{formData.Prices.homeCollectionCharges.toFixed(0)}</span>
                                 </div>
                                 <div className="d-flex justify-content-between mt-1">
                                     <span style={{ color: 'var(--color-blue)' }}>Discount:</span>
-                                    <span>₹{formData.Prices.discount}</span>
+                                    <span>₹{formData.Prices.discount.toFixed(0)}</span>
                                 </div>
                                 <div className="d-flex justify-content-between mt-3">
                                     <span className="total-payment" style={{ color: 'var(--color-blue)', fontWeight: 'bold' }}>Total to Pay:</span>
-                                    <span>₹{formData.Prices.totalToPay}</span>
+                                    <span>₹{formData.Prices.totalToPay.toFixed(0)}</span>
                                 </div>
                             </div>
                             <div >

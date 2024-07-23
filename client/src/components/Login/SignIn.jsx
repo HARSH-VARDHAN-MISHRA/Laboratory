@@ -5,6 +5,7 @@ import sideBg from './sideBg.webp'
 import axios from 'axios'
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import MetaTag from '../Meta/MetaTag';
 
 
 const SignIn = () => {
@@ -55,6 +56,12 @@ const SignIn = () => {
     
   return (
     <>
+        <MetaTag
+            title="Sign Up - YUGI Health Provider LLP"
+            description="Join YUGI Health Provider LLP today and get access to quality healthcare services at affordable prices. Sign up to start managing your health and accessing our wide range of diagnostic services."
+            keyword="YUGI Health Provider LLP sign up, create account, register, healthcare sign up, diagnostic services sign up, Lab Mantra sign up, Indian healthcare registration"
+        />
+
         <section className="my-3 login-page">
             <div className="container">
                 <div className="row login">

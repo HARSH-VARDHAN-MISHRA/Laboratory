@@ -6,6 +6,7 @@ import sideBg from './sideBg.webp'
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import MetaTag from '../Meta/MetaTag';
 
 const Login = () => {
     const navigate = useNavigate();
@@ -57,6 +58,12 @@ const Login = () => {
     }, [])
   return (
     <>
+        <MetaTag
+            title="Login - YUGI Health Provider LLP"
+            description="Access your account at YUGI Health Provider LLP to manage your healthcare services, view your diagnostic reports, and more. Log in now to stay connected with your health."
+            keyword="YUGI Health Provider LLP login, healthcare login, diagnostic services login, Lab Mantra login, Indian healthcare login"
+        />
+
         <section className="my-3 login-page">
             <div className="container">
                 <div className="row login">

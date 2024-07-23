@@ -202,7 +202,7 @@ const Header = () => {
                         <p className='text-center text-danger' > Please Login or Register to access personalized lab services.</p>
                         <div className="links flex">
                             <Link to={`/login`} onClick={handleCloseMenu}>LOGIN</Link>
-                            <Link to={`/sign-in`} onClick={handleCloseMenu}>SIGN IN</Link>
+                            <Link to={`/sign-up`} onClick={handleCloseMenu}>SIGN IN</Link>
                         </div>
                     </div>
                 )}

@@ -1,5 +1,5 @@
 .service h3{
-    color: var(--bg-greenblue);
+    color: var(--color-began);
     margin-bottom: 0rem;
 }
 
@@ -18,7 +18,7 @@
     margin-bottom: 1rem;
 }
 .service h5{
-    color: var(--bg-dark-blue);
+    color: #a48cf1;
 }
 
 

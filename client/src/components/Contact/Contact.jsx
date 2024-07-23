@@ -53,7 +53,7 @@ const Contact = () => {
             <section className="contact">
                 <div className="container">
                     <div className="row">
-                        <div className="col-md-6">
+                        <div className="col-md-6 mb-4">
                             <h3>Contact Us</h3>
                             <p>Have questions or feedback? Feel free to reach out to us.</p>
                             <p><strong>Address:</strong> 128/129 Sector 2 Rohini New Delhi - 110085</p>
