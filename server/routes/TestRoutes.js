@@ -9,7 +9,7 @@ const router = express.Router();
 const upload = multer({ dest: 'files/' });
 
 // Route to handle file upload and extraction
-router.post('/upload-xlsx', upload.single('file'), isAuthenticatedAdmin,UploadXlsxFileAndExtractData);
+router.post('/upload-xlsx', upload.single('file'),UploadXlsxFileAndExtractData);
 router.post('/update-test/:id', UpdateTestDetails);
 router.delete('/laboratories/:labId/tests', DeleteAllTestsByLabId);
 router.delete('/delete-test/:id', singleTestDeleteByTestId)
