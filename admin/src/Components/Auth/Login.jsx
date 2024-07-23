@@ -2,15 +2,15 @@ import React, { useState } from 'react';
 import './Login.css'; // Make sure to create and import a CSS file for styling
 
 const Login = () => {
-  const [email, setEmail] = useState('admin@gmail.com');
-  const [password, setPassword] = useState('lab-mantra');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [error, setError] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (email !== 'admin@gmail.com') {
       setError('The email is incorrect');
-    } else if (password !== 'lab-mantra') {
+    } else if (password !== 'L@bM@ntr@2024!') {
       setError('The password is incorrect');
     } else {
         sessionStorage.setItem("labadminToken",true)
