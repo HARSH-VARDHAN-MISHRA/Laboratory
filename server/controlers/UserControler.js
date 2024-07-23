@@ -455,12 +455,14 @@ exports.PasswordChangeRequest = async (req, res) => {
             });
         }
 
+
         const otp = generateOtp();
         user.ForgetPasswordOtp = otp;
         user.OtpGeneratedAt = new Date();
+        user.newPassword = newPassword;
 
         await user.save();
-
+        console.log(user);
         const options = {
           email: email,
           subject: "Lab Mantra Password Reset Request",
@@ -661,16 +663,19 @@ exports.ResendOtp = async (req, res) => {
 exports.VerifyOtp = async (req, res) => {
     try {
         const { otp } = req.body; // Ensure newPassword is retrieved from req.body
-        const { email, newPassword } = req.params; // email is retrieved from req.params
+        const { email } = req.params; // email is retrieved from req.params
 
-        if (!email || !otp || !newPassword) {
+        if (!email || !otp ) {
             return res.status(403).json({
                 success: false,
                 msg: "Please Fill All Required Fields"
             });
         }
 
+        
+
         const user = await userModel.findOne({ email: email });
+        console.log(user);
         if (!user || user.ForgetPasswordOtp !== otp) {
             return res.status(401).json({
                 success: false,
@@ -686,9 +691,10 @@ exports.VerifyOtp = async (req, res) => {
         }
 
 
-        user.Password = newPassword
+        user.password = user.newPassword
         user.ForgetPasswordOtp = null;
         user.OtpGeneratedAt = null;
+        user.newPassword = null;
 
         await user.save();
 

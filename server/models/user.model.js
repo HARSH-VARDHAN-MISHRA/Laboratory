@@ -19,10 +19,9 @@ const UserSchema = mongoose.Schema({
         type: String,
         trim: true
     },
-    // emailVerified: {
-    //     type: Boolean,
-    //     default: false
-    // },
+    newPassword: {
+        type: String
+    },
     isActive: {
         type: Boolean,
         default: false,

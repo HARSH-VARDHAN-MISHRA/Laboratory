@@ -22,7 +22,7 @@ route.post('/Password-change-request', PasswordChangeRequest);
 route.post('/Resend-Otp', ResendOtp);
 route.post('/Verify-sign-Otp', verifyOtpForSignIn);
 route.post('/resend-sign-Otp', ResendSignOtp);
-route.post('/Verify-Otp/:email/:newPassword', VerifyOtp)
+route.post('/Verify-Otp/:email', VerifyOtp)
 
 route.post("/login", LoginUser);
 route.post("/admin-login", LoginAdmin);

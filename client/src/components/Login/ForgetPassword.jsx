@@ -53,7 +53,7 @@ const ForgetPassword = () => {
         setLoading(true)
         otpevent.preventDefault()
         try {
-            const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/Verify-Otp/${formData.email}/${formData.newPassword}`, formData)
+            const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/Verify-Otp/${formData.email}`, formData)
             console.log(response.data);
             setLoading(false);
             toast.success(response.data.msg)
