@@ -4,7 +4,7 @@ const sendEmail = require('../utils/SendEmail');
 
  exports.createReports = async (req, res) => {
     try {
-        const { userId, reportLink } = req.body;
+        const { userId, reportLink , orderId } = req.body;
 
         if (!userId) {
             return res.status(402).json({
@@ -36,6 +36,7 @@ const sendEmail = require('../utils/SendEmail');
             PatientId: userId,
             ReportId: nextReportId,
             ReportLink: reportLink,
+            orderId:orderId,
             StatusOfLink: 'Active'
         });
 
@@ -129,6 +130,32 @@ exports.getReportsByPatientId = async (req, res) => {
 
     } catch (error) {
         console.error('Error in fetching reports:', error);
+        res.status(500).json({
+            success: false,
+            message: 'Internal Server Error'
+        });
+    }
+};
+exports.getReportsByOrderId = async (req, res) => {
+    try {
+        const { orderId } = req.params;
+
+        const reports = await Reports.find({ orderId: orderId });
+
+        if (reports.length === 0) {
+            return res.status(404).json({
+                success: false,
+                message: "No reports found for this patient"
+            });
+        }
+
+        res.status(200).json({
+            success: true,
+            data: reports
+        });
+
+    } catch (error) {
+        console.error('Error in fetching Order:', error);
         res.status(500).json({
             success: false,
             message: 'Internal Server Error'

@@ -9,10 +9,6 @@ const BookingConfirm = () => {
   const query = Location.get('OrderId')
   console.log(query);
   useEffect(() => {
-
-    localStorage.removeItem("lab-cart");
-    localStorage.removeItem("cartDetails");
-
     // Fetch user data from localStorage
     const user = JSON.parse(localStorage.getItem('labMantraUser'));
     if (user) {
@@ -51,7 +47,7 @@ const BookingConfirm = () => {
     <div className="container book-confirm my-5">
       <div className="row ">
         <div className="col-lg-6 col-md-6 col-sm-12" style={{ padding: '30px', borderRadius: '12px', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)' }} >
-          <h2 style={{ color: 'var(--color-began)', marginBottom: '20px', textAlign: 'center' }}>Your Booking is Confirmed!</h2>
+          <h2 style={{ color: 'var(--color-red)', marginBottom: '20px', textAlign: 'center' }}>Your Booking is Failed!</h2>
           <div style={{ borderBottom: '2px solid var(--color-began)', paddingBottom: '15px', marginBottom: '20px' }}>
             {booking.map((item,index)=>(
               <div key={index}>
@@ -59,7 +55,7 @@ const BookingConfirm = () => {
           
               <p style={{ fontSize: '1.1rem' }}>Booking ID: <strong>{item._id}</strong></p>
               <p style={{ fontSize: '1.1rem' }}>Total Payment: <strong>{item.requestBody.Prices.totalToPay ? `₹${item.requestBody.Prices.totalToPay.toFixed(0)}` : 'N/A'}</strong></p>
-              <p style={{ fontSize: '1.1rem' }}>Payment Status: <strong>{item.PaymentDone ? 'Payment Done' : 'COD'}</strong></p>
+              <p style={{ fontSize: '1.1rem' }}>Payment Status: <strong>{item.PaymentDone ? 'Payment Failed' : 'Payment Failed'}</strong></p>
               </div>
             ))}
 

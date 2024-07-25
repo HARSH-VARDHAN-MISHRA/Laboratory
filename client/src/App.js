@@ -32,6 +32,7 @@ import LabsBranchLocations from './pages/Labs/LabsBranchLocations';
 import ErrorPage from './pages/Error/ErrorPage';
 import SearchTestByNearLab from './pages/SearchTestByNearLab/SearchTestByNearLab';
 import SearchTestByNearLabAndCity from './pages/SearchTestByNearLab/SearchTestByNearLabAndCity';
+import SingleBookingDetail from './pages/UserProfilePage/SingleBookingDetail';
 
 
 function App() {
@@ -61,6 +62,7 @@ function App() {
             <Route path='/sign-up/confirm-account/:email' element={<OtpSignUp />} />
 
             <Route path='/profile' element={<UserProfilePage />} />
+            <Route path='/booking-detail/:_id' element={<SingleBookingDetail />} />
          
 
 

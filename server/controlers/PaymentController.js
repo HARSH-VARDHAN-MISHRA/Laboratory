@@ -250,16 +250,12 @@ exports.paymentVerification = async (req, res) => {
 
             sendEmail(UserMailOptions);
 
-            res.status(200).json({
-                success: true,
-                message: "Payment Verified Successfully",
-                order: latestOrder
-            });
+
+            res.redirect(`${process.env.REACT_APP_FRONTEND_URL}/booking-confirmed?OrderId=${latestOrder._id}`)
+
         } else {
-            res.status(400).json({
-                success: false,
-                message: "Payment Verification Failed"
-            });
+            res.redirect(`${process.env.REACT_APP_FRONTEND_URL}/booking-Failed?OrderId=${latestOrder._id}`)
+
         }
     } catch (error) {
         console.error("Payment Verification Error: ", error);

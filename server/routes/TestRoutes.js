@@ -1,7 +1,7 @@
 const express = require('express');
 const multer = require('multer');
 const { UploadXlsxFileAndExtractTest, UploadXlsxFileAndExtractData, getDownLoadTestOfLabByLabId, singleTestDeleteByTestId, getAllTestsWithLabInfoInBuild, UpdateTestDetails, DeleteAllTestsByLabId, getSingleTestByTestId, getALLTestByLabId, ByTestNameShowAllLabsWithWhichDoThisTestWithPrices, deleteAllTestForTestModel } = require('../controlers/TestUpload');
-const { createReports, getReportByReportId, getReportsByPatientId, getAllReports, deleteReportByReportId, resendReportByReportId, updateReportStatus } = require('../controlers/GoogleDriveController');
+const { createReports, getReportByReportId, getReportsByPatientId, getAllReports, deleteReportByReportId, resendReportByReportId, updateReportStatus, getReportsByOrderId } = require('../controlers/GoogleDriveController');
 const { isAuthenticatedAdmin } = require('../middlewares/admin');
 const router = express.Router();
 
@@ -26,6 +26,7 @@ router.get('/download-xlsx-test/:labId', getDownLoadTestOfLabByLabId)
 router.post('/upload-test-result', createReports)
 router.get('/reports/:reportId', getReportByReportId);
 router.get('/reports/patient/:patientId', getReportsByPatientId);
+router.get('/reports/order/:orderId', getReportsByOrderId);
 router.get('/reports', getAllReports);
 router.patch('/reports/:reportId/status', updateReportStatus);
 router.delete('/reports/:reportId', deleteReportByReportId)

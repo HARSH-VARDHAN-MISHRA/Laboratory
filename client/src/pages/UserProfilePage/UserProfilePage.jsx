@@ -19,7 +19,8 @@ const UserProfilePage = () => {
             const fetchBooking = async () => {
                 try {
                     const res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/get-order-by-user/${user._id}`);
-                    setBookings(res.data.data);
+                    const filterData = res.data.data.reverse();
+                    setBookings(filterData);
                 } catch (error) {
                     console.error("Something Issue to fetch Bookings: ", error);
                 }
@@ -42,7 +43,7 @@ const UserProfilePage = () => {
         localStorage.removeItem('labMantraToken');
         localStorage.removeItem('labMantraUser');
         toast.success('Logged out successfully');
-        window.location.href = '/login'; 
+        window.location.href = '/login';
     };
 
     return (
@@ -105,44 +106,50 @@ const UserProfilePage = () => {
                             </div>
                         )}
                         {activeTab === 'bookings' && (
-    <div className="tab-pane active">
-        <h3>My Booking History</h3>
-        {bookings.length === 0 ? (
-            <p>No bookings yet.</p>
-        ) : (
-            <table className="table ">
-                <thead>
-                    <tr>
-                        <th>Booking ID</th>
-                        <th>Test Name</th>
-                        <th>Date</th>
-                        <th>Status</th>
-                        <th>Details</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {bookings.map((booking) => (
-                        <tr key={booking._id}>
-                            <td>{booking._id}</td>
-                            <td>{booking.requestBody.Cart[0].formattedTestName || 'N/A'}</td> {/* Show test name or 'N/A' if not available */}
-                            <td>
-                                {booking.createdAt
-                                    ? new Date(booking.createdAt).toLocaleDateString('en-US', { day: 'numeric', month: 'long', year: 'numeric' })
-                                    : 'Invalid Date'} {/* Handle invalid dates */}
-                            </td>
-                            <td>{booking.paymentStatus}</td>
-                            <td>
-                                <Link to={`/booking-details/${booking._id}`} className="btn btn-primary btn-sm">
-                                    View Details
-                                </Link>
-                            </td>
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
-        )}
-    </div>
-)}
+                            <div className="tab-pane active ">
+                                <h3>My Booking History</h3>
+                                {bookings.length === 0 ? (
+                                    <p>No bookings yet.</p>
+                                ) : (
+                                    <table className="table ">
+                                        <thead>
+                                            <tr>
+                                                <th>Booking ID</th>
+                                                <th>Test Name</th>
+                                                <th>Date</th>
+                                                <th>Status</th>
+                                                <th>Details</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {bookings.map((booking) => (
+                                                <tr key={booking._id}>
+                                                    <td>{booking._id}</td>
+                                                    <td>
+                                                        {booking.requestBody.Cart.map((test) => (
+                                                            <div className='text-nowrap'>{test.formattedTestName || 'N/A'} ,</div>
+                                                        ))}
+
+                                                    </td>
+                                                        
+                                                    <td>
+                                                        {booking.createdAt
+                                                            ? new Date(booking.createdAt).toLocaleDateString('en-US', { day: 'numeric', month: 'long', year: 'numeric' })
+                                                            : 'Invalid Date'} {/* Handle invalid dates */}
+                                                    </td>
+                                                    <td>{booking.paymentStatus}</td>
+                                                    <td>
+                                                        <Link to={`/booking-detail/${booking?._id}`} className="btn btn-primary btn-sm">
+                                                            View Details
+                                                        </Link>
+                                                    </td>
+                                                </tr>
+                                            ))}
+                                        </tbody>
+                                    </table>
+                                )}
+                            </div>
+                        )}
 
                         {activeTab === 'reports' && (
                             <div className="tab-pane active">

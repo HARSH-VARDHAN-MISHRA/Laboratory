@@ -4,11 +4,14 @@ import { useParams } from 'react-router-dom';
 
 const Upload = () => {
     const { id } = useParams();
+    const location = new URLSearchParams(window.location.search);
+    const querry = location.get("orderId");
     const [allTestRecords, setAllTestRecords] = useState([]);
     const [filteredRecords, setFilteredRecords] = useState([]);
     const [formData, setFormData] = useState({
         userId: id,
-        reportLink: ''
+        reportLink: '',
+        orderId: querry
     });
     const [searchReportId, setSearchReportId] = useState('');
     const [startDate, setStartDate] = useState('');
@@ -19,6 +22,7 @@ const Upload = () => {
     }, []);
 
     const handleUpload = async () => {
+        console.log(formData);
         try {
             await axios.post(`${process.env.REACT_APP_BACKEND_URL}/lab/upload-test-result`, formData);
             handleFetchAll();

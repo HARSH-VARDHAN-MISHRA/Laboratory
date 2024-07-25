@@ -30,6 +30,7 @@
     background-color: var(--color-began-light); 
     border-radius: 5px;
     margin-top: 10px;
+    overflow-x: auto;
 }
 
 .profile-tabs .tab-pane {

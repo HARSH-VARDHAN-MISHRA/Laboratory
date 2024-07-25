@@ -1,45 +1,33 @@
 import React, { useState, useEffect } from 'react';
-import { Link, NavLink, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './CartPage.css';
-
-// import emptyCartImage from './emptyCart.png'
-import emptyCartImage from './emp.webp'
+import emptyCartImage from './emp.webp';
 import MetaTag from '../../components/Meta/MetaTag';
+import axios from 'axios';
 
 const CartPage = () => {
     const [cart, setCart] = useState([]);
     const [coupon, setCoupon] = useState('');
     const [discount, setDiscount] = useState(0);
+    const [discountedTotal, setDiscountedTotal] = useState(0);
+    const [couponApplied, setCouponApplied] = useState(false);
+    const [successMessage, setSuccessMessage] = useState('');
     const navigate = useNavigate();
 
     useEffect(() => {
         window.scrollTo({
             top: 0,
             behavior: "smooth"
-        })
+        });
         const storedCart = JSON.parse(localStorage.getItem('lab-cart')) || [];
         setCart(storedCart);
     }, []);
 
     const handleRemoveFromCart = (itemId) => {
-        // Filter out the item to be removed based on itemId (either _id or id)
         const updatedCart = cart.filter(item => item._id !== itemId && item.id !== itemId);
-
-        // Update state with the filtered cart
         setCart(updatedCart);
-
-        // Update local storage with the filtered cart
         localStorage.setItem('lab-cart', JSON.stringify(updatedCart));
-        console.log(updatedCart);
-    }
-
-    const handleCouponApply = () => {
-        if (coupon === 'SS10') {
-            setDiscount(cart.reduce((acc, item) => acc + (item.discountPrice || item.actualPrice) * 0.1, 0));
-        } else {
-            setDiscount(0);
-        }
-    }
+    };
 
     const subtotal = cart.reduce((acc, item) => {
         if (item.packageName) {
@@ -50,7 +38,7 @@ const CartPage = () => {
     }, 0);
 
     const homeCollectionCharges = subtotal >= 649 ? 0 : 150;
-    const totalToPay = subtotal + homeCollectionCharges - discount;
+    const totalToPay = couponApplied ? discountedTotal : (subtotal + homeCollectionCharges);
 
     const handleContinue = () => {
         const cartDetails = {
@@ -62,9 +50,9 @@ const CartPage = () => {
         };
         localStorage.setItem('cartDetails', JSON.stringify(cartDetails));
         navigate('/cart/add-booking-details');
-    }
+    };
 
-    const token = localStorage.getItem('labMantraToken')
+    const token = localStorage.getItem('labMantraToken');
 
     const [selectedPackage, setSelectedPackage] = useState(null);
 
@@ -76,6 +64,23 @@ const CartPage = () => {
         }
     };
 
+    const handleCouponApply = async () => {
+        try {
+            const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/apply-vouchers`, {
+                CouponeCode: coupon,
+                orderTotal: totalToPay
+            });
+            const { discountedTotal } = response.data.data;
+            setDiscountedTotal(discountedTotal);
+            setDiscount(subtotal + homeCollectionCharges - discountedTotal);
+            setCouponApplied(true);
+            setSuccessMessage('Coupon applied successfully!');
+        } catch (error) {
+            console.log(error);
+            setSuccessMessage('Failed to apply coupon. Please try again.');
+        }
+    };
+
     return (
         <>
             <MetaTag
@@ -84,12 +89,11 @@ const CartPage = () => {
                 keyword="Lab Mantra, cart, healthcare services, medical tests, checkout"
             />
 
-
             {cart.length ? (
                 <>
                     <section className="bread">
                         <div className="container">
-                            <nav aria-label="breadcrumb ">
+                            <nav aria-label="breadcrumb">
                                 <h2>Cart</h2>
                                 <ol className="breadcrumb">
                                     <li className="breadcrumb-item"><Link to="/">Home</Link></li>
@@ -109,8 +113,6 @@ const CartPage = () => {
                             </div>
 
                             <div className="row">
-
-
                                 <div className="col-md-7">
                                     <div className="cart-items mb-4">
                                         {cart.map(item => (
@@ -120,7 +122,6 @@ const CartPage = () => {
                                                         <>
                                                             <h5 className='test-name'>Test : <span className='fw-normal'>{item.formattedTestName}</span></h5>
                                                             <div className="text-muted">₹{item.discountPrice.toFixed(0) || item.actualPrice.toFixed(0)}</div>
-
                                                         </>
                                                     )}
                                                     {item.packageName && (
@@ -164,6 +165,8 @@ const CartPage = () => {
                                             )}
                                         </div>
 
+                                        {successMessage && <div className="alert alert-success">{successMessage}</div>}
+
                                         <div className="totals">
                                             <div className="d-flex justify-content-between">
                                                 <span>Subtotal</span>
@@ -173,10 +176,12 @@ const CartPage = () => {
                                                 <span>Home Collection Charges</span>
                                                 <span>₹{homeCollectionCharges.toFixed(0)}</span>
                                             </div>
-                                            <div className="discount d-flex justify-content-between">
-                                                <span>Discount</span>
-                                                <span>₹{discount.toFixed(0)}</span>
-                                            </div>
+                                            {couponApplied && (
+                                                <div className="discount d-flex justify-content-between">
+                                                    <span>Discount</span>
+                                                    <span>₹{discount.toFixed(0)}</span>
+                                                </div>
+                                            )}
                                             <div className="pay d-flex justify-content-between font-weight-bold">
                                                 <span>To Pay</span>
                                                 <span>₹{totalToPay.toFixed(0)}</span>
@@ -184,7 +189,6 @@ const CartPage = () => {
                                         </div>
                                         {token ? (
                                             <button className='link' onClick={handleContinue}>Continue</button>
-
                                         ) : (
                                             <Link className='link' to={'/login'}>Please Login to continue</Link>
                                         )}
@@ -193,17 +197,16 @@ const CartPage = () => {
                             </div>
                         </div>
                     </section>
-
                 </>
             ) : (
                 <>
                     <section className="container emptycart my-5">
                         <div className="row">
-                            <div className="col-md-4 col-8 mx-auto ">
+                            <div className="col-md-4 col-8 mx-auto">
                                 <img src={emptyCartImage} alt="Empty Cart Image" />
                             </div>
                             <div className="col-12 text-center">
-                                <h1 >Sorry, Your Cart is Empty</h1>
+                                <h1>Sorry, Your Cart is Empty</h1>
                                 <div className="view-more-container">
                                     <Link className='viewMoreBtn' to="/lab-tests">Book Your Test</Link>
                                 </div>
@@ -212,9 +215,8 @@ const CartPage = () => {
                     </section>
                 </>
             )}
-
         </>
     );
-}
+};
 
 export default CartPage;

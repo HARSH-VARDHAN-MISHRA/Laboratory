@@ -58,3 +58,7 @@
 .booking-form .breadcrumb-item.active a {
     color: var(--color-blue-light);
 }
+.book-confirm strong{
+    font-weight: 500;
+    color: var(--color-began);
+}

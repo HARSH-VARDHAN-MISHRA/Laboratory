@@ -6,6 +6,8 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+import logo from '../../Assets/logo.png'
+
 const OrderSummary = () => {
     const navigate = useNavigate();
     const [cartDetails, setCartDetails] = useState({});
@@ -49,6 +51,11 @@ const OrderSummary = () => {
                 }
             });
         }
+
+        window.scrollTo({
+            top:0,
+            behavior:'smooth'
+        })
     }, [cartDetails, bookingFormData]);
 
     const checkoutHandler = async (e) => {
@@ -62,7 +69,8 @@ const OrderSummary = () => {
                         Authorization: `Bearer ${token}`
                     }
                 });
-                console.log(res.data)
+                console.log(res.data);
+                navigate(`/booking-confirmed?OrderId=${res.data?._id}`)
             } catch (error) {
                 console.error('Error in processing payment:', error);
             }
@@ -81,7 +89,7 @@ const OrderSummary = () => {
                     currency: "INR",
                     name: "Lab Mantra",
                     description: `Payment For Lab Testing`,
-                    image: "https://i.pinimg.com/originals/9e/ff/85/9eff85f9a3f9540bff61bbeffa0f6305.jpg",
+                    image: `https://i.ibb.co/xKv8RGM/logo.png`,
                     order_id: order?.id,
                     callback_url: `${process.env.REACT_APP_BACKEND_URL}/paymentverification`,
                     prefill: {

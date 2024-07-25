@@ -154,7 +154,7 @@ const AllOrders = () => {
                                 <td>{order.requestBody?.Prices.totalToPay}</td>
                                 <td>{order.paymentStatus}</td>
                                 <td>
-                                    <Link to={`/Upload-test/${order.PatientId}`} className="bt info" >
+                                    <Link to={`/Upload-test/${order.PatientId}?orderId=${order._id}`} className="bt info" >
                                         Upload
                                     </Link>
                                 </td>
