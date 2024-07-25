@@ -93,7 +93,7 @@ const OrderSummary = () => {
                         "address": "Razorpay Corporate Office"
                     },
                     theme: {
-                        "color": "#2DBCB6"
+                        "color": "#7d68bf"
                     }
                 };
 
@@ -134,11 +134,11 @@ const OrderSummary = () => {
             <section className="my-5">
                 <div className="container">
                     <div className="row">
-                        <div className="col-md-6">
+                        <div className="col-md-6 mb-3">
                             <div
                                 className="booking-details"
                                 style={{
-                                    backgroundColor: '#f0fffe',
+                                    backgroundColor: '#d4dbf4',
                                     padding: '20px',
                                     borderRadius: '8px'
                                 }}
@@ -196,10 +196,10 @@ const OrderSummary = () => {
                         </div>
 
                         <div className="col-md-6">
-                            <div className="order-summary mb-4" style={{ backgroundColor: '#f0fffe', padding: '20px', borderRadius: '8px' }}>
+                            <div className="order-summary mb-4" style={{ backgroundColor: '#d4dbf4', padding: '20px', borderRadius: '8px' }}>
                                 <h3 className="mb-3" style={{ color: '#003873' }}>Test Details</h3>
                                 {cartDetails.cart && cartDetails.cart.map(item => (
-                                    <div key={item._id} className="cart-item mb-4" style={{ backgroundColor: '#ddf3f2', padding: '15px', borderRadius: '8px', boxShadow: '0 2px 4px rgba(0,0,0,0.1)' }}>
+                                    <div key={item._id} className="cart-item mb-4" style={{ backgroundColor: '#eae6fc', padding: '15px', borderRadius: '8px', boxShadow: '0 2px 4px rgba(0,0,0,0.1)' }}>
                                         {item.packageName ? (
                                             <>
                                                 <h5 className="mb-2" style={{ color: '#4377a2' }}>Package: {item.packageName}</h5>
@@ -210,7 +210,7 @@ const OrderSummary = () => {
 
                                                 <button
                                                     className="btn btn-info mt-1"
-                                                    style={{ backgroundColor: '#2dbcb6', color: '#f0fffe', border: 'none', padding: '8px 16px', borderRadius: '4px' }}
+                                                    style={{ backgroundColor: '#7d68bf', color: '#d4dbf4', border: 'none', padding: '8px 16px', borderRadius: '4px' }}
                                                     onClick={() => toggleVisibility(item._id)}
                                                 >
                                                     {visibleTests[item._id] ? 'Hide Details' : 'View Details'}
@@ -246,7 +246,7 @@ const OrderSummary = () => {
                         </div>
 
                         <div className="col-md-6 my-4">
-                            <div className="tot" style={{ backgroundColor: 'var(--bg-head)', padding: '20px', borderRadius: '8px' }}>
+                            <div className="tot mb-3" style={{ backgroundColor: 'var(--bg-head)', padding: '20px', borderRadius: '8px' }}>
                                 <h3 className="mb-3 h4" style={{ color: 'var(--bg-dark-blue)' }}>Payment Details</h3>
                                 <div className="d-flex justify-content-between mt-3">
                                     <span style={{ color: 'var(--color-blue)' }}>Subtotal:</span>
@@ -266,7 +266,7 @@ const OrderSummary = () => {
                                 </div>
                             </div>
                             <div >
-                                <div className="p-4 " style={{ backgroundColor: '#F0FFFE' }} >
+                                <div className="p-4 " style={{ backgroundColor: '#d4dbf4' }} >
                                     <h2 className="card-title text-center mb-4">Select Payment Option</h2>
                                     <form>
                                         <div className="form-check mb-3">
@@ -304,7 +304,7 @@ const OrderSummary = () => {
                                 </div>
                             </div>
                             <div className="mt-4 d-grid">
-                                <button onClick={checkoutHandler} className="btn btn-success" style={{ backgroundColor: '#2dbcb6', color: '#f0fffe', border: 'none', padding: '10px 0', borderRadius: '4px' }}>
+                                <button onClick={checkoutHandler} className="btn btn-success" style={{ backgroundColor: '#7d68bf', color: '#d4dbf4', border: 'none', padding: '10px 0', borderRadius: '4px' }}>
                                     Confirm Booking
                                 </button>
                             </div>
