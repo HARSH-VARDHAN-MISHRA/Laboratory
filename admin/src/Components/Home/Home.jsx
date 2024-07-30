@@ -28,6 +28,9 @@ import AllEnquiry from '../../Pages/Enquiry/AllEnquiry'
 import AllCity from '../../Pages/City/AllCity'
 import AddLaboratoryTest from '../../Pages/LaboratoryTest/AddLaboratoryTest'
 import Upload from '../../Pages/Orders/Upload'
+import AllNews from '../../Pages/News/AllNews'
+import AddNews from '../../Pages/News/AddNews'
+import EditNews from '../../Pages/News/EditNews'
 
 
 const Home = () => {
@@ -85,6 +88,11 @@ const Home = () => {
 
           {/* --- Orders --- */}
           <Route path={"/all-orders"} element={<AllOrders/>}/>
+
+          {/* --- News --- */}
+         <Route path={"/all-news"} element={<AllNews/>}/>
+         <Route path={"/add-news"} element={<AddNews/>}/>
+         <Route path={"/edit-news/:id"} element={<EditNews/>}/>
 
           {/* --- Cities --- */}
           <Route path={"/all-city"} element={<AllCity/>}/>

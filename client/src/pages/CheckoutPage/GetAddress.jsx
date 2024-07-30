@@ -84,7 +84,7 @@ const OrderSummary = () => {
                 const order = res.data.order;
 
                 const options = {
-                    key: "rzp_test_gU4w4jM7ASo0XA",
+                    key:`${process.env.RAZORPAY_APT_KEY}  `,
                     amount: order?.amount || null,
                     currency: "INR",
                     name: "Lab Mantra",

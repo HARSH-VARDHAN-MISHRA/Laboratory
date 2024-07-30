@@ -12,6 +12,7 @@ const { getAllOrders, deleteOrder, deleteAllOrder, getOrderByUserId } = require(
 const { createBranchLaboratory, getBranchLaboratories, findNearestBranchLaboratories, updateBranchLabLocations, getBranchLabInformationByCityAndPinCode, deleteBranchLaboratory } = require('../controlers/LaboratoryBranchControler');
 const { createEnquiryForm, getAllEnquiryForm, deleteEnquiryById } = require('../controlers/ContactControler');
 const { createCity, updateCity, getAllCities, deleteCity } = require('../controlers/Citycontroller');
+const { createNews, DeleteNews, getAllNews, getSingleNews, UpdateNews } = require('../controlers/BlogControler');
 
 const route = express.Router();
 
@@ -96,8 +97,12 @@ route.get('/all-orders',getAllOrders)
 route.get('/get-order-by-user/:id',getOrderByUserId)
 route.delete('/delete-order/:id',deleteOrder)
 route.post('/delete-All-order',deleteAllOrder)
-
-
+// Blogs 
+route.post('/create-news', createNews);
+route.delete('/delete-news/:id', DeleteNews);
+route.get('/get-all-news', getAllNews);
+route.get('/get-single-news/:id', getSingleNews);
+route.put('/update-news/:id', UpdateNews);
 
 // Enquiry Form 
 route.post('/apply-enquiry',createEnquiryForm)

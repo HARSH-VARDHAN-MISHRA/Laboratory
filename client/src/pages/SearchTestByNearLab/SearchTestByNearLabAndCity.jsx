@@ -126,7 +126,7 @@ const SearchTestByNearLabAndCity = () => {
                                                         )}
 
                                                         {lab.discountPercentage && lab.discountPercentage > 0 ? (
-                                                            <p className="card-dicount">{lab.discountPercentage}% Off</p>
+                                                            <p className="card-dicount">{lab.discountPercentage.toFixed(0)}% Off</p>
                                                         ) : null}
 
                                                         {isInCart({ ...lab, id: `${lab.labName}-${testName}` }) ? (
