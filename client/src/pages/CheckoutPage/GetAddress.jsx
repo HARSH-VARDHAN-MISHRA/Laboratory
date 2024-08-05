@@ -82,9 +82,10 @@ const OrderSummary = () => {
                     }
                 });
                 const order = res.data.order;
-
+              
+                // console.log("key ",key)
                 const options = {
-                    key:`${process.env.RAZORPAY_APT_KEY}  `,
+                    key:process.env.REACT_APP_RAZORPAY_APT_KEY,
                     amount: order?.amount || null,
                     currency: "INR",
                     name: "Lab Mantra",
