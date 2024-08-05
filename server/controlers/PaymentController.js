@@ -148,7 +148,7 @@ exports.paymentVerification = async (req, res) => {
                             
                             <p style="color: #003873;"><strong>Note:</strong> Your payment has been successfully processed.</p>
                 
-                            <p>We look forward to serving you. If you have any questions, feel free to contact us at support@labmantra.com.</p>
+                            <p>We look forward to serving you. If you have any questions, feel free to contact us at info@labmantra.com.</p>
                 
                             <p>Best regards,<br>Lab Mantra Team</p>
                         </div>
@@ -194,7 +194,7 @@ exports.paymentVerification = async (req, res) => {
                                     <li><strong>Address:</strong> ${latestOrder.requestBody?.BookingInfo?.address}</li>
                                 </ul>
                 
-                                <p>We appreciate your collaboration with Lab Mantra. For any questions, please contact us at support@labmantra.com.</p>
+                                <p>We appreciate your collaboration with Lab Mantra. For any questions, please contact us at info@labmantra.com.</p>
                 
                                 <p>Best regards,<br>Lab Mantra Team</p>
                             </div>
@@ -239,7 +239,7 @@ exports.paymentVerification = async (req, res) => {
                                     <li><strong>Address:</strong> ${latestOrder.requestBody?.BookingInfo?.address}</li>
                                 </ul>
                 
-                                <p>We appreciate your collaboration with Lab Mantra. For any questions, please contact us at support@labmantra.com.</p>
+                                <p>We appreciate your collaboration with Lab Mantra. For any questions, please contact us at info@labmantra.com.</p>
                 
                                 <p>Best regards,<br>Lab Mantra Team</p>
                             </div>
