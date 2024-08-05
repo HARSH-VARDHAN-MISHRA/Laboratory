@@ -122,22 +122,24 @@ exports.getAllPackage = async (req, res) => {
 
         const transformedPackages = await Promise.all(getAllPackage.map(async (pkg) => {
             try {
-                const testCategoryIds = pkg.testCategoryId.map(category => category._id.toString()); // Convert test category IDs to strings
+                const testCategoryIds = pkg.testCategoryId.map(category => category._id.toString());
 
                 const matchedTestCategories = await testCategoryModel.find({ _id: { $in: testCategoryIds } }).populate('testId');
 
-                // Flatten the test details from matched test categories
                 const matchedTestDetails = matchedTestCategories.flatMap(category => category.testId);
 
-                // Remove the 'tests' property from the 'laboratoryId' object
-                const laboratory = pkg.laboratoryId.toObject();
-                delete laboratory.tests;
+                // Check if laboratoryId is not null before converting to an object
+                const laboratory = pkg.laboratoryId ? pkg.laboratoryId.toObject() : null;
+
+                if (laboratory) {
+                    delete laboratory.tests;
+                }
 
                 return {
                     ...pkg.toObject(),
                     laboratoryId: laboratory,
                     isPackage: true,
-                    testDetails: matchedTestDetails // Assign matched test details
+                    testDetails: matchedTestDetails
                 };
             } catch (error) {
                 console.error("Error:", error);

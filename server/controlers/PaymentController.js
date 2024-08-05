@@ -2,12 +2,13 @@
 const Razorpay = require('razorpay');
 const crypto = require('crypto');
 const OrderModel = require('../models/OrderModel');
+require('dotenv').config()
 const sendEmail = require('../utils/SendEmail');
 const instance = new Razorpay({
-    key_id: 'rzp_test_gU4w4jM7ASo0XA',
-    key_secret: 'khlbmv5fXQVkCt5JSBGM5gvb',
+    key_id: process.env.RAZORPAY_APT_KEY,
+    key_secret: process.env.RAZORPAY_APT_SECRET,
 });
-
+console.log()
 exports.checkout = async (req, res) => {
     try {
         const { BookingInfo, Cart, Prices } = req.body;
@@ -87,7 +88,7 @@ exports.paymentVerification = async (req, res) => {
         const body = razorpay_order_id + "|" + razorpay_payment_id;
 
         const expectedSignature = crypto
-            .createHmac("sha256", "khlbmv5fXQVkCt5JSBGM5gvb") // Use environment variable for key secret
+            .createHmac("sha256", process.env.RAZORPAY_APT_SECRET) // Use environment variable for key secret
             .update(body)
             .digest("hex");
 

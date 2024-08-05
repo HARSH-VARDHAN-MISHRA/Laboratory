@@ -39,56 +39,56 @@ function App() {
   return (
     <>
 
-        <Header/>
-        <ToastContainer />
-          <Routes>
-            <Route path='/' element={<HomePage />} />
-            <Route path='/about-us' element={<AboutPage />} />
-            <Route path='/contact-us' element={<ContactPage />} />
+      <Header />
+      <ToastContainer />
+      <Routes>
+        <Route path='/' element={<HomePage />} />
+        <Route path='/about-us' element={<AboutPage />} />
+        <Route path='/contact-us' element={<ContactPage />} />
 
-            <Route path='/lab-tests' element={<AllTest />} />
-            <Route path='/lab-tests/:testname' element={<SearchByTest />} />
+        <Route path='/lab-tests' element={<AllTest />} />
+        <Route path='/lab-tests/:testname' element={<SearchByTest />} />
 
-            <Route path='/find-your-test/:testName' element={<SearchTestByNearLab />} />
-            <Route path='/your-nearest-lab' element={<SearchTestByNearLabAndCity />} />
+        <Route path='/find-your-test/:testName' element={<SearchTestByNearLab />} />
+        <Route path='/your-nearest-lab' element={<SearchTestByNearLabAndCity />} />
 
-            <Route path='/our-packages' element={<PackagesPage />} />
-            <Route path='/our-packages/:packagename' element={<PackageByTitlePage />} />
+        <Route path='/our-packages' element={<PackagesPage />} />
+        <Route path='/our-packages/:packagename' element={<PackageByTitlePage />} />
 
-            {/* ------- Authentication ---------  */}
-            <Route path='/login' element={<Login />} />
-            <Route path='/login/forget-password' element={<ForgetPassword />} />
-            <Route path='/sign-up' element={<SignIn />} />
-            <Route path='/sign-up/confirm-account/:email' element={<OtpSignUp />} />
+        {/* ------- Authentication ---------  */}
+        <Route path='/login' element={<Login />} />
+        <Route path='/login/forget-password' element={<ForgetPassword />} />
+        <Route path='/sign-up' element={<SignIn />} />
+        <Route path='/sign-up/confirm-account/:email' element={<OtpSignUp />} />
 
-            <Route path='/profile' element={<UserProfilePage />} />
-            <Route path='/booking-detail/:_id' element={<SingleBookingDetail />} />
-         
-
-
-            {/* --- Route by package names -- */}
-            <Route path='/cart' element={<CartPage />} />
-            <Route path='/cart/add-booking-details' element={<BookingForm />} />
-            <Route path='/cart/booking-summary' element={<OrderSummary />} />
-            <Route path='/booking-confirmed' element={<BookingConfirm />} />
+        <Route path='/profile' element={<UserProfilePage />} />
+        <Route path='/booking-detail/:_id' element={<SingleBookingDetail />} />
 
 
-            <Route path='/report-status' element={<UserReport />} />
-            <Route path='/proceed-to-checkout' element={<CheckoutPage />} />
-            <Route path='/booking' element={<Booking />} />
 
-            <Route path='/give-location' element={<LabsLocations />} />
-            <Route path='/give-branch-location' element={<LabsBranchLocations />} />
+        {/* --- Route by package names -- */}
+        <Route path='/cart' element={<CartPage />} />
+        <Route path='/cart/add-booking-details' element={<BookingForm />} />
+        <Route path='/cart/booking-summary' element={<OrderSummary />} />
+        <Route path='/booking-confirmed' element={<BookingConfirm />} />
 
-            {/* Policy Pages ==  */}
-            <Route path='/terms-condition' element={<TermsCondition />} />
-            <Route path='/refund-cancellation-policy' element={<RefundCancelation />} />
-            <Route path='/privay-policy' element={<PrivacyPolicy />} />
 
-            {/* <Route path='/*' element={<ErrorPage />} /> */}
-          </Routes>
-        <Footer/>
-        
+        <Route path='/report-status' element={<UserReport />} />
+        <Route path='/proceed-to-checkout' element={<CheckoutPage />} />
+        <Route path='/booking' element={<Booking />} />
+
+        <Route path='/give-location' element={<LabsLocations />} />
+        <Route path='/give-branch-location' element={<LabsBranchLocations />} />
+
+        {/* Policy Pages ==  */}
+        <Route path='/terms-condition' element={<TermsCondition />} />
+        <Route path='/refund-cancellation-policy' element={<RefundCancelation />} />
+        <Route path='/privay-policy' element={<PrivacyPolicy />} />
+
+        {/* <Route path='/*' element={<ErrorPage />} /> */}
+      </Routes>
+      <Footer />
+
     </>
   );
 }
